@@ -1,0 +1,44 @@
+name: lawfirm-n8n
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:5678:5678"
+
+    env_file:
+      - ./openai-key.txt
+
+    environment:
+      TZ: America/New_York
+      GENERIC_TIMEZONE: America/New_York
+
+      N8N_HOST: localhost
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: http
+      N8N_EDITOR_BASE_URL: http://localhost:5678/
+      WEBHOOK_URL: http://localhost:5678/
+
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+
+      # Allow workflow expressions to reference OPENAI_API_KEY.
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+
+      # Allow file nodes to access the mounted workflow directories.
+      N8N_RESTRICT_FILE_ACCESS_TO: /files
+      N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES: "true"
+
+    volumes:
+      - type: bind
+        source: ./storage/n8n
+        target: /home/node/.n8n
+
+      - type: bind
+        source: ./storage/files
+        target: /files/output
+
+      - type: bind
+        source: ../resources
+        target: /files/resources

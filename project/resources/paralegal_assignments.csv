@@ -1,0 +1,3 @@
+contact_id,staff_id,staff_name,role,staff_email,research_memorandum_status
+C-101,S-003,Jordan Ellis,paralegal,jordan.ellis@example.com,not_requested
+C-102,S-004,Riley Morgan,paralegal,riley.morgan@example.com,requested

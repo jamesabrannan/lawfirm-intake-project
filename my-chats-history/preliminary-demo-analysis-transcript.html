@@ -1,0 +1,2812 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preliminary Demo Analysis Transcript</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f5f7f9;color:#18212b;font-family:Segoe UI,Arial,sans-serif;font-size:16px;line-height:1.65}main{max-width:1080px;margin:0 auto;padding:40px 28px 72px}header{margin-bottom:32px;border-bottom:1px solid #d8e1e8;padding-bottom:22px}h1{font-size:30px;line-height:1.25;margin:0 0 12px}header p{margin:6px 0;color:#536171}.message{margin:0 0 24px;padding:20px 24px;border-radius:12px}.user{background:#e8f4ff;color:#193a56;border:1px solid #d8eafa}.assistant{background:#fff;border:1px solid #e6eaee}.role{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#52677a;margin-bottom:10px}.content>:first-child{margin-top:0}.content>:last-child{margin-bottom:0}h2,h3,h4{line-height:1.35;margin:24px 0 12px}h2{font-size:22px}h3{font-size:19px}p,ul,ol{margin:12px 0}li{margin:7px 0}a{color:#145b96;overflow-wrap:anywhere}code{font-family:Consolas,monospace;font-size:.9em;background:#eef2f5;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef2f5;padding:16px;border-radius:8px}pre code{padding:0}blockquote{margin:16px 0;padding:4px 18px;border-left:4px solid #9fc5e5;background:#f5f9fd}table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;table-layout:fixed}th,td{padding:10px 12px;border:1px solid #dbe3e9;vertical-align:top;overflow-wrap:anywhere}th{background:#edf2f6;text-align:left}tr:nth-child(even){background:#f8fafb}@media(max-width:650px){main{padding:24px 12px}.message{padding:16px}table{font-size:12px}th,td{padding:7px}}@media print{body{background:white}main{max-width:none;padding:0}.message{break-inside:auto}.role{break-after:avoid}a{color:inherit}}
+
+main{background:white}blockquote{background:transparent;border:0;padding:0;margin:0}hr{border:0;border-top:1px solid #e6eaee;margin:24px 0}</style></head><body><main><h1 id="preliminary-demo-analysis-transcript">Preliminary Demo Analysis Transcript</h1>
+<p>Planning conversation with the firm name and opening job discussion redacted.</p>
+<hr />
+<h2 id="user">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p><strong>REDACTED</strong></p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant">Assistant</h2>
+<p><strong>REDACTED</strong></p>
+<hr />
+<h2 id="user-1">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>correction, <strong>REDACTED</strong> followup interview</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-1">Assistant</h2>
+<p>Got it, James. You got a follow-up interview for the <strong>REDACTED</strong> AI and automation role. I’ll use the job description as context for your interview prep.</p>
+<hr />
+<h2 id="user-2">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>no. we are not doing interview prep. the context is they want me to prepare a demo showing simple AI automation.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-2">Assistant</h2>
+<p><strong>REDACTED</strong> asked you to prepare a demo of simple AI automation for the follow-up interview. A concrete demo would take a fictional client intake email, use AI to extract the details into a structured record, flag missing information, and show the result for staff review. One email with an ambiguous date would let you show how the workflow handles uncertainty without guessing.</p>
+<hr />
+<h2 id="user-3">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>No, I want to involve creating a memo of some kind as a pdf. What's a good idea that is doable.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-3">Assistant</h2>
+<p>I’d demo an <strong>Intake Follow-Up Memo</strong>. Take a short set of fictional intake notes and turn them into a one-page PDF that a paralegal can review before the attorney’s first consultation.</p>
+<p>For example, suppose the notes say a prospective client received a hearing notice, remembers being told the hearing is in December, and hasn’t sent a copy. The memo would contain:</p>
+<ul>
+<li><strong>Reason for contacting the firm</strong> — The prospective client is seeking help after receiving a hearing notice.</li>
+<li><strong>What the client reported</strong> — The client recalls a December hearing. The exact date is unverified.</li>
+<li><strong>Items for staff to follow up on</strong> — Request a copy of the notice and verify the date, time, and location from the document.</li>
+</ul>
+<p>Use the model to turn the notes into structured fields, then fill a fixed PDF template from those fields. A single screen with a text box and a <strong>Generate Memo</strong> button is enough. You can use your DynamicPDF experience to make the output look like something the firm could actually use. The only moving parts are one model call and one PDF template.</p>
+<p>For the live demo, leave the exact hearing date out of the notes. When the PDF marks it <strong>Unverified</strong> and turns it into a follow-up item, the firm sees both the time saved and where staff judgment comes in.</p>
+<hr />
+<h2 id="user-4">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>Could we assume a csv file that has the client's intake info, address, ssn, etc. and somewhere along the line wed redact privledged information?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-4">Assistant</h2>
+<p>Yes. I’d use a <strong>fictional intake CSV to generate an internal attorney handoff memo as a PDF</strong>. The demo can show that the firm may collect a full intake record while giving the AI only the fields it needs to draft the memo.</p>
+<ol type="1">
+<li><strong>Read one row from the CSV.</strong> Include realistic columns such as client name, address, SSN, phone, preferred language, reason for contacting the firm, and documents received. Use fictional data throughout.</li>
+<li><strong>Filter locally before calling the model.</strong> Build the AI request from an explicit list of approved fields. For example, send the intake ID, preferred language, and a short scenario description reviewed for sensitive details. Keep the SSN, street address, and contact details out of the request. Free-text notes deserve particular attention because someone could paste an SSN or address there too.</li>
+<li><strong>Generate the PDF locally.</strong> Have the model return a short summary and follow-up items. Fill a fixed PDF template with those fields and, if useful for staff, add the client’s name directly from the CSV. An SSN serves no purpose in this memo.</li>
+</ol>
+<p>For the live demo, show <strong>the CSV row, the exact fields sent to the model, and the finished PDF</strong>. The memo might say, “Client reports receiving a hearing notice. Staff should request a copy and verify the hearing details.” That gives you a simple workflow with a visible privacy decision and a concrete document the firm could use.</p>
+<hr />
+<h2 id="user-5">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay we are still brainstorming. My thought, as if you look at the job description, this could be an n8n automation they are looking for, an enterprise workflow, a script, or you with .toml files. I'm thinking an example of each with a short blurb in the github project's readme about why three different examples of same workflow process. Thoughts?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-5">Assistant</h2>
+<p>Yes. I’d build <strong>one intake-to-PDF workflow three ways</strong> and demo the same fictional case in each. The job description covers two distinct needs: automate the firm’s existing tools now and build software it can maintain over time. The three implementations let you talk concretely about when each approach fits.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Example</th>
+<th>What it demonstrates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>n8n workflow</strong></td>
+<td>How you could connect existing tools and make the steps visible to the person maintaining the automation.</td>
+</tr>
+<tr>
+<td><strong>Standalone script</strong></td>
+<td>How you’d implement the same workflow when you need tighter control over validation, data handling, and PDF generation. Use the language you can build and explain most comfortably.</td>
+</tr>
+<tr>
+<td><strong>Codex-assisted run</strong></td>
+<td>How a developer or technical operator could run the workflow on demand using written instructions and the same local utilities. If you include a TOML file, use it for actual configuration and put the workflow instructions in Markdown.</td>
+</tr>
+</tbody>
+</table>
+<p>I’d treat <strong>enterprise deployment as a short README discussion</strong>. You can explain how the workflow would change once multiple staff members rely on it, with access controls, a review step, and a record of each run. That gives you something substantive to discuss without building a fourth integration on assumptions about their software.</p>
+<p>Use the <strong>same fictional CSV, approved AI input fields, and PDF template</strong> across all three. Reuse the local filtering and PDF generation where practical. In the live demo, I’d run n8n end to end, show the exact data sent to the model and the finished memo, then briefly point to the other implementations in GitHub.</p>
+<p>For the README, I’d use something like:</p>
+<blockquote>
+<p>This project implements the same intake-to-memo workflow three ways. The n8n version shows how to connect existing tools, the script shows how to package the workflow as maintainable software, and the Codex example shows how a technical operator can run it on demand. Each version uses the same fictional intake data and limits what the model receives before generating the PDF.</p>
+</blockquote>
+<hr />
+<h2 id="user-6">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I want it to be a multi-agent workflow one for each task?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-6">Assistant</h2>
+<p>Yes. I’d use <strong>two agents with distinct jobs</strong> and keep CSV parsing, privacy filtering, and PDF rendering in ordinary code. That gives you a genuine multi-agent demo with a clear reason for each agent.</p>
+<ol type="1">
+<li><strong>Filter the intake locally.</strong> Read the fictional CSV row and pass along only approved fields. For the demo, use a dedicated <code>case_summary</code> field with fictional, sanitized notes. The original CSV, SSN, and street address stay outside both agents’ inputs.</li>
+<li><strong>Drafting agent.</strong> Turn the filtered intake into a structured memo with the client’s reported facts, missing documents, and suggested staff follow-up.</li>
+<li><strong>Review agent.</strong> Compare the draft against the same filtered intake. Check for invented dates, missing follow-up items, and wording that turns a client’s recollection into a verified fact. Return either <code>ready</code> or <code>needs_review</code>, with specific reasons.</li>
+<li><strong>Render the PDF.</strong> Fill a fixed template when the review returns <code>ready</code>. If it returns <code>needs_review</code>, show the flagged items to the operator and hold the PDF.</li>
+</ol>
+<p>The demo case can make the handoff visible. If the intake says, “Client thinks the hearing is in December,” the reviewer should flag a draft that says, “The hearing is scheduled for December.” You can show that behavior reliably with a saved test draft containing that exact mistake, alongside a successful live run.</p>
+<p>Across <strong>n8n, the script, and Codex</strong>, I’d keep the agent roles, inputs, and PDF template the same. The README can explain that what changes is <strong>how the steps are coordinated</strong>. I’d build the n8n version first and use it as the main demo.</p>
+<hr />
+<h2 id="user-7">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>now HR specifically asked about if I had any crm ai workflows developed. revise my knowledge of crm and how we could integrate that here.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-7">Assistant</h2>
+<p>I’d make the demo a <strong>CRM intake-to-memo workflow</strong>. The PDF still gives you something tangible to show, and the CRM gives the automation a clear starting point and somewhere to put the result.</p>
+<p>A <strong>CRM</strong> tracks people and the work your organization does with them. In a law firm, the intake side might track a prospective client’s contact details, inquiry, intake status, assigned staff member, and next follow-up. Once the firm opens a matter, a practice management system may track case documents, deadlines, filings, and billing. Some products cover both. For this demo, you only need the intake side.</p>
+<h3 id="what-id-build">What I’d build</h3>
+<ol type="1">
+<li><strong>Import one fictional CSV row into a mock CRM.</strong> Create a contact and an intake record linked by ID. Give the intake a status of <code>Ready for review</code>, an assigned staff member, and a short intake summary.</li>
+<li><strong>Trigger the workflow when the intake is ready.</strong> n8n reads the intake record and builds an AI payload from approved fields. The agents get the intake ID, sanitized summary, and documents received. The SSN and street address stay out of the payload.</li>
+<li><strong>Draft and review the memo.</strong> The first agent extracts reported facts and proposes follow-up. The second checks the draft against the intake and flags unsupported claims.</li>
+<li><strong>Write back to the same intake record.</strong> Attach the PDF or save a link to it, then create a task for the assigned staff member. If the reviewer flags a problem, create a task with the reason so staff can resolve it.</li>
+</ol>
+<p>For example, the intake says the prospective client <em>thinks</em> the hearing is in December and hasn’t supplied the notice. The PDF records that the date is unverified. The CRM gets a task assigned to the intake coordinator: <strong>Request a copy of the hearing notice.</strong> That write-back is what I’d emphasize. The automation turns an intake record into a document <strong>and</strong> gives someone a concrete next action where they already work.</p>
+<p><strong>I’d build the n8n version first.</strong> Use a small mock CRM with records, statuses, and tasks so you can demonstrate the integration without guessing what <strong>REDACTED</strong> uses. If you build the script and Codex versions, have them use the same mock CRM and produce the same write-back. In the README, describe it plainly as a <strong>prototype CRM intake automation built for the demo with fictional data</strong>. That gives you a concrete answer to HR’s question while being precise about what you developed.</p>
+<hr />
+<h2 id="user-8">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>rename <strong>REDACTED</strong> folder to lawfirm-intake-demo</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update">Assistant update</h2>
+<p>I’ll check the source and destination, then rename the folder.</p>
+<hr />
+<h2 id="assistant-8">Assistant</h2>
+<p>Windows blocked the rename because another process is using <a href="D:/████████">D:**REDACTED**</a>. This Codex chat is open in that folder. Close or switch away from the workspace, then run this from PowerShell:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> D<span class="op">:</span>\</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Rename-Item</span> <span class="op">-</span>LiteralPath <span class="st">&#39;D:\████████&#39;</span> <span class="op">-</span>NewName <span class="st">&#39;lawfirm-intake-demo&#39;</span></span></code></pre></div>
+<hr />
+<h2 id="user-9">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>yes, you are that process</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-1">Assistant update</h2>
+<p>I’ll check whether I can release the workspace from this chat.</p>
+<hr />
+<h2 id="assistant-9">Assistant</h2>
+<p>If this Codex session holds the lock, quit Codex completely to release it. I can’t close the session and continue the rename from it. Once Codex is closed, run this in a separate PowerShell window:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> D<span class="op">:</span>\</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Rename-Item</span> <span class="op">-</span>LiteralPath <span class="st">&#39;D:\████████&#39;</span> <span class="op">-</span>NewName <span class="st">&#39;lawfirm-intake-demo&#39;</span></span></code></pre></div>
+<p>Then reopen <code>D:\lawfirm-intake-demo</code> in Codex.</p>
+<hr />
+<h2 id="user-10">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>now try renaming</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-2">Assistant update</h2>
+<p>I’ll retry the rename from <code>D:\</code> and verify the result.</p>
+<hr />
+<h2 id="assistant-10">Assistant</h2>
+<p>Windows still reports that a process is using <code>D:\████████</code>, so the rename failed. The folder is still at its original path.</p>
+<hr />
+<h2 id="user-11">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>expand on this: </p>
+<ol type="1">
+<li><strong>Import one fictional CSV row into a mock CRM.</strong> Create a contact and an intake record linked by ID. Give the intake a status of <code>Ready for review</code>, an assigned staff member, and a short intake summary.</li>
+<li><strong>Trigger the workflow when the intake is ready.</strong> n8n reads the intake record and builds an AI payload from approved fields. The agents get the intake ID, sanitized summary, and documents received. The SSN and street address stay out of the payload.</li>
+<li><strong>Draft and review the memo.</strong> The first agent extracts reported facts and proposes follow-up. The second checks the draft against the intake and flags unsupported claims.</li>
+<li><strong>Write back to the same intake record.</strong> Attach the PDF or save a link to it, then create a task for the assigned staff member. If the reviewer flags a problem, create a task with the reason so staff can resolve it.</li>
+</ol>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-11">Assistant</h2>
+<p>I’d make the demo follow <strong>one prospective client from CSV import to a staff follow-up task</strong>. Give the mock CRM a small screen where you can open the intake, click <strong>Ready for review</strong>, and see the memo and task appear on that same record.</p>
+<h3 id="import-the-csv-into-the-mock-crm">1. Import the CSV into the mock CRM</h3>
+<p>Use one fictional row with a name, address, placeholder SSN, contact details, and intake notes. The importer creates two linked records.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Record</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Contact <code>C-101</code></strong></td>
+<td>Elena Rivera, contact details, street address, fictional SSN placeholder</td>
+</tr>
+<tr>
+<td><strong>Intake <code>I-204</code></strong></td>
+<td>Linked to <code>C-101</code>, assigned to Maya, status <code>New</code>, intake summary, documents received</td>
+</tr>
+</tbody>
+</table>
+<p>The intake summary reads, “Prospective client reports receiving a hearing notice and believes the hearing is in December. She hasn’t provided a copy.” The documents-received field is empty.</p>
+<p>The contact represents the person. The intake represents the specific request for help, with its own owner, status, memo, and tasks. That distinction gives you a simple way to explain the CRM data model during the demo.</p>
+<h3 id="trigger-n8n-from-a-crm-status-change">2. Trigger n8n from a CRM status change</h3>
+<p>Click <strong>Ready for review</strong> on the intake screen. The mock CRM updates the status and sends n8n a webhook containing <code>I-204</code>. n8n fetches a limited view of the intake and sends the agents only three fields:</p>
+<ul>
+<li><strong>Intake ID</strong> — <code>I-204</code></li>
+<li><strong>Sanitized case summary</strong> — The client-reported hearing information above</li>
+<li><strong>Documents received</strong> — None</li>
+</ul>
+<p>The full CSV and contact record stay in the mock CRM. For the demo, use a separate, explicitly prepared <code>sanitized_summary</code> field. Selecting approved columns keeps the address and SSN columns out, while the prepared summary handles the risk that someone might enter those details in free text. Show the exact model payload during the demo so this behavior is visible.</p>
+<h3 id="give-the-two-agents-separate-jobs">3. Give the two agents separate jobs</h3>
+<p>The <strong>drafting agent</strong> returns structured data for a one-page memo. It records that the prospective client <em>believes</em> the hearing is in December, marks the hearing date as unverified, and proposes requesting the notice.</p>
+<p>The <strong>review agent</strong> receives the same sanitized intake plus the draft. It checks whether the draft preserves uncertainty, whether the facts come from the intake, and whether the proposed follow-up addresses what’s missing. It returns <code>pass</code> or <code>needs_staff_review</code> with reasons. A fixed PDF template handles formatting after the review passes.</p>
+<p>For a repeatable failure demo, feed the reviewer a saved draft that says, “The hearing is scheduled for December.” The reviewer should flag that the draft presents a recollection as a confirmed date.</p>
+<h3 id="write-the-outcome-back-to-the-crm">4. Write the outcome back to the CRM</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Review result</th>
+<th>What Maya sees on intake <code>I-204</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pass</strong></td>
+<td>Status <code>Memo generated</code>, a link to the one-page PDF, and a task assigned to Maya to request a copy of the hearing notice.</td>
+</tr>
+<tr>
+<td><strong>Needs staff review</strong></td>
+<td>Status <code>Needs staff review</code> and a task assigned to Maya that includes the reviewer’s reason. PDF generation is held.</td>
+</tr>
+</tbody>
+</table>
+<p>The automation gets the task owner from the CRM and uses the intake ID to link the results. Give each generated task a stable identifier tied to that intake and task type so a retry updates the task instead of creating a duplicate.</p>
+<p>For a first build, I’d use <strong>a small mock CRM API backed by SQLite, one intake screen, and one n8n workflow</strong>. In the live demo, open the record, click <strong>Ready for review</strong>, and return to the record to open the PDF and show Maya’s assigned task. That last step directly answers HR’s CRM question. The workflow starts from CRM state and puts the result back into the assigned staff member’s queue.</p>
+<hr />
+<h2 id="user-12">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>we are still in planning phase, don't do this yet, we will construct a prompt to do actual work later.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-12">Assistant</h2>
+<p>Understood. We’ll keep this in brainstorming and planning. The mock CRM, n8n trigger, two-agent review, and PDF write-back are candidate design choices. Once you settle on the scope, we’ll turn it into an implementation prompt.</p>
+<hr />
+<h2 id="user-13">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p> lets make the two records csv files for simplicity. assume they are exported from a database. we are simulating. for the contact. for the intake, lets assume its immigration lawfirm, what are some valid intake documents we might receive? could we make dummy pdfs of them?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-3">Assistant update</h2>
+<p>I’ll verify a few document names and keep this at the planning level.</p>
+<hr />
+<h2 id="assistant-13">Assistant</h2>
+<p>Yes. For the demo, I’d use <strong>two CSV exports and a folder of fictional PDFs</strong>. Keep one contact linked to one intake, and give the intake a field for the filenames of the documents received.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>File</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contacts.csv</code></td>
+<td><code>contact_id</code>, name, phone, email, street address, and a clearly fake SSN placeholder</td>
+</tr>
+<tr>
+<td><code>intakes.csv</code></td>
+<td><code>intake_id</code>, <code>contact_id</code>, assigned staff member, status, intake summary, and document filenames</td>
+</tr>
+</tbody>
+</table>
+<h3 id="which-documents-fit-the-demo">Which documents fit the demo?</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Document</th>
+<th>What it gives the workflow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Notice to Appear (Form I-862)</strong></td>
+<td>A document the prospective client can provide even when the hearing date is still unclear. The sample can omit the date, time, and location. <a href="https://www.justice.gov/eoir/notice-appear">EOIR Notice to Appear</a></td>
+</tr>
+<tr>
+<td><strong>Immigration Court Notice of Hearing</strong></td>
+<td>A separate document with a hearing date, time, and location. This gives the workflow something specific to extract and cite in the memo. <a href="https://www.justice.gov/eoir/notice-hearing">EOIR Notice of Hearing</a></td>
+</tr>
+<tr>
+<td><strong>USCIS receipt notice (Form I-797C)</strong></td>
+<td>An option for a separate intake about a pending application. It gives the workflow a filing receipt to summarize. <a href="https://www.uscis.gov/sites/default/files/document/guides/Congressional-Inquiries-Refresher.pdf">USCIS guide</a></td>
+</tr>
+</tbody>
+</table>
+<p>I’d make <strong>two one-page dummy PDFs</strong> for the first scenario, the Notice to Appear and the Notice of Hearing. Use selectable text, made-up identifiers, a plain layout, and a prominent <strong>FICTIONAL DEMO DOCUMENT</strong> label. That keeps PDF extraction simple and lets you show two runs with the same intake.</p>
+<ul>
+<li><strong>First run.</strong> The client recalls a December hearing and supplies only the Notice to Appear. It has no hearing date. The memo attributes December to the client and gives staff a follow-up task to request the hearing notice.</li>
+<li><strong>Second run.</strong> The intake export now lists the Notice of Hearing too. The memo reports the date, time, and location <strong>as printed on that notice</strong>, cites the filename, and gives staff a task to verify the details.</li>
+</ul>
+<p>For the privacy demonstration, put a fake mailing address and case identifier in the sample PDFs. The workflow can extract text locally and send the agents only the approved facts and source filenames. That shows why filtering the contact CSV alone is insufficient when the same information can appear in an attachment.</p>
+<hr />
+<h2 id="user-14">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>in lawfirm-intake-project create a subfolder named resources. In resources create the contacts, the intakes, and the three dummy documents we will use.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-4">Assistant update</h2>
+<p>I’ll check the project path and use the spreadsheets and PDF skills to create and verify the five sample files.</p>
+<hr />
+<h2 id="user-15">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>oops, move the folder to be a subfolder of project</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-5">Assistant update</h2>
+<p>I’ll put the five files in <code>project\resources</code>. The renamed workspace is outside this session’s writable roots, so the write needs approval.</p>
+<hr />
+<h2 id="assistant-14">Assistant</h2>
+<p>Created and verified all five files in <a href="D:/lawfirm-intake-project/project/resources">project/resources</a>. The two CSV exports link by <code>contact_id</code>, and each intake lists its associated PDF filenames.</p>
+<ul>
+<li><a href="D:/lawfirm-intake-project/project/resources/contacts.csv">contacts.csv</a></li>
+<li><a href="D:/lawfirm-intake-project/project/resources/intakes.csv">intakes.csv</a></li>
+<li><a href="D:/lawfirm-intake-project/project/resources/notice-to-appear.pdf">Notice to Appear</a></li>
+<li><a href="D:/lawfirm-intake-project/project/resources/notice-of-hearing.pdf">Immigration Court Notice of Hearing</a></li>
+<li><a href="D:/lawfirm-intake-project/project/resources/uscis-receipt-notice.pdf">USCIS Receipt Notice</a></li>
+</ul>
+<p>I used two fictional cases. One pairs the Notice to Appear with the hearing notice. The other uses the USCIS receipt notice for a pending employment authorization application. Each PDF is one page, has selectable text, and is marked <strong>FICTIONAL DEMO DOCUMENT</strong>.</p>
+<hr />
+<h2 id="user-16">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>The three documents are NOT tied to the person, is that by design or should you have made them somehow tied to the person in the csv?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-15">Assistant</h2>
+<p>Yes, the documents should be tied to the person <strong>through the intake</strong>. That’s how I set up the CSVs, though the link inside each PDF is only visible through the person’s name and mailing address.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Contact</th>
+<th>Intake</th>
+<th>Documents listed in <code>intakes.csv</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elena Rivera (<code>C-101</code>)</td>
+<td><code>I-204</code></td>
+<td><code>notice-to-appear.pdf</code> and <code>notice-of-hearing.pdf</code></td>
+</tr>
+<tr>
+<td>Mateo Santos (<code>C-102</code>)</td>
+<td><code>I-205</code></td>
+<td><code>uscis-receipt-notice.pdf</code></td>
+</tr>
+</tbody>
+</table>
+<p>The workflow should join the intake to its contact using <code>contact_id</code>, then load the PDFs listed in <code>document_filenames</code>. That gives it an explicit link without asking the AI to match names. Splitting the three PDFs across two people was deliberate so the USCIS receipt could support a separate scenario.</p>
+<p>For the demo, I’d make the link easier to see by prefixing the filenames with the intake ID, for example <code>I-204-notice-of-hearing.pdf</code>, and updating the CSV references. That keeps the two-file setup and makes it obvious which intake each attachment belongs to when you open the resources folder.</p>
+<hr />
+<h2 id="user-17">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>wouldn't it be better if the document names had the id as part of the filename?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-6">Assistant update</h2>
+<p>I’ll prefix the PDF filenames with their intake IDs and update the references in <code>intakes.csv</code>.</p>
+<hr />
+<h2 id="assistant-16">Assistant</h2>
+<p>Yes. I prefixed each PDF with its intake ID so you can see which intake it belongs to directly from the filename.</p>
+<ul>
+<li><code>I-204-notice-to-appear.pdf</code></li>
+<li><code>I-204-notice-of-hearing.pdf</code></li>
+<li><code>I-205-uscis-receipt-notice.pdf</code></li>
+</ul>
+<p>I updated <a href="D:/lawfirm-intake-project/project/resources/intakes.csv">intakes.csv</a> and verified that all three references resolve to the renamed files.</p>
+<hr />
+<h2 id="user-18">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>from this data, how would we know if a document was missing?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-17">Assistant</h2>
+<p>The current data can tell us if <strong>a listed PDF is missing from the folder</strong>. It can’t reliably tell us if <strong>the client hasn’t supplied a document we expected</strong>. Those are two different follow-up tasks.</p>
+<ul>
+<li><strong>Listed but missing from the folder.</strong> If <code>intakes.csv</code> lists <code>I-204-notice-of-hearing.pdf</code> and the file can’t be found, flag a missing attachment for staff to check.</li>
+<li><strong>Expected but never received.</strong> If the intake lists only the Notice to Appear, the automation needs an explicit expectation before it can say the hearing notice is missing. The client’s recollection of a December hearing can prompt a question, but it doesn’t establish that a notice was issued.</li>
+</ul>
+<p>For the demo, I’d add one column to <code>intakes.csv</code> called <code>expected_document_types</code>. For <code>I-204</code>, it could list <code>notice_to_appear|notice_of_hearing</code> as the <strong>firm’s checklist for this fictional intake</strong>. If the Notice to Appear is the only attachment, the memo can say <strong>“Hearing notice not on file”</strong> and create a task to ask the client whether they received one. If the hearing notice is listed but the PDF is absent, the task can instead say <strong>“Locate the hearing notice listed in the export.”</strong></p>
+<hr />
+<h2 id="user-19">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>do that. be certain we are using the three documents above: notice-to-appear, notice-of-hearing, uscis-receipt-notice</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-7">Assistant update</h2>
+<p>I’ll add the expected document types to <code>intakes.csv</code> and verify that the two records still reference all three PDFs.</p>
+<hr />
+<h2 id="assistant-18">Assistant</h2>
+<p>Added <code>expected_document_types</code> to <a href="D:/lawfirm-intake-project/project/resources/intakes.csv">intakes.csv</a> and verified that all three referenced PDFs exist.</p>
+<ul>
+<li><strong>I-204</strong> expects <code>notice-to-appear</code> and <code>notice-of-hearing</code>.</li>
+<li><strong>I-205</strong> expects <code>uscis-receipt-notice</code>.</li>
+</ul>
+<p>Both intakes currently have all expected documents. The demo can compare the checklist against <code>document_filenames</code> to detect a document that wasn’t received, then check the folder for any listed PDF that’s missing.</p>
+<hr />
+<h2 id="user-20">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>well if some are missing that is okay as that's what we want to show for them too</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-8">Assistant update</h2>
+<p>I’ll make <code>I-204</code> start with the hearing notice missing from its intake record, while keeping the sample PDF available for a later run.</p>
+<hr />
+<h2 id="assistant-19">Assistant</h2>
+<p>Updated <a href="D:/lawfirm-intake-project/project/resources/intakes.csv">intakes.csv</a> so the demo has both outcomes.</p>
+<ul>
+<li><strong>I-204</strong> has the Notice to Appear on file and expects a Notice of Hearing. The checklist flags <strong>“Hearing notice not on file.”</strong></li>
+<li><strong>I-205</strong> has its expected USCIS receipt notice on file.</li>
+</ul>
+<p>All three sample PDFs are still available. The workflow should use <code>document_filenames</code> to determine what’s on file for each intake. For a second demo run, add <code>I-204-notice-of-hearing.pdf</code> to that field to simulate receipt.</p>
+<hr />
+<h2 id="user-21">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>your confusing me. there are only three actual pdfs. so both clients have to have some missing documents. corect?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-20">Assistant</h2>
+<p>No. <strong>Missing means a document is on an intake’s checklist but isn’t listed as received.</strong> The total number of PDFs doesn’t determine whether both clients are missing something.</p>
+<p>Right now:</p>
+<ul>
+<li><strong>Elena (<code>I-204</code>)</strong> is missing her Notice of Hearing. The demo PDF exists in the folder so we can simulate receiving it later, but her intake currently lists only the Notice to Appear.</li>
+<li><strong>Mateo (<code>I-205</code>)</strong> has his USCIS receipt notice, the only document on his checklist.</li>
+</ul>
+<p>If you want <strong>both</strong> clients to have a missing document, we can keep the same three PDFs and add a second expected item to Mateo’s checklist, such as a copy of his filed application.</p>
+<hr />
+<h2 id="user-22">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>you missred my intentions. if there are three expected document types and a client only has one, or two, how would the system know that x needed three but only had two? do we need to indicate that they are all needed</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-21">Assistant</h2>
+<p>Yes. If the demo assumes <strong>each client needs all three document types</strong>, list all three in <code>expected_document_types</code> for <strong>each</strong> intake. That column tells the system what the intake needs. The <code>document_filenames</code> column tells it what the intake actually has.</p>
+<p>With your three PDFs, the demo would look like this:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Intake</th>
+<th>Needs</th>
+<th>Has on file</th>
+<th>System flags as missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elena (<code>I-204</code>)</td>
+<td>All three</td>
+<td>Notice to Appear, Notice of Hearing</td>
+<td>USCIS receipt notice</td>
+</tr>
+<tr>
+<td>Mateo (<code>I-205</code>)</td>
+<td>All three</td>
+<td>USCIS receipt notice</td>
+<td>Notice to Appear, Notice of Hearing</td>
+</tr>
+</tbody>
+</table>
+<p>The system compares the two lists <strong>for each intake</strong>. Mateo’s receipt doesn’t count for Elena, even though it’s in the same folder.</p>
+<p>I’d set up the CSV that way for the demo. My previous edit used different checklists for the two clients and left Elena’s hearing notice off her received list. Your setup uses all three PDFs as received attachments and shows one client missing one document and the other missing two.</p>
+<hr />
+<h2 id="user-23">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>do that</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-9">Assistant update</h2>
+<p>I’ll set both intakes to expect all three document types, then verify what each one is missing.</p>
+<hr />
+<h2 id="assistant-22">Assistant</h2>
+<p>Updated <a href="D:/lawfirm-intake-project/project/resources/intakes.csv">intakes.csv</a> so both intakes expect all three document types. All three PDFs are listed as received on their respective intake records.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Intake</th>
+<th>On file</th>
+<th>Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elena (<code>I-204</code>)</td>
+<td>Notice to Appear, Notice of Hearing</td>
+<td>USCIS Receipt Notice</td>
+</tr>
+<tr>
+<td>Mateo (<code>I-205</code>)</td>
+<td>USCIS Receipt Notice</td>
+<td>Notice to Appear, Notice of Hearing</td>
+</tr>
+</tbody>
+</table>
+<p>I verified these results by comparing each intake’s <code>expected_document_types</code> with its <code>document_filenames</code>.</p>
+<hr />
+<h2 id="user-24">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay so now if one is missing we could simulate creating a pdf/email to request one, correct?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-23">Assistant</h2>
+<p>Yes. The workflow can compare each intake’s checklist with its received documents, then generate <strong>one follow-up request per client</strong> listing everything missing.</p>
+<ul>
+<li><strong>Elena (<code>I-204</code>)</strong> gets a request for a copy of her USCIS Receipt Notice.</li>
+<li><strong>Mateo (<code>I-205</code>)</strong> gets one request covering both his Notice to Appear and Notice of Hearing.</li>
+</ul>
+<p>I’d have the workflow generate a <strong>draft email for staff review</strong> and render the same message as a PDF letter. The missing-document list comes directly from the CSV comparison. The drafting agent turns it into a clear request, and the review agent checks that the draft asks for exactly the missing items and gives the client a way to respond if they never received a document. The demo can end with the drafts ready for staff to review.</p>
+<hr />
+<h2 id="user-25">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>create a third csv of lawyer and/or lawclerk and assignment and email? with idea that we will update assignment and that we will email lawyers with brief? so law clerk is assigned to client by id. paralegal or lawyer is assigned to client by id also. lawyer or paralegal is sent copies of correspondence via email. we'd simulate email by having "outbox" does this make sense?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-10">Assistant update</h2>
+<p>I’ll add a staff assignment CSV keyed by <code>contact_id</code>, with the assigned clerk and the person who should receive the brief and correspondence copies.</p>
+<hr />
+<h2 id="assistant-24">Assistant</h2>
+<p>Yes. I created <a href="D:/lawfirm-intake-project/project/resources/staff_assignments.csv">staff_assignments.csv</a> with one row per staff assignment, linked to <code>contacts.csv</code> by <code>contact_id</code>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Client</th>
+<th>Assigned law clerk</th>
+<th>Receives the intake brief and correspondence copies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elena (<code>C-101</code>)</td>
+<td>Maya Chen</td>
+<td>Jordan Ellis, lawyer</td>
+</tr>
+<tr>
+<td>Mateo (<code>C-102</code>)</td>
+<td>Maya Chen</td>
+<td>Riley Morgan, paralegal</td>
+</tr>
+</tbody>
+</table>
+<p>The CSV includes a staff ID, a fictional email address, and separate flags for receiving the internal brief and copies of client correspondence. When an assignment changes, the next run can read the updated CSV and route drafts to the new assignee.</p>
+<p>For the demo, the workflow can write two drafts per intake into an <code>outbox</code> folder. One is addressed to the client, with the designated staff member copied, and requests the missing documents. The other is addressed to the designated staff member and carries the internal PDF brief. Staff can inspect both drafts locally.</p>
+<hr />
+<h2 id="user-26">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>no, I'm thinking a law clerk assigns client to paralegal/lawyer. a law clerk requests missing documents.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-25">Assistant</h2>
+<p>The <strong>law clerk owns the intake follow-up and decides who gets assigned to the client</strong>. The workflow supports those decisions.</p>
+<ol type="1">
+<li><strong>Request missing documents.</strong> Maya reviews what’s missing and asks the workflow to draft one client email listing those documents. The simulated outbox draft is from Maya and addressed to the client. If Maya has already assigned a lawyer or paralegal, that person gets a copy.</li>
+<li><strong>Assign the client.</strong> Maya chooses a lawyer or paralegal and adds or updates that person’s row in <code>staff_assignments.csv</code>. Maya stays assigned as the law clerk.</li>
+<li><strong>Send the handoff brief.</strong> Once Maya assigns someone, the workflow generates an internal PDF brief and puts a separate email draft addressed to that person in the outbox. The brief can show what’s on file, what Maya requested, and what’s still outstanding.</li>
+</ol>
+<p>The existing CSV can represent this. A client with <strong>only Maya’s row</strong> is waiting for a lawyer or paralegal assignment. The rows for Jordan and Riley represent clients Maya has already assigned.</p>
+<hr />
+<h2 id="user-27">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>why did you say intake brief true, there are no intake briefs</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-26">Assistant</h2>
+<p><code>receive_intake_brief=true</code> was meant as a future routing preference. I added it because we’d discussed emailing a brief, but it makes the assignment CSV look like that step already exists.</p>
+<p>For the workflow you described, the CSV only needs to record who the clerk assigned and who should receive copies of client correspondence. The brief flag is premature.</p>
+<hr />
+<h2 id="user-28">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>assume the law clerk creates the intake brief. if they have not created then they will create. modify the staff assignments to reflect this rule.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-11">Assistant update</h2>
+<p>I’ll update the assignments so the law clerk is responsible for creating the intake brief if one doesn’t already exist.</p>
+<hr />
+<h2 id="assistant-27">Assistant</h2>
+<p>Updated <a href="D:/lawfirm-intake-project/project/resources/staff_assignments.csv">staff_assignments.csv</a>. The assigned law clerk has <code>create_intake_brief_if_missing=true</code> for both clients. If a brief already exists, the clerk can use it. The lawyer and paralegal are still marked to receive copies of client correspondence.</p>
+<hr />
+<h2 id="user-29">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>note the changes i made, i want that to only track the law clerks. now, create another csv with a lawyer and a paralegal for assignments. they should have the assigned id of person assigned, a flag if they received the intake brief. and a flag for all three document types and if they were sent.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-12">Assistant update</h2>
+<p>I’ll check your edits to the clerk CSV, then create a separate assignment CSV for the lawyer and paralegal.</p>
+<hr />
+<h2 id="assistant-28">Assistant</h2>
+<p>Created <a href="D:/lawfirm-intake-project/project/resources/lawyer_paralegal_assignments.csv">lawyer_paralegal_assignments.csv</a>. It assigns Jordan Ellis, a lawyer, to Elena (<code>C-101</code>) and Riley Morgan, a paralegal, to Mateo (<code>C-102</code>). I kept your edits to <code>staff_assignments.csv</code> intact.</p>
+<p>Each assignment has four flags, all initialized to <code>false</code> so the demo can show them changing:</p>
+<ul>
+<li><code>intake_brief_received</code></li>
+<li><code>notice_to_appear_sent</code></li>
+<li><code>notice_of_hearing_sent</code></li>
+<li><code>uscis_receipt_notice_sent</code></li>
+</ul>
+<p>I noticed that Doug Smith’s clerk row lists Maya’s email, and <code>intakes.csv</code> still lists Maya for Mateo. Those fields may need aligning before the demo uses them for routing.</p>
+<hr />
+<h2 id="user-30">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>wait, you needed to tie the flags to the intakes, some of the documents WERE sent</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-13">Assistant update</h2>
+<p>I’ll add <code>intake_id</code> to the assignments and mark the documents listed on each intake as already sent for the demo.</p>
+<hr />
+<h2 id="assistant-29">Assistant</h2>
+<p>Updated <a href="D:/lawfirm-intake-project/project/resources/lawyer_paralegal_assignments.csv">lawyer_paralegal_assignments.csv</a> to link each assignment to its <code>intake_id</code>. I used the PDFs listed on each intake as the demo’s record of what was already sent.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Intake</th>
+<th>Assigned to</th>
+<th>Already sent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>I-204</code></td>
+<td>Jordan Ellis, lawyer</td>
+<td>Notice to Appear and Notice of Hearing</td>
+</tr>
+<tr>
+<td><code>I-205</code></td>
+<td>Riley Morgan, paralegal</td>
+<td>USCIS Receipt Notice</td>
+</tr>
+</tbody>
+</table>
+<p>The other document flags and both <code>intake_brief_received</code> flags are <code>false</code>.</p>
+<hr />
+<h2 id="user-31">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>is there a database that is very simple where we simply double click and it runs?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-14">Assistant update</h2>
+<p>I’ll check the simplest Windows option for opening the database by double-clicking.</p>
+<hr />
+<h2 id="assistant-30">Assistant</h2>
+<p>Yes. <strong>SQLite with DB Browser for SQLite</strong> is a good fit for this demo. SQLite stores the database in a local file, such as <code>intake-demo.sqlite</code>, with no database server to start. Once you associate <code>.sqlite</code> files with DB Browser on Windows, double-clicking the file opens it so you can browse and edit rows. <a href="https://www.sqlite.org/onefile.html">SQLite single-file format</a> · <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a></p>
+<p>For this project, the four CSVs can seed four tables in that one file. During the demo, you could open the database, change a staff assignment or mark a document as sent, and show that the workflow reads the updated state on its next run. The sample PDFs can stay in <code>resources</code>, with their filenames stored in the database.</p>
+<hr />
+<h2 id="user-32">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>do you not have to install it?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-31">Assistant</h2>
+<p><strong>SQLite itself needs no separate installation</strong> if the demo uses Python’s built-in <code>sqlite3</code> module. The script opens the database file directly, with no server to start.</p>
+<p><strong>DB Browser for SQLite is optional.</strong> If you want to browse or edit the database visually, you can use the Windows installer or download the portable version and run it without installing it. To open the database by double-clicking the file itself, associate <code>.sqlite</code> files with DB Browser once in Windows. <a href="https://sqlitebrowser.org/dl/">DB Browser downloads</a></p>
+<hr />
+<h2 id="user-33">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>forget db. draw me a relationship diagram of the three csv data rows showing relationships and output here</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-32">Assistant</h2>
+<p><code>contacts.csv</code> is the starting point. The other three CSVs link to it by <code>contact_id</code>. The lawyer/paralegal assignment also links to a specific intake by <code>intake_id</code>.</p>
+<pre class="text"><code>contacts.csv
+├── C-101  Elena Rivera
+│   ├── staff_assignments.csv
+│   │   └── S-001  Maya Chen · law clerk
+│   └── intakes.csv
+│       └── I-204
+│           ├── On file: Notice to Appear, Notice of Hearing
+│           ├── Missing: USCIS Receipt Notice
+│           └── lawyer_paralegal_assignments.csv
+│               └── S-003  Jordan Ellis · lawyer
+│                   ├── Sent: Notice to Appear, Notice of Hearing
+│                   └── Intake brief received: No
+│
+└── C-102  Mateo Santos
+    ├── staff_assignments.csv
+    │   └── S-002  Doug Smith · law clerk
+    └── intakes.csv
+        └── I-205
+            ├── On file: USCIS Receipt Notice
+            ├── Missing: Notice to Appear, Notice of Hearing
+            └── lawyer_paralegal_assignments.csv
+                └── S-004  Riley Morgan · paralegal
+                    ├── Sent: USCIS Receipt Notice
+                    └── Intake brief received: No</code></pre>
+<p><code>intakes.csv</code> tracks <strong>what the firm has on file</strong>. <code>lawyer_paralegal_assignments.csv</code> tracks <strong>what was sent to the assigned lawyer or paralegal</strong>. <code>staff_assignments.csv</code> identifies the clerk responsible for following up with the client.</p>
+<hr />
+<h2 id="user-34">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I don't want that. show relationships by field names, an er database type diagram</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-33">Assistant</h2>
+<pre class="mermaid"><code>erDiagram
+    CONTACTS ||--o{ INTAKES : &quot;contact_id&quot;
+    CONTACTS ||--o{ STAFF_ASSIGNMENTS : &quot;contact_id&quot;
+    INTAKES ||--o{ LAWYER_PARALEGAL_ASSIGNMENTS : &quot;intake_id&quot;
+    CONTACTS ||--o{ LAWYER_PARALEGAL_ASSIGNMENTS : &quot;contact_id&quot;
+
+    CONTACTS {
+        string contact_id PK
+        string first_name
+        string last_name
+        string email
+    }
+
+    INTAKES {
+        string intake_id PK
+        string contact_id FK
+        string status
+        string sanitized_summary
+        string expected_document_types
+        string document_filenames
+    }
+
+    STAFF_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean intake_brief
+        boolean missing_docs_email_sent
+    }
+
+    LAWYER_PARALEGAL_ASSIGNMENTS {
+        string intake_id FK
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean intake_brief_received
+        boolean notice_to_appear_sent
+        boolean notice_of_hearing_sent
+        boolean uscis_receipt_notice_sent
+    }</code></pre>
+<p><code>STAFF_ASSIGNMENTS</code> links the law clerk to the <strong>contact</strong>. <code>LAWYER_PARALEGAL_ASSIGNMENTS</code> links each handoff to the <strong>intake</strong> and repeats <code>contact_id</code>, which should match the contact on that intake. <code>PK</code> and <code>FK</code> mark logical keys for the CSVs.</p>
+<hr />
+<h2 id="user-35">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>If staff assignments goes to intakes via the contacts id then shouldn't lawyer_paralegal_assignments also not have the intake id?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-34">Assistant</h2>
+<p>Yes. <strong>If the demo assumes one intake per contact</strong>, <code>lawyer_paralegal_assignments.csv</code> can use <code>contact_id</code> alone, just like <code>staff_assignments.csv</code>. The workflow can find the intake and both staff assignments from that one ID.</p>
+<p>If a contact can have <strong>multiple intakes</strong>, the sent flags need <code>intake_id</code>. Otherwise, <code>notice_of_hearing_sent=true</code> wouldn’t tell you which intake’s notice was sent. In that design, I’d keep <code>intake_id</code> in the lawyer/paralegal assignment and get <code>contact_id</code> through <code>intakes.csv</code>.</p>
+<p>For the current two-client demo, I’d use <strong><code>contact_id</code> alone</strong> and make the one-intake-per-contact assumption explicit.</p>
+<hr />
+<h2 id="user-36">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>remove intakes then</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-15">Assistant update</h2>
+<p>I’ll remove <code>intake_id</code> from the lawyer/paralegal assignments so both assignment CSVs link by <code>contact_id</code>.</p>
+<hr />
+<h2 id="assistant-35">Assistant</h2>
+<p>Removed <code>intake_id</code> from <a href="D:/lawfirm-intake-project/project/resources/lawyer_paralegal_assignments.csv">lawyer_paralegal_assignments.csv</a>. Both assignment CSVs now link to the intake by <code>contact_id</code>. I verified that each contact has exactly one intake and that all delivery flags were preserved.</p>
+<hr />
+<h2 id="user-37">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>now redraw the entity diagram</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-36">Assistant</h2>
+<pre class="mermaid"><code>erDiagram
+    CONTACTS ||--o| INTAKES : &quot;contact_id&quot;
+    CONTACTS ||--o| STAFF_ASSIGNMENTS : &quot;contact_id&quot;
+    CONTACTS ||--o| LAWYER_PARALEGAL_ASSIGNMENTS : &quot;contact_id&quot;
+
+    CONTACTS {
+        string contact_id PK
+        string first_name
+        string last_name
+        string phone
+        string email
+        string street_address
+        string city
+        string state
+        string postal_code
+        string ssn
+    }
+
+    INTAKES {
+        string intake_id PK
+        string contact_id FK
+        string assigned_staff
+        string status
+        string sanitized_summary
+        string document_filenames
+        string expected_document_types
+    }
+
+    STAFF_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean intake_brief
+        boolean missing_docs_email_sent
+    }
+
+    LAWYER_PARALEGAL_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean intake_brief_received
+        boolean notice_to_appear_sent
+        boolean notice_of_hearing_sent
+        boolean uscis_receipt_notice_sent
+    }</code></pre>
+<p>Each contact can have one intake, one law clerk assignment, and one lawyer or paralegal assignment in this demo. All three relationships use <code>contact_id</code>.</p>
+<hr />
+<h2 id="user-38">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>rename staff_assignments to lawclerk assignments</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-16">Assistant update</h2>
+<p>I’ll rename the CSV to <code>lawclerk_assignments.csv</code> and check for references that need updating.</p>
+<hr />
+<h2 id="assistant-37">Assistant</h2>
+<p>Renamed <code>staff_assignments.csv</code> to <a href="D:/lawfirm-intake-project/project/resources/lawclerk_assignments.csv">lawclerk_assignments.csv</a>. I verified that the file contents are identical.</p>
+<hr />
+<h2 id="user-39">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>So it looks like for C-101 the intake brief was created, so create a dummy intake brief and save as pdf.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-17">Assistant update</h2>
+<p>I’ll use the PDF skill to create a fictional internal brief for <code>C-101</code> from the intake record and its two notices.</p>
+<hr />
+<h2 id="user-40">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>stop</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-38">Assistant</h2>
+<p>Stopped. No PDF was created, and no files were changed.</p>
+<hr />
+<h2 id="user-41">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I did not ask you to create the two notices. I only asked you to create the intake brief.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-18">Assistant update</h2>
+<p>I’ll create only the fictional intake brief PDF for <code>C-101</code>, using the notices already on file as source material.</p>
+<hr />
+<h2 id="user-42">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>we are setting up our fictional system, remember? the system will not be in a complete state</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-39">Assistant</h2>
+<p>Created the fictional <a href="D:/lawfirm-intake-project/project/resources/I-204-intake-brief.pdf">intake brief for Elena Rivera (<code>C-101</code>)</a>. It records the two notices on file, the outstanding USCIS receipt notice, and the pending handoff to Jordan Ellis. Only the brief was added.</p>
+<hr />
+<h2 id="user-43">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>modify that the receipt of the brief was made. also update the lawyer_paralegal_assignments intake_brief_received to true</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-19">Assistant update</h2>
+<p>I’ll update the brief to record that Jordan Ellis received it, then set <code>intake_brief_received</code> to <code>true</code> for <code>C-101</code>.</p>
+<hr />
+<h2 id="assistant-40">Assistant</h2>
+<p>Updated the <a href="D:/lawfirm-intake-project/project/resources/I-204-intake-brief.pdf">intake brief</a> to state that Jordan Ellis received it. Set <code>intake_brief_received</code> to <code>true</code> for <code>C-101</code> in <a href="D:/lawfirm-intake-project/project/resources/lawyer_paralegal_assignments.csv">lawyer_paralegal_assignments.csv</a>.</p>
+<hr />
+<h2 id="user-44">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>the lawyer_paralegal_assignments shouldn't they show if the three documents were received, not sent?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-20">Assistant update</h2>
+<p>I’ll rename the three document flags to <code>_received</code> so they describe what the assigned lawyer or paralegal has received.</p>
+<hr />
+<h2 id="assistant-41">Assistant</h2>
+<p>Yes. The assignment CSV tracks what the <strong>lawyer or paralegal received</strong>. I renamed the three document flags from <code>_sent</code> to <code>_received</code> in <a href="D:/lawfirm-intake-project/project/resources/lawyer_paralegal_assignments.csv">lawyer_paralegal_assignments.csv</a> and verified that all flag values were preserved.</p>
+<hr />
+<h2 id="user-45">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>and this is tied to the intakes expected documents matches the actual documents?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-21">Assistant update</h2>
+<p>I’ll compare the expected documents, PDFs on file, and staff receipt flags for both intakes.</p>
+<hr />
+<h2 id="assistant-42">Assistant</h2>
+<p>Yes. The CSVs join by <code>contact_id</code>. I verified that all three PDFs listed in <code>intakes.csv</code> exist and that the staff receipt flags match the current demo data.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Contact</th>
+<th>Expected</th>
+<th>On file and received by assigned staff</th>
+<th>Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-101</code></td>
+<td>All three</td>
+<td>Notice to Appear, Notice of Hearing</td>
+<td>USCIS Receipt Notice</td>
+</tr>
+<tr>
+<td><code>C-102</code></td>
+<td>All three</td>
+<td>USCIS Receipt Notice</td>
+<td>Notice to Appear, Notice of Hearing</td>
+</tr>
+</tbody>
+</table>
+<p>The statuses can change independently. When the firm gets a new PDF, it goes on the intake’s file list. The <code>_received</code> flag turns <code>true</code> when the assigned lawyer or paralegal receives it.</p>
+<hr />
+<h2 id="user-46">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay, I think we have the data setup. let me enter the rules and you tell me if they match the data setup. DO NOT ACT ON THE RULES, we are setting up the hypothetical data and processing scenario.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-43">Assistant</h2>
+<p>Enter the rules when you’re ready. I’ll review each one against the current CSV fields, PDF files, and relationships, and flag any assumptions or gaps. This will be a hypothetical review only, with no workflow execution or file changes.</p>
+<hr />
+<h2 id="user-47">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>rename contacts.csv to clients.csv</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-22">Assistant update</h2>
+<p>I’ll rename <code>contacts.csv</code> to <code>clients.csv</code> and verify that its contents are preserved.</p>
+<hr />
+<h2 id="assistant-44">Assistant</h2>
+<p>Renamed <code>contacts.csv</code> to <a href="D:/lawfirm-intake-project/project/resources/clients.csv">clients.csv</a> and verified that the contents are identical.</p>
+<hr />
+<h2 id="user-48">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>for the intake brief, you need to modify it so it lists the received documents and missing documents</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-23">Assistant update</h2>
+<p>I’ll update the brief with explicit lists of the documents received and the documents still missing for <code>I-204</code>.</p>
+<hr />
+<h2 id="assistant-45">Assistant</h2>
+<p>Updated the <a href="D:/lawfirm-intake-project/project/resources/I-204-intake-brief.pdf">intake brief for I-204</a> with separate lists that match <code>intakes.csv</code>.</p>
+<ul>
+<li><strong>Received:</strong> Notice to Appear and Immigration Court Notice of Hearing.</li>
+<li><strong>Missing:</strong> USCIS Receipt Notice.</li>
+</ul>
+<p>The handoff section still records that Jordan Ellis received the brief.</p>
+<hr />
+<h2 id="user-49">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>take the intake-brief you just created and turn it into a template that you could use as guidance to construct future intake briefs and save as pdf</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-24">Assistant update</h2>
+<p>I’ll turn the existing brief into a reusable PDF template with placeholders and guidance for each section.</p>
+<hr />
+<h2 id="assistant-46">Assistant</h2>
+<p>Created the <a href="D:/lawfirm-intake-project/project/resources/intake-brief-template.pdf">intake brief template</a> in <code>project/resources</code>. It includes placeholders and drafting guidance for the intake summary, received and missing documents, hearing details, follow-up actions, and handoff status.</p>
+<hr />
+<h2 id="user-50">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay, so Iets discuss broad workflow. -If a lawclerk is missing any document from the intake expected documents then<br />
+	- send an email to the client<br />
+	- update missing_docs_email_sent to true<br />
+<br />
+<br />
+-if missing intake brief then create an intake brief<br />
+	 -save it as a pdf.<br />
+	 -send "dummy" email to the assigned paralegal/lawyer<br />
+	 -change intake brief to true ---evaluate if this data structure accomplishes this and critique it.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-47">Assistant</h2>
+<p>Yes. The current CSVs support both branches of the demo. I’d make the rules explicit about <strong>when each flag changes</strong> and treat the two branches as independent, so a clerk can prepare a brief while documents are still missing.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Rule</th>
+<th>How the current data supports it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Request missing documents</strong></td>
+<td>Join the intake, client, and law clerk by <code>contact_id</code>. Compare <code>expected_document_types</code> with <code>document_filenames</code>. If documents are missing and <code>missing_docs_email_sent</code> is <code>false</code>, write one simulated email from the clerk to the client listing all missing items. Set <code>missing_docs_email_sent=true</code> after the email is saved to the outbox.</td>
+</tr>
+<tr>
+<td><strong>Create and hand off the brief</strong></td>
+<td>If the clerk’s <code>intake_brief</code> flag is <code>false</code>, generate the PDF using the template and save it under the intake ID, such as <code>I-205-intake-brief.pdf</code>. Set <code>intake_brief=true</code> once the PDF is saved. If a lawyer or paralegal is assigned, write a separate outbox email with the brief attached.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-id-tighten">What I’d tighten</h3>
+<ul>
+<li><strong>Brief created and brief received are separate events.</strong> <code>lawclerk_assignments.intake_brief</code> means the PDF exists. <code>lawyer_paralegal_assignments.intake_brief_received</code> means the assignee received it. If saving to the outbox simulates delivery, set the receipt flag after that succeeds. If it only simulates queuing, leave receipt pending. Check for a pending handoff even when the brief already exists, so an email failure can be retried without regenerating the PDF.</li>
+<li><strong>A missing document and a missing file call for different actions.</strong> If an expected document is absent from <code>document_filenames</code>, ask the client for it. If a filename is listed but the PDF is absent, flag it for the clerk to locate internally.</li>
+<li><strong>The follow-up flag covers one request.</strong> That’s enough for this demo. It won’t tell you <em>which</em> documents were requested if the checklist changes later.</li>
+<li><strong>Use the clerk assignment CSV for sender details.</strong> Mateo’s clerk is Doug Smith, but his row currently uses Maya’s email and the intake still lists Maya. Resolve that mismatch before simulating the email.</li>
+</ul>
+<p>With the current data, <strong>Elena</strong> would get a request for her USCIS Receipt Notice. Her brief already exists and Jordan has received it. <strong>Mateo</strong> would get one request for both missing notices, and Doug would create the brief and queue a separate handoff email to Riley.</p>
+<hr />
+<h2 id="user-51">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>do we need an extra field on lawclerk_assignments for intake_brief_sent that signifies the email was sent? to avoid a transaction?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-48">Assistant</h2>
+<p>I’d <strong>skip <code>intake_brief_sent</code> for this demo</strong>. A second flag would still leave two writes that can get out of sync. If the workflow saves the email and stops before updating the CSV, a retry could send a duplicate.</p>
+<p>Use the <strong>outbox file itself as the record that the simulated email was created</strong>. Give it a predictable name that identifies the intake and recipient, such as <code>I-205-intake-brief-to-S-004.eml</code>. On a retry, the workflow checks for that exact file. If it exists, it can finish updating the CSV without creating another email. If the clerk reassigns the client, the new staff ID gives the new recipient a separate outbox record.</p>
+<p>That leaves three distinct states:</p>
+<ul>
+<li><strong><code>lawclerk_assignments.intake_brief</code></strong> tracks whether the PDF was created.</li>
+<li><strong>The outbox file</strong> records whether the simulated email was created for that recipient.</li>
+<li><strong><code>lawyer_paralegal_assignments.intake_brief_received</code></strong> tracks whether that recipient has the brief. If writing to the outbox counts as simulated delivery, the workflow can set this flag after confirming the file exists.</li>
+</ul>
+<p>This handles the demo’s retry case without a transaction across the PDF, outbox, and CSV.</p>
+<hr />
+<h2 id="user-52">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I'm confused by this: </p>
+<ul>
+<li><strong>A missing document and a missing file call for different actions.</strong> If an expected document is absent from <code>document_filenames</code>, ask the client for it. If a filename is listed but the PDF is absent, flag it for the clerk to locate internally. : Do you mean that just because a file is missing from expected does not mean you should send an email to client but rather have lawclerk look for it?</li>
+</ul>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-49">Assistant</h2>
+<p>If an expected document is <strong>absent from the intake’s <code>document_filenames</code> list</strong>, the demo treats it as <strong>not received</strong>. The law clerk’s email should ask the client for it.</p>
+<p>If the intake <strong>lists the PDF</strong> but the workflow can’t find it in <code>resources</code>, the intake says the firm already received it. In that case, the clerk should look for the file internally before asking the client to resend it.</p>
+<p>For example, Elena’s USCIS Receipt Notice is expected and absent from her intake’s file list, so <strong>it belongs in the client email</strong>. If her listed Notice of Hearing PDF disappeared from the folder, <strong>that would be an internal follow-up for the clerk</strong>.</p>
+<hr />
+<h2 id="user-53">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>for simplicity can we just assume if it doesn't exist then need to email, based on the fields and not double check the pdf actually existing in the folder?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-50">Assistant</h2>
+<p>Yes. For the demo, use <code>intakes.csv</code> as the source of truth for what the client has provided. Compare <code>expected_document_types</code> with the document types represented in <code>document_filenames</code>. If any expected types are absent and <code>missing_docs_email_sent</code> is <code>false</code>, create one simulated email requesting all missing documents. After saving it to the outbox, set <code>missing_docs_email_sent</code> to <code>true</code>.</p>
+<p>The workflow can decide whether to request documents entirely from the CSV fields, without scanning the PDF folder.</p>
+<hr />
+<h2 id="user-54">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>Do you have enough information from this summary, the files created, etc. for you to summarize the demo functionality? If so, do so here. We will save it as a document after reviewing and doing any needed modifications. Be certain to check the files against what we are going to do. And remember, this is a demo, state any assumptions explicitly.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-25">Assistant update</h2>
+<p>I’ll check the four CSVs and the PDF fixtures, then summarize the proposed workflow and what each sample case should produce.</p>
+<hr />
+<h2 id="assistant-51">Assistant</h2>
+<h1 id="law-firm-intake-automation-demo">Law Firm Intake Automation Demo</h1>
+<p>The demo shows how a law clerk handles two fictional immigration intakes: identify missing documents, prepare an internal PDF brief when needed, and hand the brief off to the assigned lawyer or paralegal. The four CSVs simulate exports from the firm’s systems. A local outbox simulates email delivery.</p>
+<h2 id="data-and-assumptions">Data and assumptions</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Input</th>
+<th>How the workflow uses it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clients.csv</code></td>
+<td>Provides the client’s name and email address.</td>
+</tr>
+<tr>
+<td><code>intakes.csv</code></td>
+<td>Provides the intake ID, sanitized summary, expected document types, and filenames of documents the firm has received.</td>
+</tr>
+<tr>
+<td><code>lawclerk_assignments.csv</code></td>
+<td>Identifies the responsible clerk and tracks whether the missing-document email was sent and whether the brief was created.</td>
+</tr>
+<tr>
+<td><code>lawyer_paralegal_assignments.csv</code></td>
+<td>Identifies the handoff recipient and tracks whether that person received the brief and each of the three document types.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>One intake per client.</strong> The four CSVs join by <code>contact_id</code>. The <code>intake_id</code> identifies PDFs and outbox artifacts.</li>
+<li><strong>Three expected document types for both sample intakes.</strong> The Notice to Appear, Notice of Hearing, and USCIS Receipt Notice are a fictional demo checklist.</li>
+<li><strong>The intake CSV determines what the firm has received.</strong> The workflow compares <code>expected_document_types</code> with <code>document_filenames</code>. It uses that comparison to decide what to request without scanning the PDF folder. The staff receipt flags track a separate event: which documents the assignee received.</li>
+<li><strong>The outbox counts as simulated delivery.</strong> All data and email addresses are fictional. Saving a message to the local outbox is the demo’s delivery event.</li>
+<li><strong>One missing-document request per intake.</strong> The email lists every document missing at the time of the request. The single <code>missing_docs_email_sent</code> flag tracks that request.</li>
+</ul>
+<h2 id="workflow">Workflow</h2>
+<ol type="1">
+<li><p><strong>Request missing documents.</strong> If the checklist has missing items and <code>missing_docs_email_sent</code> is <code>false</code>, draft one email from the assigned clerk to the client. List the missing items and ask the client to let the clerk know if they never received one. Save the email to the outbox, then set <code>missing_docs_email_sent=true</code>.</p></li>
+<li><p><strong>Create the intake brief when needed.</strong> If the clerk’s <code>intake_brief</code> flag is <code>false</code>, use <code>intake-brief-template.pdf</code> as guidance. Include the reason for intake, received and missing documents, hearing details where supported, follow-up, and the assigned recipient. Save the brief as <code>&lt;intake_id&gt;-intake-brief.pdf</code>, then set the clerk’s <code>intake_brief</code> flag to <code>true</code>. A brief can be created while documents are outstanding.</p></li>
+<li><p><strong>Hand off the brief.</strong> If a brief exists and the assigned lawyer or paralegal has <code>intake_brief_received=false</code>, save a separate outbox email addressed to that person with the brief attached. Then set <code>intake_brief_received=true</code>. Give the message a predictable filename based on the intake and recipient IDs so a retry can recognize an email that already exists and finish the CSV update.</p></li>
+</ol>
+<p>The <strong>drafting agent</strong> turns the verified checklist and sanitized intake summary into the client email and brief text. The <strong>review agent</strong> checks that the email asks for the right documents and that the brief preserves uncertainty about facts such as hearing dates. Ordinary workflow logic handles CSV joins, document comparisons, PDF rendering, outbox writes, and flag updates. Client email addresses and other identifying details can be added locally where needed. The AI gets only the approved drafting inputs.</p>
+<h2 id="expected-results-with-the-current-fixtures">Expected results with the current fixtures</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Intake</th>
+<th>Starting state</th>
+<th>Demo output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elena Rivera (<code>C-101</code>, <code>I-204</code>)</strong></td>
+<td>Notice to Appear and Notice of Hearing on file. Maya Chen already created the brief, and Jordan Ellis received it.</td>
+<td>One outbox email asking Elena for her <strong>USCIS Receipt Notice</strong>.</td>
+</tr>
+<tr>
+<td><strong>Mateo Santos (<code>C-102</code>, <code>I-205</code>)</strong></td>
+<td>USCIS Receipt Notice on file. Doug Smith has yet to create the brief. Riley Morgan has received the receipt notice.</td>
+<td>One outbox email asking Mateo for his <strong>Notice to Appear and Notice of Hearing</strong>, a new <strong><code>I-205-intake-brief.pdf</code></strong>, and a separate handoff email to Riley with the brief attached.</td>
+</tr>
+</tbody>
+</table>
+<p>I checked all four CSVs, the three source PDFs, Elena’s existing brief, and the template. The existing brief agrees with Elena’s checklist and Jordan’s receipt flag. Two fixture details need alignment when we finalize the spec:</p>
+<ul>
+<li><strong>Mateo’s clerk routing.</strong> The clerk assignment names Doug Smith but lists Maya’s email. The intake’s <code>assigned_staff</code> field also says Maya. Use the clerk assignment CSV as the source for sender details and correct Doug’s sample email before running the demo.</li>
+<li><strong>Template guidance.</strong> The template currently tells the drafter to flag a listed PDF that is unavailable. The agreed rule is simpler: use the intake CSV alone to decide what to request from the client.</li>
+</ul>
+<hr />
+<h2 id="user-55">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I want this to all be asynchronous, so I think the law clerk needs another flag indicating if they sent the email that brief was sent. We can't use teh flag from the lawyer paralegal as thats if they are received</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-52">Assistant</h2>
+<p>Yes. Add <strong><code>intake_brief_sent</code></strong> to <code>lawclerk_assignments.csv</code>. I’d revise the demo so <strong>writing the handoff email to the outbox represents sending</strong>, and a separate recipient step records receipt later.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Who updates it</th>
+<th>When it becomes <code>true</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lawclerk_assignments.intake_brief</code></td>
+<td>Law clerk workflow</td>
+<td>The brief PDF is saved.</td>
+</tr>
+<tr>
+<td><code>lawclerk_assignments.intake_brief_sent</code></td>
+<td>Law clerk workflow</td>
+<td>The handoff email with the PDF attached is saved to the outbox.</td>
+</tr>
+<tr>
+<td><code>lawyer_paralegal_assignments.intake_brief_received</code></td>
+<td>Lawyer/paralegal workflow</td>
+<td>The recipient processes the simulated message and records receipt.</td>
+</tr>
+</tbody>
+</table>
+<p>For <strong>Mateo</strong>, the demo can show the intermediate state you’re after: Doug creates the brief and sends it, so the clerk flags are both <code>true</code>, while Riley’s <code>intake_brief_received</code> stays <code>false</code>. Riley’s separate step changes it to <code>true</code> later. <strong>Elena</strong> would start with all three flags <code>true</code>, since her fixture represents a completed handoff.</p>
+<p>Keep the predictable outbox filename so the clerk workflow can recover if it saves the email and stops before updating <code>intake_brief_sent</code>. If the assignee changes, the sent flag needs to be reset for the new handoff.</p>
+<hr />
+<h2 id="user-56">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>To make this interesting, I think we need to simulate that these are asynchronous events. Merely showing a synchronous workflow is trivial, as we could do that here. Do you concur?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-53">Assistant</h2>
+<p>Yes. <strong>I’d make the asynchronous handoff the centerpiece of the demo.</strong> A single run that generates a PDF and flips every flag would show document automation. A handoff that stays pending until another person acts shows how the firm can track work across roles.</p>
+<p>Use Mateo’s intake to show three separate events:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Event</th>
+<th>What changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Doug creates the brief</strong></td>
+<td>The PDF appears. <code>intake_brief=true</code>, <code>intake_brief_sent=false</code>, <code>intake_brief_received=false</code>.</td>
+</tr>
+<tr>
+<td><strong>Doug sends the brief</strong></td>
+<td>A simulated email addressed to Riley appears in the outbox. <code>intake_brief_sent=true</code>, and receipt stays <code>false</code>.</td>
+</tr>
+<tr>
+<td><strong>Riley acknowledges receipt</strong></td>
+<td>On a separate run, <code>intake_brief_received</code> changes to <code>true</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Pause the demo after Doug sends it. Show <strong>Sent, awaiting receipt</strong>, then resume as Riley. Each step can run independently, with the CSVs and outbox preserving the state between runs. There’s no need for an artificial timer.</p>
+<p>The missing-document request can run independently too. Doug can ask Mateo for the two missing notices, and Riley can receive a brief that clearly lists them as outstanding. That’s a realistic reason for the workflow to continue while someone else has the next action.</p>
+<hr />
+<h2 id="user-57">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I hope you are not simply agreeing with me...remember, I prefer you to be critical when needed! lol</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-54">Assistant</h2>
+<p>Fair push. I agree with <strong>one asynchronous boundary</strong>. I’d revise my earlier recommendation to show three separate runs. Generating the PDF and preparing the handoff email can happen in one clerk run. Making those separate steps adds friction unless the clerk needs to approve the brief before sending.</p>
+<p>The meaningful boundary is <strong>sending versus acknowledging receipt</strong>. Doug’s run should finish after saving the message to the outbox. Riley’s separate run should process that saved message and record receipt. You can close the clerk workflow in between and still complete the handoff later. Simply clicking three buttons that flip three booleans would demonstrate a status tracker.</p>
+<p>I’d also push back on making <code>intake_brief_sent</code> the sole record of sending. It’s useful as a visible status, but it can be stale if the run stops after saving the message and before updating the CSV. The outbox file should be what the retry checks to avoid creating a duplicate.</p>
+<p>For the demo, I’d show <strong>two runs and one pending handoff</strong>. That earns the extra complexity and gives you a concrete failure case to explain.</p>
+<hr />
+<h2 id="user-58">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>so for the lawclerk knowing if they need to send the input brief or not would depend on it being in the outbox and not the field flag?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-55">Assistant</h2>
+<p>For <strong>new handoffs</strong>, use the outbox file to answer <strong>“Did we already create this email for this assignee?”</strong> Keep <code>intake_brief_sent</code> as the clerk’s visible status.</p>
+<ul>
+<li>If the outbox message already exists but the flag is <code>false</code>, set the flag to <code>true</code> and skip creating another email. That handles a run that stopped between the two writes.</li>
+<li>If the message is absent and the flag is <code>false</code>, create the email, then set the flag to <code>true</code>.</li>
+<li>If the flag is <code>true</code> but the message is absent, skip sending. That can represent a handoff completed before the demo began.</li>
+</ul>
+<p>Elena is that third case. Jordan has already received her brief, so we’d initialize her clerk’s sent flag to <code>true</code> without needing a historical outbox message. Riley’s separate receipt flag stays under the recipient workflow’s control.</p>
+<hr />
+<h2 id="user-59">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>please be more explicit in your naming. remember we have client--to---lawclerk and lawclerk---parlegal/lawyer</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-56">Assistant</h2>
+<p>I’d name each status by <strong>who sent what and who received it</strong>. There are two handoffs, plus the clerk’s request back to the client.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Direction</th>
+<th>What moves</th>
+<th>Field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Client → law clerk</strong></td>
+<td>The client submits intake documents.</td>
+<td><code>intakes.csv</code> → <code>document_filenames</code> lists what the firm has received.</td>
+</tr>
+<tr>
+<td><strong>Law clerk → client</strong></td>
+<td>The clerk asks for missing intake documents.</td>
+<td><code>lawclerk_assignments.csv</code> → <code>missing_documents_request_sent_to_client</code></td>
+</tr>
+<tr>
+<td><strong>Law clerk → lawyer or paralegal</strong></td>
+<td>The clerk sends the internal intake brief.</td>
+<td><code>lawclerk_assignments.csv</code> → <code>intake_brief_sent_to_lawyer_or_paralegal</code></td>
+</tr>
+<tr>
+<td><strong>Lawyer or paralegal acknowledges receipt</strong></td>
+<td>The assignee confirms receipt of the brief from the clerk.</td>
+<td><code>lawyer_paralegal_assignments.csv</code> → <code>intake_brief_received_from_law_clerk</code></td>
+</tr>
+</tbody>
+</table>
+<p>I’d also call the clerk’s PDF creation flag <strong><code>intake_brief_created_by_law_clerk</code></strong>. That gives the demo three explicit states for the brief: created by the clerk, sent by the clerk, and received by the lawyer or paralegal.</p>
+<p>For Mateo, the clerk’s send step checks for <code>I-205-lawclerk-to-paralegal-intake-brief-to-S-004.eml</code> in the outbox. That file represents <strong>Doug sending the brief to Riley</strong>. Riley’s separate acknowledgment updates the receipt flag.</p>
+<hr />
+<h2 id="user-60">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>so the lawclerk does need two flags, one for it creating the brief and one for sending the brief?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-57">Assistant</h2>
+<p>Yes. In the demo, <code>lawclerk_assignments.csv</code> should track two separate steps:</p>
+<ul>
+<li><strong><code>intake_brief_created_by_law_clerk</code></strong> becomes <code>true</code> when the PDF is saved.</li>
+<li><strong><code>intake_brief_sent_to_lawyer_or_paralegal</code></strong> becomes <code>true</code> when the simulated email with the PDF attached is saved to the outbox.</li>
+</ul>
+<p>That lets the workflow recognize a <strong>brief that exists and still needs to be sent</strong>. After sending, the outbox file lets a retry confirm the email already exists and avoid creating a duplicate.</p>
+<p>The lawyer or paralegal records receipt separately in <code>lawyer_paralegal_assignments.csv</code> when they acknowledge the handoff.</p>
+<hr />
+<h2 id="user-61">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay summarize again for me here</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-58">Assistant</h2>
+<h1 id="law-firm-intake-automation-demo-1">Law Firm Intake Automation Demo</h1>
+<p>The demo shows two handoffs in a fictional immigration law firm. <strong>The client provides documents to the law clerk. The law clerk prepares and sends an internal intake brief to the assigned lawyer or paralegal.</strong> Sending and acknowledging the brief happen in separate runs, so the demo can show a handoff that is sent and still awaiting receipt.</p>
+<h2 id="data-and-assumptions-1">Data and assumptions</h2>
+<ul>
+<li><strong>Four CSVs simulate exports.</strong> <code>clients.csv</code> provides client contact details. <code>intakes.csv</code> provides the sanitized summary, expected document types, and filenames on file. <code>lawclerk_assignments.csv</code> identifies the clerk and tracks the clerk’s actions. <code>lawyer_paralegal_assignments.csv</code> identifies the assignee and tracks what they received.</li>
+<li><strong>One intake per client.</strong> The four CSVs join by <code>contact_id</code>. Use <code>intake_id</code> in PDF and outbox filenames.</li>
+<li><strong>Both sample intakes expect the same three documents.</strong> The Notice to Appear, Notice of Hearing, and USCIS Receipt Notice are the fictional demo checklist. Compare <code>expected_document_types</code> with <code>document_filenames</code> to decide what to request. That decision comes entirely from the CSV.</li>
+<li><strong>Email is simulated locally.</strong> Saving a message to the outbox counts as sending it. A separate acknowledgment counts as receipt. The demo uses fictional data and sends no real email.</li>
+</ul>
+<h2 id="workflow-1">Workflow</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Step</th>
+<th>What happens</th>
+<th>Status recorded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Client → law clerk</strong></td>
+<td>The intake export lists the documents the client has provided.</td>
+<td><code>intakes.csv</code> records them in <code>document_filenames</code>.</td>
+</tr>
+<tr>
+<td><strong>Law clerk → client</strong></td>
+<td>If any expected documents are missing and the clerk hasn’t already requested them, save one email to the outbox listing all missing items.</td>
+<td>Set <code>missing_documents_request_sent_to_client=true</code> after the email is saved.</td>
+</tr>
+<tr>
+<td><strong>Law clerk creates the brief</strong></td>
+<td>If no brief has been created, use the PDF template to prepare one. Include the intake summary, received and missing documents, hearing details where supported, and follow-up. The brief can be created while documents are outstanding.</td>
+<td>Set <code>intake_brief_created_by_law_clerk=true</code> after saving <code>&lt;intake_id&gt;-intake-brief.pdf</code>.</td>
+</tr>
+<tr>
+<td><strong>Law clerk → lawyer or paralegal</strong></td>
+<td>If the brief exists, an assignee is in place, and the clerk hasn’t sent it, save a separate email with the PDF attached.</td>
+<td>Set <code>intake_brief_sent_to_lawyer_or_paralegal=true</code> after saving the email to the outbox.</td>
+</tr>
+<tr>
+<td><strong>Lawyer or paralegal acknowledges receipt</strong></td>
+<td>In a later run, the assignee processes the simulated handoff.</td>
+<td>Set <code>intake_brief_received_from_law_clerk=true</code> on the assignee’s row.</td>
+</tr>
+</tbody>
+</table>
+<p>The clerk can create and send the brief in one run. <strong>The demo pauses after the clerk sends it</strong>, with the sent flag <code>true</code> and the receipt flag <code>false</code>. The assignee’s run completes the handoff later. For new messages, use a predictable outbox filename keyed by intake and recipient. If a run stops after saving the email but before updating the clerk’s flag, a retry can recognize the existing message and finish the update without creating a duplicate.</p>
+<p>The <strong>drafting agent</strong> writes the client email and brief text from the sanitized summary and the document comparison. The <strong>review agent</strong> checks that the email requests exactly the missing items and that the brief preserves uncertainty about details such as hearing dates. Workflow code handles CSV joins, PDF rendering, email addressing, and status updates.</p>
+<h2 id="what-the-two-cases-demonstrate">What the two cases demonstrate</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Intake</th>
+<th>Starting state</th>
+<th>Expected demo outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elena Rivera (<code>I-204</code>)</strong></td>
+<td>The firm has both court notices. Maya Chen created the brief, and Jordan Ellis has received it.</td>
+<td>Generate one client email requesting the <strong>USCIS Receipt Notice</strong>. The existing brief represents a completed handoff.</td>
+</tr>
+<tr>
+<td><strong>Mateo Santos (<code>I-205</code>)</strong></td>
+<td>The firm has the USCIS Receipt Notice, which Riley Morgan has already received. Doug Smith has yet to create the brief.</td>
+<td>Generate one client email requesting the <strong>Notice to Appear</strong> and <strong>Notice of Hearing</strong>. Create the brief and put the separate email to Riley in the outbox. Show <strong>Sent, awaiting receipt</strong> until Riley’s acknowledgment run.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fixture-updates-to-make-after-review">Fixture updates to make after review</h2>
+<p>The CSVs still use the earlier flag names. Rename them to the proposed names above and add the clerk’s <strong>sent-to-lawyer-or-paralegal</strong> flag, initialized to <code>true</code> for Elena and <code>false</code> for Mateo. Also correct Doug’s sample email, which currently points to Maya, and resolve the stale <code>assigned_staff</code> value on Mateo’s intake. The clerk assignment CSV should control sender routing. The template’s instruction about locating a missing PDF should be aligned with the agreed CSV-only rule for deciding what to request from the client.</p>
+<hr />
+<h2 id="user-62">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>provide again but also provide table of the data and er diagram and a description of both</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-59">Assistant</h2>
+<h1 id="law-firm-intake-automation-demo-2">Law Firm Intake Automation Demo</h1>
+<p>The demo follows two fictional immigration intakes. <strong>Clients provide documents to the law clerk. The clerk requests anything still missing, prepares an internal PDF brief, and sends it to the assigned lawyer or paralegal.</strong> The assignee acknowledges receipt in a separate run. The pause between sending and acknowledgment is the part of the demo that shows how work passes between people.</p>
+<p>This is the proposed workflow for review. The CSVs still use their existing field names, and the workflow hasn’t been implemented.</p>
+<h2 id="sample-data">Sample data</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Client and intake</th>
+<th>Assigned law clerk</th>
+<th>Assigned lawyer or paralegal</th>
+<th>Documents on file</th>
+<th>Missing documents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elena Rivera</strong> (<code>C-101</code>, <code>I-204</code>)</td>
+<td>Maya Chen (<code>S-001</code>)</td>
+<td>Jordan Ellis (<code>S-003</code>), lawyer</td>
+<td>Notice to Appear, Notice of Hearing</td>
+<td>USCIS Receipt Notice</td>
+</tr>
+<tr>
+<td><strong>Mateo Santos</strong> (<code>C-102</code>, <code>I-205</code>)</td>
+<td>Doug Smith (<code>S-002</code>)</td>
+<td>Riley Morgan (<code>S-004</code>), paralegal</td>
+<td>USCIS Receipt Notice</td>
+<td>Notice to Appear, Notice of Hearing</td>
+</tr>
+</tbody>
+</table>
+<p>Both intakes expect the same three document types for this fictional scenario. The <strong>On file</strong> and <strong>Missing documents</strong> columns show what the firm has and what it still needs from the client. The next table tracks what the clerk and the assignee have done with that intake.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Status at the start of the demo</th>
+<th>Elena</th>
+<th>Mateo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clerk sent a missing-document request to the client</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Clerk created the intake brief</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Clerk sent the brief to the lawyer or paralegal</td>
+<td>Yes, proposed starting value</td>
+<td>No, proposed starting value</td>
+</tr>
+<tr>
+<td>Lawyer or paralegal acknowledged receipt of the brief</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Lawyer or paralegal received the source documents</td>
+<td>Jordan received both court notices</td>
+<td>Riley received the USCIS Receipt Notice</td>
+</tr>
+</tbody>
+</table>
+<p>Elena’s existing PDF and Jordan’s receipt flag represent a completed handoff before the demo begins. Mateo is the case that demonstrates the asynchronous handoff. His USCIS Receipt Notice has already reached Riley, even though his intake brief hasn’t been created yet.</p>
+<h2 id="entity-relationship-diagram">Entity relationship diagram</h2>
+<p>The diagram shows the <strong>proposed field names</strong>. <code>PK</code> and <code>FK</code> are logical keys in the CSV model. The CSV files themselves do not enforce them.</p>
+<pre class="mermaid"><code>erDiagram
+    CLIENTS ||--o| INTAKES : &quot;contact_id&quot;
+    CLIENTS ||--o| LAWCLERK_ASSIGNMENTS : &quot;contact_id&quot;
+    CLIENTS ||--o| LAWYER_PARALEGAL_ASSIGNMENTS : &quot;contact_id&quot;
+
+    CLIENTS {
+        string contact_id PK
+        string first_name
+        string last_name
+        string phone
+        string email
+        string street_address
+        string city
+        string state
+        string postal_code
+        string ssn
+    }
+
+    INTAKES {
+        string intake_id PK
+        string contact_id FK
+        string status
+        string sanitized_summary
+        string document_filenames
+        string expected_document_types
+    }
+
+    LAWCLERK_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean missing_documents_request_sent_to_client
+        boolean intake_brief_created_by_law_clerk
+        boolean intake_brief_sent_to_lawyer_or_paralegal
+    }
+
+    LAWYER_PARALEGAL_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean intake_brief_received_from_law_clerk
+        boolean notice_to_appear_received
+        boolean notice_of_hearing_received
+        boolean uscis_receipt_notice_received
+    }</code></pre>
+<p><strong>How to read it.</strong> <code>clients.csv</code> is the parent. Each intake and assignment refers to a client through <code>contact_id</code>. The demo allows one intake, one clerk assignment, and one lawyer or paralegal assignment per client. That makes <code>contact_id</code> sufficient to find both assignees from an intake. <code>intake_id</code> identifies the intake in PDF and outbox filenames.</p>
+<p><strong>Who owns each status.</strong> <code>intakes.csv</code> records what the firm received from the client. <code>lawclerk_assignments.csv</code> records what the clerk created or sent. <code>lawyer_paralegal_assignments.csv</code> records what the assigned recipient received. For example, a Notice of Hearing can be on file in the intake while <code>notice_of_hearing_received</code> is still <code>false</code> for the assigned lawyer.</p>
+<h2 id="workflow-2">Workflow</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action and result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Client → law clerk</strong></td>
+<td>Read the intake export. Compare <code>expected_document_types</code> with the document types represented by <code>document_filenames</code>. The CSV determines what’s on file for purposes of the request.</td>
+</tr>
+<tr>
+<td><strong>2. Law clerk → client</strong></td>
+<td>If documents are missing and the clerk hasn’t already sent a request, save one simulated email asking for every missing item. Set <code>missing_documents_request_sent_to_client=true</code> after the email is saved.</td>
+</tr>
+<tr>
+<td><strong>3. Law clerk creates the brief</strong></td>
+<td>If the brief hasn’t been created, use <code>intake-brief-template.pdf</code> as guidance. Include the reason for intake, received and missing documents, any hearing details supported by the intake materials, and follow-up. Save <code>&lt;intake_id&gt;-intake-brief.pdf</code>, then mark it created. The clerk can do this while documents are outstanding.</td>
+</tr>
+<tr>
+<td><strong>4. Law clerk → lawyer or paralegal</strong></td>
+<td>If the brief exists and the clerk has assigned a recipient, save an internal email with the PDF attached and mark the brief sent. An existing brief that hasn’t been sent can be handed off in a later run.</td>
+</tr>
+<tr>
+<td><strong>5. Lawyer or paralegal acknowledges receipt</strong></td>
+<td>In a separate run, the assignee processes the saved message and marks the brief received. The clerk’s run ends with the handoff status <strong>Sent, awaiting receipt</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>Saving an email to the local outbox counts as <strong>simulated sending</strong>. The demo uses fictional addresses and sends no real email. Use a predictable outbox filename for each intake, message type, and recipient. If a run stops after saving the email but before updating the clerk’s flag, the next run can recognize the existing message and finish the update without producing a duplicate. The missing-document flag covers one request per intake in this demo.</p>
+<p>The <strong>drafting agent</strong> turns the sanitized intake summary and the calculated document lists into email and brief text. The <strong>review agent</strong> checks that the email requests the correct documents and that the brief attributes claims to the intake or source document. Workflow code handles the CSV joins, document comparison, email addressing, PDF rendering, outbox writes, and flag updates. Client email addresses and other identifying details can be inserted locally.</p>
+<h2 id="what-to-show-live">What to show live</h2>
+<ol type="1">
+<li><strong>Elena:</strong> Maya’s run creates one outbox email requesting the <strong>USCIS Receipt Notice</strong>. Elena’s existing brief stays in place, and the completed handoff to Jordan requires no new message.</li>
+<li><strong>Mateo, clerk run:</strong> Doug’s run creates one client email requesting the <strong>Notice to Appear</strong> and <strong>Notice of Hearing</strong>, produces <code>I-205-intake-brief.pdf</code>, and saves a separate handoff email to Riley. Show <strong>created = true</strong>, <strong>sent = true</strong>, and <strong>received = false</strong>.</li>
+<li><strong>Mateo, assignee run:</strong> Riley processes the saved handoff and acknowledges receipt. The assignee’s receipt flag becomes <code>true</code>. The two requested documents are still outstanding.</li>
+</ol>
+<h2 id="fixture-updates-to-make-after-review-1">Fixture updates to make after review</h2>
+<ul>
+<li>Rename the existing status fields to the names in the diagram and add <code>intake_brief_sent_to_lawyer_or_paralegal</code>. Initialize it to <code>true</code> for Elena and <code>false</code> for Mateo.</li>
+<li>Correct Doug’s fictional email, which currently points to Maya. The diagram omits the existing <code>intakes.csv.assigned_staff</code> field because the clerk assignment CSV should own that relationship. Mateo’s current <code>assigned_staff</code> value is stale.</li>
+<li>Align the PDF template with the CSV-only rule for deciding what to request from the client. A brief can use a listed PDF for source details, while the request decision comes from the CSV comparison.</li>
+</ul>
+<hr />
+<h2 id="user-63">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I wanted complete data table by csv file...keep everything else the same.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-60">Assistant</h2>
+<h1 id="law-firm-intake-automation-demo-3">Law Firm Intake Automation Demo</h1>
+<p>The demo follows two fictional immigration intakes. <strong>Clients provide documents to the law clerk. The clerk requests anything still missing, prepares an internal PDF brief, and sends it to the assigned lawyer or paralegal.</strong> The assignee acknowledges receipt in a separate run. The pause between sending and acknowledgment shows how work passes between people.</p>
+<p>This is the proposed workflow for review. The four tables below show the <strong>current CSV contents</strong>. The entity diagram shows the <strong>proposed schema</strong>, including the new flag for when the clerk sends the brief.</p>
+<h2 id="complete-sample-data-by-csv-file">Complete sample data by CSV file</h2>
+<h3 id="clients.csv"><code>clients.csv</code></h3>
+<p>This file holds the fictional client records. <code>contact_id</code> is the common key across all four CSVs.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr>
+<th><code>contact_id</code></th>
+<th><code>first_name</code></th>
+<th><code>last_name</code></th>
+<th><code>phone</code></th>
+<th><code>email</code></th>
+<th><code>street_address</code></th>
+<th><code>city</code></th>
+<th><code>state</code></th>
+<th><code>postal_code</code></th>
+<th><code>ssn</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-101</td>
+<td>Elena</td>
+<td>Rivera</td>
+<td>202-555-0101</td>
+<td>elena.rivera@example.com</td>
+<td>100 Sample Lane</td>
+<td>Example City</td>
+<td>MD</td>
+<td>00000</td>
+<td>DEMO-SSN-101</td>
+</tr>
+<tr>
+<td>C-102</td>
+<td>Mateo</td>
+<td>Santos</td>
+<td>202-555-0102</td>
+<td>mateo.santos@example.com</td>
+<td>200 Sample Lane</td>
+<td>Example City</td>
+<td>MD</td>
+<td>00000</td>
+<td>DEMO-SSN-102</td>
+</tr>
+</tbody>
+</table>
+<h3 id="intakes.csv"><code>intakes.csv</code></h3>
+<p>This file records what each intake expects and which documents the firm has on file. Both intakes use the same fictional checklist. The <code>document_filenames</code> and <code>expected_document_types</code> fields use pipe-separated values.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th><code>intake_id</code></th>
+<th><code>contact_id</code></th>
+<th><code>assigned_staff</code></th>
+<th><code>status</code></th>
+<th><code>sanitized_summary</code></th>
+<th><code>document_filenames</code></th>
+<th><code>expected_document_types</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I-204</td>
+<td>C-101</td>
+<td>Maya</td>
+<td>Ready for review</td>
+<td>Prospective client recalls being told the hearing is in December. The client supplied the Notice to Appear and later sent a hearing notice.</td>
+<td><code>I-204-notice-to-appear.pdf\|I-204-notice-of-hearing.pdf</code></td>
+<td><code>notice-to-appear\|notice-of-hearing\|uscis-receipt-notice</code></td>
+</tr>
+<tr>
+<td>I-205</td>
+<td>C-102</td>
+<td>Maya</td>
+<td>Ready for review</td>
+<td>Prospective client requests help understanding a receipt notice for a pending employment authorization application.</td>
+<td><code>I-205-uscis-receipt-notice.pdf</code></td>
+<td><code>notice-to-appear\|notice-of-hearing\|uscis-receipt-notice</code></td>
+</tr>
+</tbody>
+</table>
+<p>The checklist comparison flags <strong>one missing document for Elena</strong>, the USCIS Receipt Notice, and <strong>two for Mateo</strong>, the Notice to Appear and Notice of Hearing. The current <code>assigned_staff</code> value for Mateo says Maya. The clerk assignment below identifies Doug as the clerk responsible for Mateo’s intake.</p>
+<h3 id="lawclerk_assignments.csv"><code>lawclerk_assignments.csv</code></h3>
+<p>This file identifies the clerk responsible for each client and tracks the clerk’s actions. The current <code>intake_brief</code> field indicates whether the PDF was created. The proposed schema adds a separate flag for whether the clerk sent it.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th><code>contact_id</code></th>
+<th><code>staff_id</code></th>
+<th><code>staff_name</code></th>
+<th><code>role</code></th>
+<th><code>staff_email</code></th>
+<th><code>intake_brief</code></th>
+<th><code>missing_docs_email_sent</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-101</td>
+<td>S-001</td>
+<td>Maya Chen</td>
+<td>law_clerk</td>
+<td>maya.chen@example.com</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>C-102</td>
+<td>S-002</td>
+<td>Doug Smith</td>
+<td>law_clerk</td>
+<td>maya.chen@example.com</td>
+<td>false</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>Elena’s existing PDF represents a brief Maya already created. Neither clerk has requested missing documents yet. Doug’s row currently contains Maya’s email and needs a fictional email for Doug before the demo runs.</p>
+<h3 id="lawyer_paralegal_assignments.csv"><code>lawyer_paralegal_assignments.csv</code></h3>
+<p>This file identifies the lawyer or paralegal assigned to each client and records what that person received. The three document flags track receipt by the assignee. The intake CSV separately tracks what the firm has on file.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th><code>contact_id</code></th>
+<th><code>staff_id</code></th>
+<th><code>staff_name</code></th>
+<th><code>role</code></th>
+<th><code>staff_email</code></th>
+<th><code>intake_brief_received</code></th>
+<th><code>notice_to_appear_received</code></th>
+<th><code>notice_of_hearing_received</code></th>
+<th><code>uscis_receipt_notice_received</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-101</td>
+<td>S-003</td>
+<td>Jordan Ellis</td>
+<td>lawyer</td>
+<td>jordan.ellis@example.com</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>C-102</td>
+<td>S-004</td>
+<td>Riley Morgan</td>
+<td>paralegal</td>
+<td>riley.morgan@example.com</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p>Jordan has already received Elena’s brief and both court notices. Riley has received Mateo’s USCIS Receipt Notice. Mateo’s brief has yet to be created.</p>
+<h2 id="entity-relationship-diagram-1">Entity relationship diagram</h2>
+<p>The diagram shows the <strong>proposed field names</strong>. <code>PK</code> and <code>FK</code> are logical keys in the CSV model. The CSV files themselves do not enforce them.</p>
+<pre class="mermaid"><code>erDiagram
+    CLIENTS ||--o| INTAKES : &quot;contact_id&quot;
+    CLIENTS ||--o| LAWCLERK_ASSIGNMENTS : &quot;contact_id&quot;
+    CLIENTS ||--o| LAWYER_PARALEGAL_ASSIGNMENTS : &quot;contact_id&quot;
+
+    CLIENTS {
+        string contact_id PK
+        string first_name
+        string last_name
+        string phone
+        string email
+        string street_address
+        string city
+        string state
+        string postal_code
+        string ssn
+    }
+
+    INTAKES {
+        string intake_id PK
+        string contact_id FK
+        string status
+        string sanitized_summary
+        string document_filenames
+        string expected_document_types
+    }
+
+    LAWCLERK_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean missing_documents_request_sent_to_client
+        boolean intake_brief_created_by_law_clerk
+        boolean intake_brief_sent_to_lawyer_or_paralegal
+    }
+
+    LAWYER_PARALEGAL_ASSIGNMENTS {
+        string contact_id FK
+        string staff_id
+        string staff_name
+        string role
+        string staff_email
+        boolean intake_brief_received_from_law_clerk
+        boolean notice_to_appear_received
+        boolean notice_of_hearing_received
+        boolean uscis_receipt_notice_received
+    }</code></pre>
+<p><strong>How to read it.</strong> <code>clients.csv</code> is the parent. Each intake and assignment refers to a client through <code>contact_id</code>. The demo allows one intake, one clerk assignment, and one lawyer or paralegal assignment per client. That makes <code>contact_id</code> sufficient to find both assignees from an intake. <code>intake_id</code> identifies the intake in PDF and outbox filenames.</p>
+<p><strong>Who owns each status.</strong> <code>intakes.csv</code> records what the firm received from the client. <code>lawclerk_assignments.csv</code> records what the clerk created or sent. <code>lawyer_paralegal_assignments.csv</code> records what the assigned recipient received. A Notice of Hearing can be on file in the intake while <code>notice_of_hearing_received</code> is still <code>false</code> for the assigned lawyer.</p>
+<h2 id="workflow-3">Workflow</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action and result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Client → law clerk</strong></td>
+<td>Read the intake export. Compare <code>expected_document_types</code> with the document types represented by <code>document_filenames</code>. The CSV determines what’s on file for purposes of the request.</td>
+</tr>
+<tr>
+<td><strong>2. Law clerk → client</strong></td>
+<td>If documents are missing and the clerk hasn’t already sent a request, save one simulated email asking for every missing item. Set <code>missing_documents_request_sent_to_client=true</code> after the email is saved.</td>
+</tr>
+<tr>
+<td><strong>3. Law clerk creates the brief</strong></td>
+<td>If the brief hasn’t been created, use <code>intake-brief-template.pdf</code> as guidance. Include the reason for intake, received and missing documents, any hearing details supported by the intake materials, and follow-up. Save <code>&lt;intake_id&gt;-intake-brief.pdf</code>, then mark it created. The clerk can do this while documents are outstanding.</td>
+</tr>
+<tr>
+<td><strong>4. Law clerk → lawyer or paralegal</strong></td>
+<td>If the brief exists, an assignee is in place, and the clerk hasn’t sent it, save an internal email with the PDF attached and mark the brief sent. An existing brief that hasn’t been sent can be handed off in a later run.</td>
+</tr>
+<tr>
+<td><strong>5. Lawyer or paralegal acknowledges receipt</strong></td>
+<td>In a separate run, the assignee processes the saved message and marks the brief received. The clerk’s run ends with the handoff status <strong>Sent, awaiting receipt</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>Saving an email to the local outbox counts as <strong>simulated sending</strong>. The demo uses fictional addresses and sends no real email. Use a predictable outbox filename for each intake, message type, and recipient. If a run stops after saving the email but before updating the clerk’s flag, the next run can recognize the existing message and finish the update without producing a duplicate. The missing-document flag covers one request per intake in this demo.</p>
+<p>The <strong>drafting agent</strong> turns the sanitized intake summary and the calculated document lists into email and brief text. The <strong>review agent</strong> checks that the email requests the correct documents and that the brief attributes claims to the intake or source document. Workflow code handles the CSV joins, document comparison, email addressing, PDF rendering, outbox writes, and flag updates. Client email addresses and other identifying details can be inserted locally.</p>
+<h2 id="what-to-show-live-1">What to show live</h2>
+<ol type="1">
+<li><strong>Elena.</strong> Maya’s run creates one outbox email requesting the <strong>USCIS Receipt Notice</strong>. Elena’s existing brief stays in place, and the completed handoff to Jordan requires no new message.</li>
+<li><strong>Mateo, clerk run.</strong> Doug’s run creates one client email requesting the <strong>Notice to Appear</strong> and <strong>Notice of Hearing</strong>, produces <code>I-205-intake-brief.pdf</code>, and saves a separate handoff email to Riley. Show <strong>created = true</strong>, <strong>sent = true</strong>, and <strong>received = false</strong>.</li>
+<li><strong>Mateo, assignee run.</strong> Riley processes the saved handoff and acknowledges receipt. The assignee’s receipt flag becomes <code>true</code>. The two requested documents are still outstanding.</li>
+</ol>
+<h2 id="fixture-updates-to-make-after-review-2">Fixture updates to make after review</h2>
+<ul>
+<li>Rename the existing status fields to the names in the diagram and add <code>intake_brief_sent_to_lawyer_or_paralegal</code>. Initialize it to <code>true</code> for Elena and <code>false</code> for Mateo.</li>
+<li>Correct Doug’s fictional email. The diagram omits the existing <code>intakes.csv.assigned_staff</code> field because the clerk assignment CSV should own that relationship.</li>
+<li>Align the PDF template with the CSV-only rule for deciding what to request from the client. A brief can use a listed PDF for source details, while the request decision comes from the CSV comparison.</li>
+</ul>
+<hr />
+<h2 id="user-64">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>create a pdf from this, be certain to make the data tables small enough to fit in margins of 8.5 by 11 and save pdf.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-26">Assistant update</h2>
+<p>I’ll use the PDF skill to lay out the summary on US Letter pages. I’ll put CSV fields down the left side of each table so the complete records fit within the margins at a readable size.</p>
+<hr />
+<h2 id="assistant-61">Assistant</h2>
+<p>Saved the four-page <a href="D:/lawfirm-intake-project/project/law-firm-intake-automation-demo.pdf">Law Firm Intake Automation Demo PDF</a>. It includes the complete data from all four CSVs, the proposed entity relationship diagram, the asynchronous workflow, and the live demo scenarios.</p>
+<p>I verified that all four pages are US Letter (8.5 × 11 inches) and that every table fits within the margins.</p>
+<hr />
+<h2 id="user-65">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>now save this transcript, complete with formatting, as a .md document, being certain to redact ALL mentions of <strong>REDACTED</strong>, including this prompt. simply put REDACTED in bold in place of the mention or put black ribbon, your choice. then save the html transcript to: D:-intake-project-chats-history-project-brainstorm.md</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-27">Assistant update</h2>
+<p>I’ll locate the chat history, preserve the message formatting in Markdown, and verify that the saved transcript redacts every instance of the firm name, including in your latest prompt.</p>
+<hr />
+<h2 id="assistant-62">Assistant</h2>
+<p>Saved the <a href="D:/lawfirm-intake-project/my-chats-history/initial-project-brainstorm.md">formatted Markdown transcript</a>, including your latest prompt. I verified that no mentions of the firm name remain.</p>
+<hr />
+<h2 id="user-66">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>you need to redact the job description as well and the <strong>REDACTED</strong> and the <strong>REDACTED</strong></p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-28">Assistant update</h2>
+<p>I’ll redact the original job posting, the job announcement, and my congratulatory reply in the saved transcript.</p>
+<hr />
+<h2 id="assistant-63">Assistant</h2>
+<p>Updated the <a href="D:/lawfirm-intake-project/my-chats-history/initial-project-brainstorm.md">Markdown transcript</a>. I replaced the job description, the statement that you got the job, and my congratulatory reply with <strong>REDACTED</strong>. The clarification about the follow-up interview remains.</p>
+<hr />
+<h2 id="user-67">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>oops, I forgot, you need to make law-firm-intake-automation-demo.pdf a .md as well</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-29">Assistant update</h2>
+<p>I’ll save a Markdown companion beside the PDF with the complete CSV tables, entity relationship diagram, and workflow.</p>
+<hr />
+<h2 id="assistant-64">Assistant</h2>
+<p>Saved <a href="D:/lawfirm-intake-project/project/law-firm-intake-automation-demo.md">law-firm-intake-automation-demo.md</a> alongside the PDF. It includes the complete data from all four CSVs, the Mermaid entity relationship diagram, the asynchronous workflow, and the live demo scenarios.</p>
+<hr />
+<h2 id="user-68">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>fix the lawclerk_assignments.csv so that Doug Smith's email is doug_smith@example.com.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-30">Assistant update</h2>
+<p>I’ll update Doug Smith’s email in the clerk assignment CSV.</p>
+<hr />
+<h2 id="assistant-65">Assistant</h2>
+<p>Updated Doug Smith’s email to <code>doug_smith@example.com</code> in <a href="D:/lawfirm-intake-project/project/resources/lawclerk_assignments.csv">lawclerk_assignments.csv</a>.</p>
+<hr />
+<h2 id="user-69">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>make this change</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="user-70">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<ul>
+<li>Rename the existing status fields to the names in the diagram and add <code>intake_brief_sent_to_lawyer_or_paralegal</code>. Initialize it to <code>true</code> for Elena and <code>false</code> for Mateo.</li>
+</ul>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-31">Assistant update</h2>
+<p>I’ll update both assignment CSVs to use the diagram’s status field names and set the new sent flag for Elena and Mateo.</p>
+<hr />
+<h2 id="assistant-66">Assistant</h2>
+<p>Renamed the status fields in <a href="D:/lawfirm-intake-project/project/resources/lawclerk_assignments.csv">lawclerk_assignments.csv</a> and <a href="D:/lawfirm-intake-project/project/resources/lawyer_paralegal_assignments.csv">lawyer_paralegal_assignments.csv</a> to match the diagram.</p>
+<p>Verified that the new <code>intake_brief_sent_to_lawyer_or_paralegal</code> field is <code>true</code> for Elena (<code>C-101</code>) and <code>false</code> for Mateo (<code>C-102</code>). Existing status values were preserved.</p>
+<hr />
+<h2 id="user-71">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>make this change: </p>
+<ul>
+<li>Align the PDF template with the CSV-only rule for deciding what to request from the client. A brief can use a listed PDF for source details, while the request decision comes from the CSV comparison.</li>
+</ul>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-32">Assistant update</h2>
+<p>I’ll update the PDF template so it uses the CSV checklist to decide what to request and uses listed PDFs to support details in the brief.</p>
+<hr />
+<h2 id="assistant-67">Assistant</h2>
+<p>Updated the <a href="D:/lawfirm-intake-project/project/resources/intake-brief-template.pdf">intake brief template</a>. It now directs the clerk to compare <code>expected_document_types</code> with <code>document_filenames</code> in the intake CSV and request only the missing types. Listed PDFs can support details in the brief, such as the hearing date and location. I verified the updated one-page layout.</p>
+<hr />
+<h2 id="user-72">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>create a process flow diagram of the processes</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-68">Assistant</h2>
+<h2 id="intake-automation-process-flow">Intake automation process flow</h2>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Client provides intake documents&quot;] --&gt; B[&quot;Intake CSV records documents on file&quot;]
+    B --&gt; C[&quot;Clerk run loads client, intake, clerk, and assignee by contact_id&quot;]
+
+    C --&gt; D[&quot;Compare expected document types with document_filenames&quot;]
+    D --&gt; E{&quot;Any missing documents and no request sent?&quot;}
+    E -- No --&gt; F[&quot;Finish document-request branch&quot;]
+    E -- Yes --&gt; G[&quot;Draft and review one email listing all missing documents&quot;]
+    G --&gt; H[&quot;Save clerk-to-client email in outbox&quot;]
+    H --&gt; I[&quot;Mark missing-document request sent&quot;]
+
+    C --&gt; J{&quot;Intake brief already created?&quot;}
+    J -- Yes --&gt; M[&quot;Use existing brief PDF&quot;]
+    J -- No --&gt; K[&quot;Draft and review brief using the template and intake data&quot;]
+    K --&gt; L[&quot;Save brief PDF and mark it created&quot;]
+    L --&gt; M
+    M --&gt; N{&quot;Lawyer or paralegal assigned?&quot;}
+    N -- No --&gt; O[&quot;Brief waits for assignment&quot;]
+    N -- Yes --&gt; P{&quot;Brief already sent to this assignee?&quot;}
+    P -- Yes --&gt; Q[&quot;Clerk leaves the existing handoff in place&quot;]
+    P -- No --&gt; R[&quot;Save clerk-to-assignee email with brief attached&quot;]
+    R --&gt; S[&quot;Mark brief sent by clerk&quot;]
+    S --&gt; T[&quot;Sent, awaiting receipt&quot;]
+    T -. &quot;Separate run, later&quot; .-&gt; U[&quot;Lawyer or paralegal opens the simulated handoff&quot;]
+    U --&gt; V[&quot;Assignee acknowledges receipt and updates their receipt flag&quot;]</code></pre>
+<p>The clerk can <strong>request missing documents and prepare the brief in the same run</strong>. The request comes from the CSV comparison. The brief can also cite facts from a listed PDF, such as hearing details.</p>
+<p>The <strong>outbox is the handoff between runs</strong>. Saving the email marks it sent on the clerk’s side. Only the assignee’s later acknowledgment marks it received. On a clerk retry, the workflow checks for the existing outbox message before creating another one.</p>
+<hr />
+<h2 id="user-73">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>the client to intake is already completed and assumed for this demo. so why are you including it in the description and the flow?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-69">Assistant</h2>
+<p>I included document collection as background, but it’s outside the demo’s scope. <strong>The demo starts with the completed intake exports already in place.</strong> The clerk’s first action is to read those exports and determine what follow-up is needed.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Law clerk run loads the existing CSV exports&quot;] --&gt; B[&quot;Compare expected document types with document_filenames&quot;]
+    B --&gt; C{&quot;Documents missing and request not yet sent?&quot;}
+    C -- Yes --&gt; D[&quot;Draft and review one client email listing the missing documents&quot;]
+    D --&gt; E[&quot;Save email to outbox and mark request sent&quot;]
+    C -- No --&gt; F[&quot;No client email needed&quot;]
+
+    A --&gt; G{&quot;Intake brief already created?&quot;}
+    G -- Yes --&gt; H[&quot;Use existing brief PDF&quot;]
+    G -- No --&gt; I[&quot;Draft and review brief using the template&quot;]
+    I --&gt; J[&quot;Save PDF and mark brief created&quot;]
+    J --&gt; H
+    H --&gt; K{&quot;Lawyer or paralegal assigned?&quot;}
+    K -- No --&gt; L[&quot;Brief waits for assignment&quot;]
+    K -- Yes --&gt; M{&quot;Brief already sent to this assignee?&quot;}
+    M -- Yes --&gt; N[&quot;No new handoff email needed&quot;]
+    M -- No --&gt; O[&quot;Save handoff email with brief attached and mark it sent&quot;]
+    O --&gt; P[&quot;Sent, awaiting receipt&quot;]
+    P -. &quot;Separate run, later&quot; .-&gt; Q[&quot;Lawyer or paralegal opens the saved handoff&quot;]
+    Q --&gt; R[&quot;Assignee acknowledges receipt&quot;]</code></pre>
+<p>The clerk can request missing documents and prepare the brief in the same run. The <strong>asynchronous boundary</strong> is after the clerk sends the brief. The lawyer or paralegal acknowledges it later.</p>
+<hr />
+<h2 id="user-74">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>why would you say law clerk run loads the existing csv exports, use actual names of what they are.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-70">Assistant</h2>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Start law clerk workflow&quot;] --&gt; B[&quot;Read clients.csv for client names and email addresses&quot;]
+    A --&gt; C[&quot;Read intakes.csv for intake summaries, expected documents, and documents on file&quot;]
+    A --&gt; D[&quot;Read lawclerk_assignments.csv for the assigned clerk and their request, creation, and send flags&quot;]
+    A --&gt; E[&quot;Read lawyer_paralegal_assignments.csv for the assigned recipient&quot;]
+
+    B --&gt; F[&quot;Join records by contact_id&quot;]
+    C --&gt; F
+    D --&gt; F
+    E --&gt; F
+
+    F --&gt; G[&quot;Compare expected_document_types with document_filenames&quot;]
+    G --&gt; H{&quot;Any expected documents missing and no request already sent?&quot;}
+    H -- Yes --&gt; I[&quot;Draft and review one email from the law clerk to the client&quot;]
+    I --&gt; J[&quot;Save email to outbox and mark the missing-document request sent&quot;]
+    H -- No --&gt; K[&quot;Finish the document-request branch&quot;]
+
+    G --&gt; L{&quot;Intake brief already created?&quot;}
+    L -- Yes --&gt; M[&quot;Use the existing intake brief PDF&quot;]
+    L -- No --&gt; N[&quot;Draft and review the brief using intake-brief-template.pdf&quot;]
+    N --&gt; O[&quot;Save the brief PDF and mark it created&quot;]
+    O --&gt; M
+
+    M --&gt; P{&quot;Lawyer or paralegal assigned?&quot;}
+    P -- No --&gt; Q[&quot;Brief awaits assignment&quot;]
+    P -- Yes --&gt; R{&quot;Brief already sent to this assignee?&quot;}
+    R -- Yes --&gt; S[&quot;Clerk finishes the handoff branch&quot;]
+    R -- No --&gt; T[&quot;Save email with the brief attached and mark it sent&quot;]
+    T --&gt; U[&quot;Sent, awaiting receipt&quot;]
+
+    U -. &quot;Separate run&quot; .-&gt; V[&quot;Assigned lawyer or paralegal opens the saved handoff&quot;]
+    V --&gt; W[&quot;Record receipt in lawyer_paralegal_assignments.csv&quot;]</code></pre>
+<p>The demo starts with those four CSVs already populated. The clerk updates <code>lawclerk_assignments.csv</code> when the request is sent, the brief is created, or the brief is sent. The lawyer or paralegal updates <code>lawyer_paralegal_assignments.csv</code> when they acknowledge receipt.</p>
+<hr />
+<h2 id="user-75">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>make the intake from client and the assignment as as two separate workflows</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-71">Assistant</h2>
+<h2 id="workflow-1-client-intake-follow-up">Workflow 1 — Client intake follow-up</h2>
+<p>Starts with the intake already recorded in <code>intakes.csv</code>. The clerk uses that record to decide whether to request documents from the client.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Read intakes.csv for expected_document_types and document_filenames&quot;] --&gt; D[&quot;Join by contact_id&quot;]
+    B[&quot;Read clients.csv for the client&#39;s name and email&quot;] --&gt; D
+    C[&quot;Read lawclerk_assignments.csv for the clerk and request status&quot;] --&gt; D
+    D --&gt; E[&quot;Compare expected document types with the types listed on file&quot;]
+    E --&gt; F{&quot;Any documents missing and no request already sent?&quot;}
+    F -- No --&gt; G[&quot;Finish client follow-up&quot;]
+    F -- Yes --&gt; H[&quot;Draft and review one email listing all missing documents&quot;]
+    H --&gt; I[&quot;Save law-clerk-to-client email in the outbox&quot;]
+    I --&gt; J[&quot;Set missing_documents_request_sent_to_client to true&quot;]</code></pre>
+<h2 id="workflow-2-assignment-and-brief-handoff">Workflow 2 — Assignment and brief handoff</h2>
+<p>The law clerk owns the assignment and sends the brief. The assigned lawyer or paralegal acknowledges receipt in a later run.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Read clients.csv and intakes.csv for the client and intake details&quot;] --&gt; D[&quot;Join by contact_id&quot;]
+    B[&quot;Read lawclerk_assignments.csv for the clerk and brief status&quot;] --&gt; D
+    C[&quot;Read lawyer_paralegal_assignments.csv for the assignee&quot;] --&gt; D
+    D --&gt; E{&quot;Brief already created?&quot;}
+    E -- Yes --&gt; G[&quot;Use the existing intake brief PDF&quot;]
+    E -- No --&gt; F[&quot;Draft and review the brief using intake-brief-template.pdf&quot;]
+    F --&gt; H[&quot;Save PDF and set intake_brief_created_by_law_clerk to true&quot;]
+    H --&gt; G
+    G --&gt; I{&quot;Lawyer or paralegal assigned?&quot;}
+    I -- No --&gt; J[&quot;Clerk selects an assignee and records the assignment in lawyer_paralegal_assignments.csv&quot;]
+    J --&gt; K
+    I -- Yes --&gt; K{&quot;Brief already sent to this assignee?&quot;}
+    K -- Yes --&gt; L[&quot;Finish the clerk run&quot;]
+    K -- No --&gt; M[&quot;Save law-clerk-to-assignee email with the brief attached&quot;]
+    M --&gt; N[&quot;Set intake_brief_sent_to_lawyer_or_paralegal to true&quot;]
+    N --&gt; O[&quot;Finish clerk run with receipt pending&quot;]
+    O -. &quot;Separate run later&quot; .-&gt; P[&quot;Assignee opens the saved handoff and acknowledges receipt&quot;]
+    P --&gt; Q[&quot;Set intake_brief_received_from_law_clerk to true&quot;]</code></pre>
+<p>The two workflows can run independently. For Mateo, the clerk can request the two missing notices and hand off a brief that lists them as outstanding. Both sample clients already have assignees, so the current fixtures take the <strong>Yes</strong> branch at the assignment check.</p>
+<hr />
+<h2 id="user-76">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay I like that one. but i noticed something we missed. We need to have a template for the missing documents email and a template for the assignment email sending the intake brief. Propose templates for me here</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-72">Assistant</h2>
+<h2 id="missing-document-request-law-clerk-to-client">1. Missing-document request — law clerk to client</h2>
+<p><strong>From:</strong> <code>{{law_clerk_email}}</code><br />
+<strong>To:</strong> <code>{{client_email}}</code><br />
+<strong>Subject:</strong> Documents needed for your intake</p>
+<p>Hi {{client_first_name}},</p>
+<p>We’re reviewing your intake and still need copies of the following documents:</p>
+<p>{{missing_documents_bulleted_list}}</p>
+<p>Please reply so I can help you provide the documents. If you never received one of them or don’t have a copy, let me know which one.</p>
+<p>Thank you,<br />
+{{law_clerk_name}}<br />
+Law Clerk</p>
+<h2 id="intake-brief-handoff-law-clerk-to-assigned-lawyer-or-paralegal">2. Intake brief handoff — law clerk to assigned lawyer or paralegal</h2>
+<p><strong>From:</strong> <code>{{law_clerk_email}}</code><br />
+<strong>To:</strong> <code>{{assigned_staff_email}}</code><br />
+<strong>Subject:</strong> Intake brief for review — {{intake_id}}<br />
+<strong>Attachment:</strong> <code>{{intake_id}}-intake-brief.pdf</code></p>
+<p>Hi {{assigned_staff_first_name}},</p>
+<p>I’ve assigned {{client_full_name}}’s intake ({{intake_id}}) to you for review. The attached brief summarizes the intake, lists the documents on file, and identifies any outstanding items.</p>
+<p>Please acknowledge receipt of the brief when you’ve opened it.</p>
+<p>Thanks,<br />
+{{law_clerk_name}}<br />
+Law Clerk</p>
+<p>The workflow fills the client email’s document list directly from the CSV comparison. For the internal handoff, saving the email to the outbox records that the clerk <strong>sent</strong> the brief. The assignee’s separate acknowledgment records that they <strong>received</strong> it.</p>
+<hr />
+<h2 id="user-77">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I like them both. save them both with template name. assume they are text documents?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-33">Assistant update</h2>
+<p>I’ll save both approved templates as plain-text files in <code>project/resources</code>.</p>
+<hr />
+<h2 id="assistant-73">Assistant</h2>
+<p>Saved both approved templates as plain-text (<code>.txt</code>) files in <code>project/resources</code>:</p>
+<ul>
+<li><a href="D:/lawfirm-intake-project/project/resources/missing-documents-email-template.txt">Missing-document request email template</a></li>
+<li><a href="D:/lawfirm-intake-project/project/resources/intake-brief-assignment-email-template.txt">Intake brief assignment email template</a></li>
+</ul>
+<hr />
+<h2 id="user-78">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay, redo the flow diagram, keep it as closely as possible to the last one you created</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-74">Assistant</h2>
+<h2 id="workflow-1-client-intake-follow-up-1">Workflow 1 — Client intake follow-up</h2>
+<p>Starts with the intake already recorded in <code>intakes.csv</code>. The clerk uses that record to decide whether to request documents from the client.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Read intakes.csv for expected_document_types and document_filenames&quot;] --&gt; D[&quot;Join by contact_id&quot;]
+    B[&quot;Read clients.csv for the client&#39;s name and email&quot;] --&gt; D
+    C[&quot;Read lawclerk_assignments.csv for the clerk and request status&quot;] --&gt; D
+    D --&gt; E[&quot;Compare expected document types with the types listed on file&quot;]
+    E --&gt; F{&quot;Any documents missing and no request already sent?&quot;}
+    F -- No --&gt; G[&quot;Finish client follow-up&quot;]
+    F -- Yes --&gt; H[&quot;Draft and review one email listing all missing documents using missing-documents-email-template.txt&quot;]
+    H --&gt; I[&quot;Save law-clerk-to-client email in the outbox&quot;]
+    I --&gt; J[&quot;Set missing_documents_request_sent_to_client to true&quot;]</code></pre>
+<h2 id="workflow-2-assignment-and-brief-handoff-1">Workflow 2 — Assignment and brief handoff</h2>
+<p>The law clerk owns the assignment and sends the brief. The assigned lawyer or paralegal acknowledges receipt in a later run.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[&quot;Read clients.csv and intakes.csv for the client and intake details&quot;] --&gt; D[&quot;Join by contact_id&quot;]
+    B[&quot;Read lawclerk_assignments.csv for the clerk and brief status&quot;] --&gt; D
+    C[&quot;Read lawyer_paralegal_assignments.csv for the assignee&quot;] --&gt; D
+    D --&gt; E{&quot;Brief already created?&quot;}
+    E -- Yes --&gt; G[&quot;Use the existing intake brief PDF&quot;]
+    E -- No --&gt; F[&quot;Draft and review the brief using intake-brief-template.pdf&quot;]
+    F --&gt; H[&quot;Save PDF and set intake_brief_created_by_law_clerk to true&quot;]
+    H --&gt; G
+    G --&gt; I{&quot;Lawyer or paralegal assigned?&quot;}
+    I -- No --&gt; J[&quot;Clerk selects an assignee and records the assignment in lawyer_paralegal_assignments.csv&quot;]
+    J --&gt; K
+    I -- Yes --&gt; K{&quot;Brief already sent to this assignee?&quot;}
+    K -- Yes --&gt; L[&quot;Finish the clerk run&quot;]
+    K -- No --&gt; M[&quot;Prepare the handoff email using intake-brief-assignment-email-template.txt&quot;]
+    M --&gt; N[&quot;Save the email with the brief attached in the outbox&quot;]
+    N --&gt; O[&quot;Set intake_brief_sent_to_lawyer_or_paralegal to true&quot;]
+    O --&gt; P[&quot;Finish clerk run with receipt pending&quot;]
+    P -. &quot;Separate run later&quot; .-&gt; Q[&quot;Assignee opens the saved handoff and acknowledges receipt&quot;]
+    Q --&gt; R[&quot;Set intake_brief_received_from_law_clerk to true&quot;]</code></pre>
+<p>The two workflows can run independently. For Mateo, the clerk can request the two missing notices and hand off a brief that lists them as outstanding. Both sample clients already have assignees, so the current fixtures take the <strong>Yes</strong> branch at the assignment check.</p>
+<hr />
+<h2 id="user-79">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>Okay now redo the law-firm-intake-automation-demo with new information and fixes and also incorporate the flow diagrams. Use the flow diagrams you just created, do not improvise and create new ones. create a pdf and md report and save to D:-intake-projectoverwriting the previous documents.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-34">Assistant update</h2>
+<p>I’ll update both reports from the current fixtures and use the two approved flow diagrams exactly as written. I’ll verify the PDF layout before replacing the existing files.</p>
+<hr />
+<h2 id="user-80">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>stop</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-75">Assistant</h2>
+<p>Stopped. The existing PDF and Markdown reports were not overwritten.</p>
+<hr />
+<h2 id="user-81">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>I noticed you also stated: The clerk can send an existing brief in a later run for step 4. clerk to assignee. But that's not what we discussed. The clerk sending the brief is automated and assumed by creating the email. We update it to sent as we are assuming.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-76">Assistant</h2>
+<p>Correct. The report should remove the sentence about the clerk sending an existing brief in a later run. <strong>Creating the handoff email in the outbox is the simulated send.</strong> The workflow sets <code>intake_brief_sent_to_lawyer_or_paralegal=true</code> in that same run.</p>
+<p>I’d use this wording for step 4:</p>
+<blockquote>
+<p><strong>4. Law clerk → assigned lawyer or paralegal.</strong> The workflow automatically creates the handoff email from <code>intake-brief-assignment-email-template.txt</code>, attaches the intake brief PDF, and saves the email to the outbox. Saving it counts as sending it, so the workflow immediately marks the brief as sent. The assignee acknowledges receipt separately in step 5.</p>
+</blockquote>
+<p>That matches the approved flow diagram. The report files are still unchanged.</p>
+<hr />
+<h2 id="user-82">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>Okay now create the report and flow diagram etc.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-35">Assistant update</h2>
+<p>I’ll overwrite both reports with the current data, the approved diagrams, and the corrected rule that saving the handoff email marks the brief sent in the same run.</p>
+<hr />
+<h2 id="assistant-77">Assistant</h2>
+<p>Overwrote both reports in <code>D:\lawfirm-intake-project\project</code>:</p>
+<ul>
+<li><a href="D:/lawfirm-intake-project/project/law-firm-intake-automation-demo.pdf">PDF report</a></li>
+<li><a href="D:/lawfirm-intake-project/project/law-firm-intake-automation-demo.md">Markdown report</a></li>
+</ul>
+<p>Both include the current data from all four CSVs, the updated entity relationship diagram, and the two approved process flows. The report now states that saving the handoff email to the outbox counts as sending it in the same run. The lawyer or paralegal acknowledges receipt separately.</p>
+<p>I verified that the six-page PDF uses US Letter and that the tables and diagrams fit within the margins.</p>
+<hr />
+<h2 id="user-83">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>note you made this font smaller, why? The clerk-side sent flag starts true for Elena and false for Mateo. Elena represents a handoff completed before the demo begins.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-36">Assistant update</h2>
+<p>I styled that sentence as a footnote, but it describes the demo’s starting state. I’ll make it match the surrounding body text.</p>
+<hr />
+<h2 id="user-84">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>stop</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="user-85">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>recall I want you to verify first. always ask before doing</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="user-86">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>are you stuck?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-78">Assistant</h2>
+<p>No, I stopped when you asked. The PDF is unchanged. I had styled that sentence as a note, which made it smaller than the surrounding text.</p>
+<p>Going forward, I’ll verify the issue first, explain the proposed fix, and ask before editing.</p>
+<hr />
+<h2 id="user-87">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>now, i like this, and it makes a good n8n automation, but, is it really showing AI use and if so, where?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="user-88">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>you did not create the second diagram correctly. There is not "separate run later" and the Assignee opens the saved handoff... step needs to be removed as we automatically set intake_brief_received_from_law_clerk to true as we are demoing and assuming the assigneed receives it. change the diagram and the documentation to reflect those changes.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-37">Assistant update</h2>
+<p>I’ll verify where the second diagram and reports describe a separate acknowledgment, then confirm the exact edits with you before changing the files.</p>
+<hr />
+<h2 id="assistant-79">Assistant</h2>
+<p>I verified that both reports still show a separate acknowledgment in Workflow 2 and in Mateo’s walkthrough. I’ll remove those steps and show the simulation as <strong>save the handoff email → mark the brief sent → mark it received</strong>, all in the same run. Workflow 1 needs no edits.</p>
+<p>On the AI question, <strong>the intake brief is where the demo makes its strongest case for AI</strong>. The drafting agent turns the sanitized intake notes and source details into a brief, and the review agent checks that it preserves uncertainty and supports its claims. The CSV comparison, template filling, PDF rendering, and outbox updates are ordinary automation. Since the missing-document email already has a fixed template and a known list of missing items, it needs little AI.</p>
+<p>May I apply the verified changes to both reports and their Workflow 2 diagram?</p>
+<hr />
+<h2 id="user-89">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>yes apply those changes and create the documents. after you are finished creating them, evaluate where and how we are showing "AI use" in the application (assuming we are using a workflow tool like n8n or make)</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-38">Assistant update</h2>
+<p>I’ll update both reports so the handoff records simulated receipt in the same run, then evaluate where AI adds value in an n8n or Make implementation.</p>
+<hr />
+<h2 id="assistant-80">Assistant</h2>
+<p>Updated the <a href="D:/lawfirm-intake-project/project/law-firm-intake-automation-demo.pdf">PDF report</a> and <a href="D:/lawfirm-intake-project/project/law-firm-intake-automation-demo.md">Markdown report</a>. Workflow 2 now saves the handoff email and sets both the sent and received flags in the same run. The demo assumes receipt when the email is saved. Workflow 1 is unchanged.</p>
+<h2 id="where-the-demo-shows-ai-use">Where the demo shows AI use</h2>
+<p><strong>The intake brief is the strongest AI use case.</strong> In n8n or Make, I’d make the model step visible between reading the intake materials and rendering the PDF.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Step</th>
+<th>What the demo should show</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI drafts the brief</strong></td>
+<td>Give the model Mateo’s sanitized intake summary, approved text from his USCIS receipt notice, and the document checklist calculated by the workflow. Ask it for a structured brief that distinguishes what Mateo reported, what the receipt notice says, and what is still missing.</td>
+</tr>
+<tr>
+<td><strong>AI reviews the draft</strong></td>
+<td>Give the reviewer the same inputs and the draft. Have it flag unsupported claims, such as saying the application was approved when the document only records receipt. Show one flagged draft and the reason it was held.</td>
+</tr>
+<tr>
+<td><strong>Workflow completes the handoff</strong></td>
+<td>Compare the CSV fields, fill the two email templates, render the PDF, save the outbox messages, and update the flags. These are ordinary automation steps.</td>
+</tr>
+</tbody>
+</table>
+<p>My candid take: <strong>if the model only fills the email templates, the AI will feel tacked on.</strong> The missing-document list already comes from a straightforward CSV comparison. The demo becomes stronger when you show <strong>Mateo’s intake notes and receipt notice → the model’s structured brief → the reviewer’s decision → the finished PDF</strong>. A second model call earns its place if it can catch an error and change what the workflow does next.</p>
+<hr />
+<h2 id="user-90">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>that was my thoughts, this looks like run of the mill workflow automation that I could do by coding and matching json output and input to templates. But the problem is that AI allowed to draft the emails and the intake brief leads to much room for you to improvise, hence the templates. Is there a way I can restrict the emails and intake brief without a template (thus making it more ai)?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-81">Assistant</h2>
+<p>Yes. You can <strong>fix the facts and the rules while letting AI choose the wording</strong>. I’d do that for the brief. I’d keep the missing-document email templated unless you have a case where adapting the message helps the client.</p>
+<h3 id="intake-brief-constrain-the-content-let-ai-write-the-summary">Intake brief: constrain the content, let AI write the summary</h3>
+<p>Give the model a fixed set of sections and a small packet of approved facts. For each factual claim it writes, require a source and a label such as <code>client_reported</code>, <code>documented</code>, or <code>unknown</code>. Let the model decide what to emphasize and how to summarize it. Have the workflow populate the received and missing document lists directly from the CSV.</p>
+<p>For Mateo, the model could write:</p>
+<blockquote>
+<p>Mateo asked for help understanding a receipt notice for his employment authorization application. The notice records that the application was received on November 4, 2026. The intake materials do not establish a decision on the application.</p>
+</blockquote>
+<p>The first sentence comes from the intake summary. The second comes from the receipt notice. The third states the limit of the available evidence. If the model writes “the application was approved,” the review step should flag the unsupported claim and hold the brief for staff review. A JSON schema can require a source field, but the schema alone can’t establish that the source supports the claim.</p>
+<h3 id="client-email-allow-flexibility-only-where-it-helps">Client email: allow flexibility only where it helps</h3>
+<p>If you want an AI-written email without fixed wording, give it a few rules: <strong>request exactly the supplied documents, use plain language, invite the client to say if they never received one, and add no deadlines, legal advice, or submission instructions.</strong> Keep the actual document names as a list inserted by the workflow. That lets the model adapt the introduction and closing while keeping the request accurate.</p>
+<p>My recommendation for the demo is to <strong>keep both emails templated and use AI for the source-grounded brief</strong>. Show Mateo’s intake notes and receipt notice, the draft with its sources, and a review case where an unsupported claim changes the outcome. That gives you a concrete answer to where AI earns its place: it reads and synthesizes the intake materials, while n8n or Make carries out the decisions the CSVs already determine.</p>
+<hr />
+<h2 id="user-91">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>So using something like n8n couldn't I not map fields and just let you figure it out? so I'd do the step as something more like: review for missing documents for a client. next step take the missing documents for that client and create an email using the template, without mapping json data fields? I know before it seemed like thats what tools like n8n and make are ACTUALLY doing rather than AI.</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-39">Assistant update</h2>
+<p>I’ll check how n8n and Make pass data between steps, then relate that to your missing-document example.</p>
+<hr />
+<h2 id="assistant-82">Assistant</h2>
+<p>Yes. <strong>You can pass an entire prepared input to the model and let it interpret the data without mapping each JSON field to a prompt variable.</strong> You still tell n8n or Make which input to pass between steps. In n8n, for example, a Basic LLM Chain can take a prepared <code>chatInput</code> from the previous node or use an expression to build its prompt. <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.chainllm/">n8n Basic LLM Chain</a> · <a href="https://help.make.com/mapping">Make mapping</a></p>
+<p>Your example could work like this:</p>
+<ol type="1">
+<li><strong>Review Mateo’s intake.</strong> Pass the model one sanitized record and say, “Compare the expected documents with the filenames on file. Return only the missing document names.” It returns <strong>Notice to Appear</strong> and <strong>Notice of Hearing</strong>.</li>
+<li><strong>Prepare the email.</strong> Pass that whole result, the approved email template, and the names needed for the greeting and signature to the next model step. Say, “Fill the placeholders using the supplied information. Preserve the template wording. Return the completed email body.”</li>
+<li><strong>Save the simulated email.</strong> The workflow looks up the actual recipient from <code>clients.csv</code>, saves the message to the outbox, and updates the clerk’s status flag.</li>
+</ol>
+<p>That <strong>does use AI</strong> in steps 1 and 2. Your instinct about traditional workflow tools is also right. If you configure n8n to compare the lists and substitute the results into placeholders, it’s doing ordinary automation. If you hand those same jobs to a model, it’s AI performing two tasks that are already easy to specify exactly.</p>
+<p>For your demo, I’d use the <strong>whole-input approach for the brief</strong>. Give the model one prepared packet with Mateo’s sanitized notes, approved receipt-notice text, and the calculated checklist. Ask it to write the brief and distinguish what Mateo reported from what the notice actually establishes. That lets you avoid field-by-field prompt mapping <strong>and</strong> show why a model is useful. The model interprets prose and document text, while the workflow controls recipients, files, and status changes.</p>
+<hr />
+<h2 id="user-92">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>okay, so we are treating this as a workflow. could we also treat this as a multiagent workflow complete with .toml files etc to show how we'd do it directly in codex?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-40">Assistant update</h2>
+<p>I’ll use the OpenAI docs skill to verify how Codex defines custom agents in TOML and how they could fit this demo.</p>
+<hr />
+<h2 id="assistant-83">Assistant</h2>
+<p>Yes. I’d build a <strong>Codex-native version of the same demo</strong>, using the same CSVs, PDFs, email templates, and simulated outbox. The main Codex thread would coordinate the workflow and delegate the intake brief to two project-scoped subagents. Codex supports one custom agent per TOML file under <code>.codex/agents/</code>. <a href="https://learn.chatgpt.com/docs/agent-configuration/subagents">Codex subagent documentation</a></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Main Codex thread</strong></td>
+<td>Joins the CSVs, computes missing documents, prepares a sanitized packet, fills the email templates, and owns all PDF, outbox, and CSV writes.</td>
+</tr>
+<tr>
+<td><strong><code>intake_brief_drafter</code></strong></td>
+<td>Reads the sanitized intake summary and approved source excerpts. Returns a structured brief that distinguishes client-reported information from what the documents establish.</td>
+</tr>
+<tr>
+<td><strong><code>intake_brief_reviewer</code></strong></td>
+<td>Receives the draft and source packet. Returns <code>pass</code> or <code>needs_review</code>, identifying any unsupported claims. The main thread renders and hands off the brief after a pass.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-the-toml-files-could-look-like">What the TOML files could look like</h3>
+<p><strong><code>.codex/agents/intake_brief_drafter.toml</code></strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode toml"><code class="sourceCode toml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">&quot;intake_brief_drafter&quot;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">&quot;Drafts an internal intake brief from a sanitized evidence packet.&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dt">developer_instructions</span> <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">Use only the evidence packet supplied by the coordinator.</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="st">Return the intake summary, source references, and follow-up in structured form.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">Preserve uncertainty and use the supplied document checklist as given.</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="st">Return the draft to the coordinator. Do not write files or send messages.</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code></pre></div>
+<p><strong><code>.codex/agents/intake_brief_reviewer.toml</code></strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode toml"><code class="sourceCode toml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">&quot;intake_brief_reviewer&quot;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">&quot;Checks an intake brief against the supplied evidence.&quot;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">developer_instructions</span> <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">Compare the draft with the evidence packet and the document checklist.</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">Flag unsupported claims, omitted missing documents, and lost uncertainty.</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">Return pass or needs_review, with specific reasons for each finding.</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">Return the review to the coordinator. Do not write files or send messages.</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>The <strong>TOML defines the roles</strong>. A reusable Markdown run prompt tells the main thread when to delegate and what to do with the result. For Mateo, the drafter interprets the USCIS receipt notice, the reviewer checks that the draft doesn’t imply approval, and the main thread creates the PDF and simulated handoff. Saving the handoff email still sets <strong>sent</strong> and <strong>received</strong> in the same run under the demo assumption.</p>
+<p>My candid take: <strong>two subagents are enough</strong>. Drafting and reviewing are distinct because the review can stop an incorrect brief from reaching the outbox. A third agent that compares two CSV lists or fills a fixed email template would add complexity without giving you much else to show. The strongest live comparison is the same intake and outputs in both versions, with <strong>n8n’s node graph</strong> in one and <strong>Codex’s visible delegation and review result</strong> in the other.</p>
+<hr />
+<h2 id="user-93">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>great that's what I thought. okay so we have one automation using the workflow automation "AI" one automation using codex and for the third one, do you recommend I use python or could i use my old trusted friend Spring AI (emotional attachment added here by design lol).</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-41">Assistant update</h2>
+<p>I’ll check what Spring AI provides for the drafting and review steps, then weigh it against Python for the third demo.</p>
+<hr />
+<h2 id="assistant-84">Assistant</h2>
+<p><strong>Use Spring AI for the third version.</strong> Your old friend earns its place here. Java is where you can best show how you’d build, test, and maintain the workflow as custom software. Python would be a good choice if the main goal were to get a standalone script running quickly.</p>
+<p>The three versions would answer different questions using the same fictional intake:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Version</th>
+<th>What it demonstrates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>n8n</strong></td>
+<td>Can you connect existing tools and make the workflow easy to inspect?</td>
+</tr>
+<tr>
+<td><strong>Codex</strong></td>
+<td>Can you delegate drafting and review to two agents and show what each one contributed?</td>
+</tr>
+<tr>
+<td><strong>Spring AI</strong></td>
+<td>Can you implement the same process in application code, with typed model outputs, explicit validation, and predictable file and status updates?</td>
+</tr>
+</tbody>
+</table>
+<p>Keep the Spring version small. A <strong>Spring Boot command-line runner</strong> takes an intake ID, reads the existing fixtures, and makes two model calls: draft the brief, then review it against the source material. Spring AI’s <code>ChatClient</code> can map the responses to Java records such as <code>IntakeBriefDraft</code> and <code>BriefReview</code>. Java handles the CSV comparison, email templates, PDF rendering, outbox, and status flags. <a href="https://docs.spring.io/spring-ai/reference/api/chatclient.html#_returning_an_entity">Spring AI ChatClient documentation</a></p>
+<p>For the live demo, I’d run <strong>n8n end to end</strong>, show <strong>Codex’s two-agent review</strong>, then spend a minute on the <strong>Spring AI code that holds the brief when the reviewer flags an unsupported claim</strong>. That last example is where your Java experience adds something the first two versions haven’t already shown.</p>
+<hr />
+<h2 id="user-94">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>remember, I'm trying to demonstrate that there are a variety of ways we can approach this. You read the job description. Do you think it would help to create multi-step agent(s) that shows more rigorous document creation? For example, a final demo that show: getting ICE actions and arrests in maryland data. vetting the data and creating summaries. getting local new and other sources to integrate the data and sources to create a draft report, then create a list for manual vetting of the data and claims sources, then upon approval create a final document? To illustrate more "free form" AI use in a way that would demonstrate how to provide individual tools for staff to help guide document creation. Don't worry about time, I have until the 30th. Would that be something value added?</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-update-42">Assistant update</h2>
+<p>I’ll check what the public data can support, then assess what this reporting demo would add to the three intake implementations.</p>
+<hr />
+<h2 id="assistant-85">Assistant</h2>
+<p>Yes. <strong>I’d add it as a separate capstone.</strong> The three intake demos show that you can implement the same defined process with a workflow platform, Codex, or application code. The capstone would show a different skill the job calls for: turning an open-ended staff request into a document an attorney can verify and approve.</p>
+<p>I’d narrow the question to <strong>“What do public records show about ICE administrative arrests in Maryland over a defined period, and what does local reporting add?”</strong> “ICE actions” is broad enough to mix arrests, detainers, detention, and removals. Those are distinct measures, and an arrest count can differ from a count of unique people. The Deportation Data Project has published ICE records obtained through FOIA, along with documentation. Capital News Service has done Maryland reporting using those records, which also gives you a good test of whether the workflow recognizes when two sources rely on the same underlying data. <a href="https://deportationdata.org/docs/ice.html">Deportation Data Project documentation</a> · <a href="https://www.gao.gov/assets/gao-24-106233.pdf">GAO reporting on ICE enforcement measures</a> · <a href="https://cnsmaryland.org/interactives/spring2026/ice-arrests-maryland/">Capital News Service Maryland analysis</a></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Staff tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Collect evidence</strong></td>
+<td>A data agent identifies the release, coverage dates, and Maryland geography field. A research agent independently finds relevant local reporting and records what each article supports. Code calculates the totals from the selected data.</td>
+</tr>
+<tr>
+<td><strong>Draft the memo</strong></td>
+<td>A drafting agent uses the computed tables and source excerpts to explain the findings, add local context, and identify limitations. It can choose how to organize the memo around what the evidence shows.</td>
+</tr>
+<tr>
+<td><strong>Prepare for review</strong></td>
+<td>A review agent produces a claim-by-claim checklist with the exact sentence, the supporting table or source passage, and any question the reviewer needs to resolve.</td>
+</tr>
+<tr>
+<td><strong>Finalize the PDF</strong></td>
+<td>A staff member approves or edits the draft. The workflow renders the approved version to PDF with its citations and methodology.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The live moment I’d design around is an attorney rejecting one plausible claim.</strong> For example, the draft says “X people were arrested,” but the calculation counted arrest records. The review checklist points to the counting method, the attorney corrects the wording, and the final PDF reflects the approved claim. That shows the AI doing meaningful research and synthesis, the code handling reproducible calculations, and staff deciding what goes into the document.</p>
+<p>I’d build the capstone <strong>once in Codex</strong> and expose the stages as tools a staff member could run individually. Keep the live run reproducible with a pinned public data release and a small source packet. The part worth demonstrating is how a staff member can inspect a finding, challenge it, and carry the approved version into the final document.</p>
+<hr />
+<h2 id="user-95">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>Great. Final question, I have this idea that perhaps it would also be valuable to save our transcripts, so that they could gain insight into how I - I mean we - work. Is that "cheesy" or do you think it would be valuable? I know that books like Co-Intelligence and reports show that employees tend to "hide" AI use...I'm thinking it is valuable to show AI use as examples for others...and to show potential employer. Bad idea or good idea? An honest assessment, do not glad-hand</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-86">Assistant</h2>
+<p><strong>Good idea as a short, curated appendix. I wouldn’t share the full transcript with the hiring team.</strong></p>
+<p>The raw chat is long, and much of it is fixture setup, file renaming, and revisions to the demo. A reader would have to dig for the exchanges that actually show how you work. The strongest ones show you questioning the AI’s output and deciding what belongs in the workflow.</p>
+<p>I’d share <strong>three short excerpts</strong>, each with one sentence explaining what changed:</p>
+<ul>
+<li><strong>You challenged whether the demo needed AI.</strong> The CSV comparison and email templates were ordinary automation. That pushed the design toward using AI to read source material, draft the brief, and flag unsupported claims.</li>
+<li><strong>You caught an invented workflow step.</strong> The diagram showed a separate acknowledgment that the demo didn’t require. You corrected the simulated delivery rule and made the documentation match it.</li>
+<li><strong>You proposed a reviewable research report.</strong> A staff member could trace a claim to a source, correct it, and approve the final PDF. Once you’ve run that demo, an actual claim you caught and corrected would be stronger evidence than the planning exchange.</li>
+</ul>
+<p>I’d call the appendix <strong>“How I used AI to build and review the demo.”</strong> Label the excerpts as selected and redacted. Keep one where the AI got something wrong and your correction materially improved the result. For future staff, that example teaches more than a polished prompt. For the hiring team, it shows something the finished PDF can’t show on its own: <strong>how you decide when to trust an output and when to challenge it.</strong></p>
+<hr />
+<h2 id="user-96">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>i disagree, if I just included it in the github with a mention of "btw if you are curious..." and leave it at that, then I think they could review it if they liked. my question is not what you would do differently as somthing to showcase, but rather as an "after the fact appendix"</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="assistant-87">Assistant</h2>
+<p>With that framing, <strong>yes, I’d include it.</strong> I was evaluating the transcript as something you’d ask the hiring team to read. As an optional appendix in GitHub, its length matters less. Someone can skim it if they’re curious about how the demo came together.</p>
+<p>The full exchange has value there. It shows the false starts, the changes you made after seeing the output, and the places where you challenged my recommendations. A polished demo shows the result. The transcript lets an interested reader see how you got there. That’s a reasonable thing to share, and it doesn’t strike me as cheesy.</p>
+<p>If the repo is public, give the transcript one final redaction pass for anything you wouldn’t want public. Then a single line at the bottom of the README is enough:</p>
+<blockquote>
+<p>If you’re curious how this demo came together, the <a href="my-chats-history/initial-project-brainstorm.md">redacted planning transcript</a> is available as an optional appendix.</p>
+</blockquote>
+<hr />
+<h2 id="user-97">User</h2>
+<div style="background-color:#e8f4ff; color:#193a56; border-radius:12px; padding:6px 16px; margin-bottom:16px;">
+<blockquote>
+<p>perfect. okay, lets do it for this conversation. this is the preliminary-demo-analysis-transcript.md. I deleted the original one. like before, redact the mentions of firm name and the job description stuff in the beginning. also, format it a bit nicer so my text is light blue and yours is clear, like the window we are actually using.</p>
+</blockquote>
+</div>
+</main></body></html>

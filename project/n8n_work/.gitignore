@@ -1,0 +1,5 @@
+# Local API key
+/openai-key.txt
+
+# n8n database, credentials, settings, and generated output
+/storage/
