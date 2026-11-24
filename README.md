@@ -20,6 +20,8 @@ Three demonstrations explore how software and AI can assist law firm staff with 
 
 Together, these illustrate successive staff activities. They are separate demonstrations with their own fixtures and execution steps; they do not automatically transfer records or outputs between projects.
 
+See the [design document](DESIGN.md) for architecture, UML class and sequence diagrams, workflow routing, and the relational data model for all three demonstrations.
+
 ## Watch the demonstrations
 
 Brief screen recordings show each demo executing and producing its results. No installation is needed to view them; GitHub may offer large videos as downloads.
