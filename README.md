@@ -16,6 +16,8 @@ See the [design document](DESIGN.md) for architecture, UML class and sequence di
 
 Three demonstrations explore how software and AI can assist law firm staff with intake preparation, preliminary legal research, and review of research memorandums. The examples use fictional clients, intake records, and supporting documents.
 
+My legal domain knowledge is limited. These examples are intended to demonstrate AI engineering tasks; the legal scenarios and workflow assumptions would need review by attorneys and law firm staff before practical use.
+
 | Demo | Purpose | Implementation |
 | --- | --- | --- |
 | [Intake preparation](project/n8n_work) | Identify missing documents, prepare intake briefs, and draft staff handoffs | n8n, JavaScript, OpenAI, CSV and PDF files |
