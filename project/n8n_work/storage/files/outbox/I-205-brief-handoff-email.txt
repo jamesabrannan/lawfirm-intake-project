@@ -1,0 +1,16 @@
+From: doug_smith@example.com
+To: riley.morgan@example.com
+Subject: Intake brief created - I-205 - Mateo Santos
+
+Hi Riley Morgan,
+
+The intake brief for Mateo Santos (I-205) has been created and is available for your review.
+
+Brief location (n8n container path):
+/files/output/outbox/I-205-intake-brief.pdf
+
+Please review the brief and the outstanding items it identifies.
+
+Thank you,
+Doug Smith
+Law Clerk

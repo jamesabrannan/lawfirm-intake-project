@@ -1,0 +1,16 @@
+From: maya.chen@example.com
+To: jordan.ellis@example.com
+Subject: Intake brief created - I-204 - Elena Rivera
+
+Hi Jordan Ellis,
+
+The intake brief for Elena Rivera (I-204) has been created and is available for your review.
+
+Brief location (n8n container path):
+/files/output/outbox/I-204-intake-brief.pdf
+
+Please review the brief and the outstanding items it identifies.
+
+Thank you,
+Maya Chen
+Law Clerk

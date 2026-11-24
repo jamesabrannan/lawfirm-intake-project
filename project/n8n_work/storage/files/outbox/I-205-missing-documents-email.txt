@@ -1,0 +1,20 @@
+From: doug_smith@example.com
+To: mateo.santos@example.com
+Subject: Request for Missing Documents
+
+Dear Mateo,
+
+I hope this email finds you well.
+
+My name is Doug Smith, and I am a law clerk assisting with your case. We are writing to request the following documents that are currently missing from your file:
+
+- Notice to Appear
+- Notice of Hearing
+
+Please reply to this email and attach copies of the documents listed above at your earliest convenience.
+
+If you have any questions or need assistance, please feel free to reach out.
+
+Thank you,
+Doug Smith
+Law Clerk

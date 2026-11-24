@@ -1,5 +1,12 @@
-# Local API key
-/openai-key.txt
 
-# n8n database, credentials, settings, and generated output
-/storage/
+# Local credentials
+/openai-key.txt
+.env
+.env.*
+!.env.example
+
+# Local n8n database, credentials, configuration, and files
+/storage/n8n/
+
+# Local backups
+*.zip
