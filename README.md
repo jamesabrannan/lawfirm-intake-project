@@ -10,6 +10,8 @@ for the license text. SPDX-License-Identifier: MIT
 
 # Law Firm Workflow Demonstrations
 
+Start with the [brief overview](OVERVIEW.md) for a plain-language explanation of the demonstrations and links to the videos.
+
 See the [design document](DESIGN.md) for architecture, UML class and sequence diagrams, workflow routing, and the relational data model for all three demonstrations.
 
 Three demonstrations explore how software and AI can assist law firm staff with intake preparation, preliminary legal research, and review of research memorandums. The examples use fictional clients, intake records, and supporting documents.
