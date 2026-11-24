@@ -1,3 +1,0 @@
-contact_id,staff_id,staff_name,role,staff_email,intake_brief_created,missing_documents_request_sent_to_client,intake_brief_sent_to_paralegal
-C-101,S-001,Maya Chen,law_clerk,maya.chen@example.com,false,false,false
-C-102,S-002,Doug Smith,law_clerk,doug_smith@example.com,false,false,false

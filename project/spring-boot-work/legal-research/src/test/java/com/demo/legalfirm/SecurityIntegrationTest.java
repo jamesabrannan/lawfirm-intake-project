@@ -2,7 +2,6 @@ package com.demo.legalfirm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.startsWith;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
@@ -50,10 +49,40 @@ import java.nio.file.Path;
  *     MIT
  */
 // This placeholder lets the AI configuration start. These tests make no AI calls.
+// Tests require two requested cases independently of the selected live demo case.
+@org.springframework.test.context.jdbc.Sql(statements =
+        "UPDATE research_memorandums SET research_memorandum_status = 'requested' WHERE id IN (1, 2)")
 @SpringBootTest(properties = "spring.ai.openai.api-key=integration-test-placeholder")
 @AutoConfigureMockMvc
 class SecurityIntegrationTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityIntegrationTest.class);
+
+    @org.springframework.test.context.bean.override.mockito.MockitoBean
+    com.demo.legalfirm.service.ResearchPlanningService researchPlanningService;
+
+    // Endpoint security tests exercise JDBC/security while avoiding live drafting calls.
+    @org.springframework.test.context.bean.override.mockito.MockitoBean
+    com.demo.legalfirm.service.MemorandumDraftingService memorandumDraftingService;
+
+    @org.springframework.test.context.bean.override.mockito.MockitoBean
+    com.demo.legalfirm.service.MemorandumPdfService memorandumPdfService;
+
+    @org.springframework.test.context.bean.override.mockito.MockitoBean
+    com.demo.legalfirm.service.MemorandumOutputService memorandumOutputService;
+
+    @org.junit.jupiter.api.BeforeEach
+    void mockResearchPlanning() throws java.io.IOException {
+        LOGGER.trace("mockResearchPlanning entered");
+        org.mockito.Mockito.when(
+                        researchPlanningService.createPlan(org.mockito.ArgumentMatchers.any()))
+                .thenReturn(
+                        new com.demo.legalfirm.model.research.ResearchPlan(java.util.List.of()));
+        org.mockito.Mockito.when(memorandumPdfService.render(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
+                .thenReturn(new byte[]{1});
+        org.mockito.Mockito.when(memorandumOutputService.save(org.mockito.ArgumentMatchers.anyLong(), org.mockito.ArgumentMatchers.any()))
+                .thenAnswer(invocation -> "memorandum-" + invocation.getArgument(0) + "-test.pdf");
+        LOGGER.trace("mockResearchPlanning completed");
+    }
 
     private static final String ENDPOINT = "/api/memorandums/prepare";
 
@@ -110,7 +139,7 @@ class SecurityIntegrationTest {
     void missingCredentialsAreRejected() throws Exception {
         LOGGER.trace("missingCredentialsAreRejected() entered");
         try {
-            mockMvc.perform(post(ENDPOINT).with(csrf()))
+            mockMvc.perform(post(ENDPOINT))
                     .andExpect(status().isUnauthorized())
                     .andExpect(header().string("WWW-Authenticate", startsWith("Basic ")));
             LOGGER.trace("missingCredentialsAreRejected completed");
@@ -130,7 +159,7 @@ class SecurityIntegrationTest {
         try {
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .with(httpBasic("jordan.ellis@example.com", "wrong")))
                     .andExpect(status().isUnauthorized());
             LOGGER.trace("wrongPasswordIsRejected completed");
@@ -149,7 +178,7 @@ class SecurityIntegrationTest {
         try {
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .with(httpBasic("unknown@example.com", "password")))
                     .andExpect(status().isUnauthorized());
             LOGGER.trace("unknownUserIsRejected completed");
@@ -178,15 +207,15 @@ class SecurityIntegrationTest {
             // work; Jordan has none. Intake preparers authenticate but receive 403.
             if (email.equals("riley.morgan@example.com")) {
                 // Authentication succeeds and reaches the explicitly unimplemented pipeline.
-                mockMvc.perform(post(ENDPOINT).with(csrf()).with(httpBasic(email, "password")))
-                        .andExpect(status().isNotImplemented());
+                mockMvc.perform(post(ENDPOINT).with(httpBasic(email, "password")))
+                        .andExpect(status().isOk());
             } else if (email.equals("jordan.ellis@example.com")) {
-                mockMvc.perform(post(ENDPOINT).with(csrf()).with(httpBasic(email, "password")))
+                mockMvc.perform(post(ENDPOINT).with(httpBasic(email, "password")))
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$.status").value("no_work"))
                         .andExpect(jsonPath("$.memorandums.length()").value(0));
             } else {
-                mockMvc.perform(post(ENDPOINT).with(csrf()).with(httpBasic(email, "password")))
+                mockMvc.perform(post(ENDPOINT).with(httpBasic(email, "password")))
                         .andExpect(status().isForbidden());
             }
             LOGGER.trace("seededUsersAuthenticateThroughJdbc completed");
@@ -200,37 +229,37 @@ class SecurityIntegrationTest {
 
     @Test
     @Transactional
-    void unfinishedPreparationDoesNotReportCreationOrChangeStatus() throws Exception {
-        LOGGER.trace("unfinishedPreparationDoesNotReportCreationOrChangeStatus() entered");
+    void successfulPreparationRecordsCompletedFilenames() throws Exception {
+        LOGGER.trace("successfulPreparationRecordsCompletedFilenames() entered");
         try {
-            // Give both authorized staff requested work for this failure scenario only.
+            // Give both authorized staff requested work and verify successful completion.
             jdbcTemplate.update(
                     "UPDATE active_intakes SET assigned_paralegal_id = 'S-003' WHERE intake_id ="
                             + " 'I-204'");
 
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .with(httpBasic("jordan.ellis@example.com", "password")))
-                    .andExpect(status().isNotImplemented());
+                    .andExpect(status().isOk());
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .with(httpBasic("riley.morgan@example.com", "password")))
-                    .andExpect(status().isNotImplemented());
+                    .andExpect(status().isOk());
 
             assertThat(
                             jdbcTemplate.queryForObject(
                                     """
 SELECT COUNT(*) FROM research_memorandums
-WHERE research_memorandum_status = 'requested' AND filename IS NULL
+WHERE research_memorandum_status = 'completed' AND filename IS NOT NULL
 """,
                                     Integer.class))
                     .isEqualTo(2);
-            LOGGER.trace("unfinishedPreparationDoesNotReportCreationOrChangeStatus completed");
+            LOGGER.trace("successfulPreparationRecordsCompletedFilenames completed");
         } catch (Exception loggingFailure) {
             LOGGER.trace(
-                    "unfinishedPreparationDoesNotReportCreationOrChangeStatus exited exceptionally;"
+                    "successfulPreparationRecordsCompletedFilenames exited exceptionally;"
                             + " type={}",
                     loggingFailure.getClass().getSimpleName());
             throw loggingFailure;
@@ -274,7 +303,7 @@ WHERE research_memorandum_status = 'requested' AND filename IS NULL
             try {
                 mockMvc.perform(
                                 post(ENDPOINT)
-                                        .with(csrf())
+                                        
                                         .with(httpBasic("test@example.com", "password")))
                         .andExpect(status().isForbidden());
             } finally {
@@ -299,7 +328,7 @@ WHERE research_memorandum_status = 'requested' AND filename IS NULL
             MvcResult result =
                     mockMvc.perform(
                                     post(ENDPOINT)
-                                            .with(csrf())
+                                            
                                             .with(
                                                     httpBasic(
                                                             "jordan.ellis@example.com",
@@ -309,7 +338,7 @@ WHERE research_memorandum_status = 'requested' AND filename IS NULL
             // false means "look for an existing session without creating one."
             // A null result confirms that the successful request created no session.
             assertThat(result.getRequest().getSession(false)).isNull();
-            mockMvc.perform(post(ENDPOINT).with(csrf())).andExpect(status().isUnauthorized());
+            mockMvc.perform(post(ENDPOINT)).andExpect(status().isUnauthorized());
             LOGGER.trace("authenticationDoesNotCreateASession completed");
         } catch (Exception loggingFailure) {
             LOGGER.trace(
@@ -351,7 +380,7 @@ WHERE research_memorandum_status = 'requested' AND filename IS NULL
         try {
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .with(httpBasic("jordan.ellis@example.com", "password"))
                                     .header("Origin", origin))
                     .andExpect(status().isForbidden())
@@ -374,17 +403,17 @@ WHERE research_memorandum_status = 'requested' AND filename IS NULL
     void approvedGuiOriginStillRequiresAuthenticationAndPermission() throws Exception {
         LOGGER.trace("approvedGuiOriginStillRequiresAuthenticationAndPermission() entered");
         try {
-            mockMvc.perform(post(ENDPOINT).with(csrf()).header("Origin", "http://localhost:3000"))
+            mockMvc.perform(post(ENDPOINT).header("Origin", "http://localhost:3000"))
                     .andExpect(status().isUnauthorized());
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .header("Origin", "http://localhost:3000")
                                     .with(httpBasic("doug_smith@example.com", "password")))
                     .andExpect(status().isForbidden());
             mockMvc.perform(
                             post(ENDPOINT)
-                                    .with(csrf())
+                                    
                                     .header("Origin", "http://localhost:3000")
                                     .with(httpBasic("jordan.ellis@example.com", "password")))
                     .andExpect(status().isOk())

@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Starts synchronous memorandum preparation for the currently authenticated staff member.
  *
- * <p>Demo design: memorandum preparation will run synchronously for simplicity. The preparation
- * endpoint will wait for the service to finish processing the selected memorandums before returning
- * a JSON completion summary. It will not queue background work or return the generated PDFs; PDF
+ * <p>Demo design: memorandum preparation runs synchronously for simplicity. The preparation
+ * endpoint waits for the service to finish processing the selected memorandums before returning
+ * a JSON completion summary. It does not queue background work or return the generated PDFs; PDF
  * retrieval belongs to a separate service. A successful response must describe completed work
  * rather than report asynchronous acceptance.
  *
- * <p>The per-memorandum preparation pipeline is not implemented yet. Selected work currently
- * produces HTTP 501, rather than a fabricated creation summary.
+ * <p>A memorandum is reported created only after its PDF is saved and the database completion
+ * update succeeds. Earlier successful memorandums remain completed if a later preparation fails.
  *
  * @file MemorandumController.java
  * @author James Brannan

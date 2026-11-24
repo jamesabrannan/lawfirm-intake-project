@@ -2,3 +2,7 @@
 /tmp/
 /project/n8n-design-assets
 /project/diagrams
+.env
+.env.*
+!.env.example
+openai-key.txt

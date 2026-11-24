@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,14 +85,9 @@ public class MemorandumProcessingService {
             return loggedResult;
 
         } catch (Exception loggingFailure) {
-            if (loggingFailure instanceof ResponseStatusException statusFailure
-                    && statusFailure.getStatusCode().value() == 501) {
-                LOGGER.warn("Preparation request stopped: preparation pipeline is not implemented");
-            } else {
-                LOGGER.error(
-                        "Preparation request failed; type={}",
-                        loggingFailure.getClass().getSimpleName());
-            }
+            LOGGER.error(
+                    "Preparation request failed; type={}",
+                    loggingFailure.getClass().getSimpleName());
             throw loggingFailure;
         }
     }

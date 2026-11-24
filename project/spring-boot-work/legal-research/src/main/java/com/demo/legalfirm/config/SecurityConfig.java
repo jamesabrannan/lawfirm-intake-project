@@ -27,8 +27,8 @@ import javax.sql.DataSource;
  *
  * <p>Demo security: HTTP Basic identifies the caller, permissions authorize memorandum preparation,
  * and CORS illustrates approved browser GUI origins. CORS does not replace authentication or CSRF
- * protection. Spring's default CSRF protection is currently enabled; a client token endpoint is not
- * implemented.
+ * protection. CSRF protection is disabled for this demo to allow direct Postman requests.
+ * Production browser clients using automatically sent credentials need CSRF protection.
  *
  * <p>Production choices depend on the client architecture:
  *
@@ -139,9 +139,13 @@ public class SecurityConfig {
         LOGGER.debug("securityFilterChain(http={}) entered", LogSummary.describe(http));
         try {
 
-            LOGGER.info("Configuring HTTP Basic, CSRF, CORS and MEMORANDUM_PREPARER authorization");
+            LOGGER.info("Configuring HTTP Basic, demo CSRF exemption, CORS and MEMORANDUM_PREPARER authorization");
             var loggedResult =
                     http.cors(Customizer.withDefaults())
+                            // Demo only: allow Postman POST requests without CSRF tokens.
+                            // CORS does not provide CSRF protection. Production browser clients
+                            // using Basic authentication need an appropriate CSRF defense.
+                            .csrf(csrf -> csrf.disable())
                             .sessionManagement(
                                     session ->
                                             session.sessionCreationPolicy(

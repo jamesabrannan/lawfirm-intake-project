@@ -37,6 +37,9 @@ import java.util.List;
  * @license MIT License. See LICENSE in the project root for full terms. SPDX-License-Identifier:
  *     MIT
  */
+// Tests require two requested cases independently of the selected live demo case.
+@org.springframework.test.context.jdbc.Sql(statements =
+        "UPDATE research_memorandums SET research_memorandum_status = 'requested' WHERE id IN (1, 2)")
 @SpringBootTest(properties = "spring.ai.openai.api-key=integration-test-placeholder")
 @Transactional
 class CaseDetailsRepositoryTest {

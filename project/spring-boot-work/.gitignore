@@ -1,0 +1,10 @@
+# File: .gitignore
+# Author: James Brannan
+# Date: 2026-11-22
+# Description: Excludes local API credentials from version control.
+# Copyright (c) 2026 James Brannan.
+# License: MIT License. See legal-research/LICENSE for full terms.
+# SPDX-License-Identifier: MIT
+
+/openai-key.txt
+/courtlistener-key.txt
