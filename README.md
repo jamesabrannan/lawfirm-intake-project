@@ -72,7 +72,6 @@ The intake preparation workflow:
    - `lawclerk_assignments.csv`
    - `paralegal_assignments.csv`
    - The supporting PDFs referenced by the intake records
-   - `intake-brief-template.pdf`
 
    Create `storage/files/outbox/` if it does not exist. Inside the container, these directories are available as `/files/output/resource/` and `/files/output/outbox/`.
 
