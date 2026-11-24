@@ -187,7 +187,61 @@ flowchart LR
     Processing --> Logs[Console and rolling file logs]
 ```
 
-### 2.2 Service responsibilities and dependencies
+### 2.2 Security design and demo decisions
+
+Security is implemented in [SecurityConfig.java](project/spring-boot-work/legal-research/src/main/java/com/demo/legalfirm/config/SecurityConfig.java). The demo retains authentication and permission checks while simplifying credential management and browser-request defenses for direct local execution with Postman.
+
+| Concern | Implemented behavior | Design decision and boundary |
+| --- | --- | --- |
+| Authentication | HTTP Basic backed by `JdbcUserDetailsManager`; email identifies the seeded user | An inspectable authentication path without an identity-provider integration |
+| Password verification | A delegating encoder receives seeded passwords prefixed with `{noop}` | Fictional demo credentials are plain text; this does not provide password hashing |
+| Endpoint permission | `/api/memorandums/**` requires the exact `MEMORANDUM_PREPARER` authority; other requests require authentication | Successful login alone does not grant memorandum preparation access |
+| Work selection | The security context supplies the user's email; a parameterized query filters requested work by the assigned paralegal/requestor email | The request body cannot supply another staff identity; this is the demo's assignment convention |
+| Session management | `SessionCreationPolicy.STATELESS` | Authentication does not create a server-side login session; callers supply credentials on requests |
+| CORS | Credentialed browser requests from HTTP/HTTPS `localhost` origins on any port; POST and an explicit header list on memorandum routes | Illustrates a separate local GUI; it is an origin policy, not a network binding or caller-IP restriction |
+| CSRF | Disabled globally in the security filter chain | Deliberate simplification for direct Postman POST requests without a CSRF-token exchange |
+
+#### Why CSRF is disabled here
+
+The demonstration uses a direct HTTP client to show the preparation endpoint executing. Disabling CSRF avoids introducing a browser login and token-handling workflow that would distract from the memorandum-processing example. The configured call can use HTTP Basic without first obtaining a CSRF token. This is a scope decision for the controlled demo, not a conclusion that a deployed legal application can disregard CSRF.
+
+Statelessness alone does not remove CSRF risk. A browser can automatically resend credentials, including browser-managed Basic authentication, even when the server creates no session. CORS also does not replace CSRF protection. Although the allowed-header list includes `X-CSRF-TOKEN` and `X-XSRF-TOKEN`, the current configuration does not validate them because CSRF is disabled.
+
+For a browser application using cookies or browser-managed Basic credentials, the security design would need an appropriate CSRF defense. An architecture using only bearer access tokens explicitly attached in the `Authorization` header, without automatically sent authentication cookies or Basic credentials, changes that analysis. JWT authentication and CSRF protection solve different problems; putting a JWT in an automatically sent cookie does not remove the need to address CSRF.
+
+#### Request security sequence
+
+```mermaid
+sequenceDiagram
+    actor Caller as Postman / HTTP client
+    participant Filter as Spring Security filter chain
+    participant Users as JDBC user details
+    participant Work as Work selection service
+    participant Cases as Case details repository
+    Caller->>Filter: POST with HTTP Basic credentials
+    Note over Caller,Filter: Demo: no CSRF token required
+    Filter->>Users: Look up email, password, and authority
+    Users-->>Filter: Seeded user details
+    alt Credentials missing or invalid
+        Filter-->>Caller: 401 Unauthorized
+    else Authenticated without required authority
+        Filter-->>Caller: 403 Forbidden
+    else Authenticated with MEMORANDUM_PREPARER
+        Filter->>Work: Continue through controller and processing service
+        Work->>Work: Read identity from security context
+        Work->>Cases: Find requested work for current staff email
+        Cases-->>Work: Matching requestor assignments
+        Note over Work,Cases: Preparation follows the selected work
+    end
+```
+
+#### Verification and production boundary
+
+The security integration tests cover missing/invalid credentials, seeded JDBC authentication, denied roles, absence of an authentication session, approved and rejected CORS origins, and required authentication even with an approved origin. These tests were not rerun for this documentation update.
+
+Before deployment, replace seeded plain-text credentials with a suitable identity and password-storage design, use HTTPS, select exact approved GUI origins, and decide CSRF handling from the actual client authentication model. CORS does not restrict the Java server to localhost. Production authorization would also need domain-approved assignment and access rules; the current requestor filter is not a complete law firm permissions model.
+
+### 2.3 Service responsibilities and dependencies
 
 ```mermaid
 classDiagram
@@ -238,7 +292,7 @@ classDiagram
 
 Work selection is separated from preparation. The preparation service accepts selected `CaseDetails` and coordinates the stages; it does not establish the caller's identity or repeat authorization rules. Prompt templates live in `src/main/resources/prompts/`.
 
-### 2.3 Relational model
+### 2.4 Relational model
 
 The schema below is shared in structure with the notebook fixtures, but the databases are separate. Attributes shown are selected fields from the actual SQL schema. Sensitive fields exist in the fictional database but are not necessary in this diagram.
 
@@ -282,7 +336,7 @@ Each intake requires a client and two staff assignments. A unique `intake_id` in
 
 SQLite is seeded from `schema.sql` and `data.sql` at startup. A single pooled physical connection preserves the in-memory database for the application lifetime. Restarting resets database state but does not remove output PDFs.
 
-### 2.4 End-to-end sequence
+### 2.5 End-to-end sequence
 
 ```mermaid
 sequenceDiagram
@@ -328,7 +382,7 @@ sequenceDiagram
 
 The controller delegates the loop to `MemorandumProcessingService`; the sequence groups those entry-point interactions to keep external processing visible. On failure, the successful-summary path is not taken. Earlier completed memorandums are not rolled back if a later one fails.
 
-### 2.5 Evidence contracts and validation
+### 2.6 Evidence contracts and validation
 
 `CaseInput` combines case details, extracted documents, and missing filenames. Documents carry source identifiers and page records. `ResearchPlan` contains topics, questions, queries, and source-attributed facts. CourtListener result models retain retrieved lead information; evidence-assessment models relate research questions to those results. `MemorandumDraft` supplies structured content to the PDF renderer.
 
@@ -359,7 +413,7 @@ Unknown source IDs in planned facts fail validation. Missing or invalid page ref
 
 The current configuration executes at most one planned query per topic, retrieves at most five results per search, and spaces requests by 13 seconds in this JVM. These are demo limits, not guarantees about account-wide rate-limit compliance. PDF extraction reads embedded text and does not perform OCR.
 
-### 2.6 Completion, observability, and deployment tradeoffs
+### 2.7 Completion, observability, and deployment tradeoffs
 
 The output PDF is saved before the database update. Completion uses memorandum ID, intake ID, and `requested` status as conditions. If that update fails, preparation attempts to remove the newly written file and propagates the failure, preserving cleanup failures as suppressed exceptions. Filesystem and database writes are not one atomic transaction; process crashes can still leave orphan files.
 
@@ -391,7 +445,7 @@ flowchart LR
     Reviews --> PDF[fpdf2 review PDFs in output]
 ```
 
-The local database uses the four-table ER model in Section 2.3. The query starts from `research_memorandums` and uses left joins to intake, client, and two staff aliases, preserving memorandum rows when a join does not match. It excludes passwords and client SSNs from the selected fields. The database connection uses SQLite read-only URI mode and closes in `finally`.
+The local database uses the four-table ER model in Section 2.4. The query starts from `research_memorandums` and uses left joins to intake, client, and two staff aliases, preserving memorandum rows when a join does not match. It excludes passwords and client SSNs from the selected fields. The database connection uses SQLite read-only URI mode and closes in `finally`.
 
 This is a separate fixture database, not a connection to the Java process's in-memory SQLite database. Memorandum filenames in the notebook database must match PDFs supplied in the notebook's `resources/docs` folder. Any transfer of Java outputs and corresponding fixture updates is manual.
 
