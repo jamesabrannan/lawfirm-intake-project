@@ -10,11 +10,20 @@ SPDX-License-Identifier: MIT
 
 # Law Firm Workflow Demonstrations — Design
 
-This document describes the implemented demonstrations as inspected on November 23, 2026. The three major sections follow intake preparation, preliminary research, and memorandum review. Each project runs independently with its own fixtures; their relationship is a business workflow, not an implemented automated integration.
+This document describes the implemented demonstrations as inspected on November 24, 2026. The three major sections follow intake preparation, preliminary research, and memorandum review. Each project runs independently with its own fixtures; their relationship is a business workflow, not an implemented automated integration.
 
 Diagrams use Mermaid, which GitHub renders in Markdown. Class and sequence diagrams use UML notation; flowcharts describe workflow routing, and ER diagrams describe relational structure. Class diagrams show selected responsibilities and dependencies rather than every accessor or model field.
 
 All case material is fictional. These prototypes demonstrate software engineering approaches, not validated legal procedures. The author does not have professional legal domain expertise; workflow assumptions and legal outputs require validation with attorneys and law firm staff.
+
+## Contents
+
+- [n8n: Intake preparation](#1-n8n-intake-preparation)
+- [Java / Spring Boot: Research memorandum preparation](#2-java--spring-boot-research-memorandum-preparation)
+- [Python / Jupyter: Memorandum review](#3-python--jupyter-memorandum-review)
+- [Failure handling across the demonstrations](#4-failure-handling-across-the-demonstrations)
+
+Documentation uses Markdown and Mermaid. Postman is the demonstration HTTP client, rather than an application dependency. Sequence diagrams simplify the main execution path and show selected failure branches; they do not enumerate every conditional call or exception.
 
 ## 1. n8n: Intake preparation
 
@@ -38,7 +47,20 @@ flowchart LR
 
 The port is published on `127.0.0.1`. Bind mounts preserve n8n configuration and workflow state outside the container. Deleting the container does not itself delete those host folders. They must still be protected and backed up, including configuration needed to decrypt saved credentials.
 
-The current workflow reads CSV and PDF fixtures from `/files/output/resource/`, corresponding to `storage/files/resource/`, and writes artifacts to `/files/output/outbox/`. The additional `/files/resources` mount is not the source path used by those workflow nodes. Ignored local storage is not supplied by a Git clone.
+The current workflow reads CSV and PDF fixtures from `/files/output/resource/`, corresponding to `storage/files/resource/`, and writes artifacts to `/files/output/outbox/`. The additional `/files/resources` mount is not the source path used by those workflow nodes. The repository includes the fictional CSV and PDF fixtures and some generated example outputs. Local n8n configuration, saved credentials, and execution state under `storage/n8n/` are excluded from Git.
+
+#### Technologies and packages
+
+| Technology or package | Role |
+| --- | --- |
+| Docker Desktop and Docker Compose | Local container execution and bind-mount configuration |
+| `n8nio/n8n:latest` | n8n runtime image; the tag does not pin a reproducible version |
+| `n8n-nodes-base` | Manual trigger, file reading/writing, CSV/PDF extraction, JavaScript execution, conditions, looping, merging, and text-file conversion |
+| n8n OpenAI nodes and OpenAI API | Drafting and reviewing missing-document emails and intake briefs |
+| JavaScript and Node.js `Buffer` | Record joining, validation, handoff-message assembly, and local PDF generation |
+| CSV, JSON, PDF, and plain text | Input records, exchanged data, source/generated documents, and saved email drafts |
+
+The four OpenAI nodes are configured with `chat-latest`. This is a configured model identifier, not a guarantee of access for another API project. The exported nodes reference a saved n8n OpenAI credential. Compose loads `OPENAI_API_KEY` into the container, but that environment variable does not automatically configure the nodes' selected credentials. No API-key environment expression is present in the exported workflow.
 
 ### 1.3 Workflow routing
 
@@ -126,7 +148,7 @@ classDiagram
     IntakeWorkItem *-- ParalegalAssignment
 ```
 
-These are conceptual record shapes implemented as JavaScript objects, not declared application classes. The missing-document check compares expected types with filenames after removing the intake prefix and `.pdf` suffix. Correct naming is therefore part of the fixture contract; a filename match does not prove document completeness or authenticity.
+These are conceptual record shapes implemented as JavaScript objects, not declared application classes. Each input table accepts at most one record per `contact_id`, with duplicates rejected. This fixture model does not support multiple simultaneous intake records for the same client in one run. The missing-document check compares expected types with filenames after removing the intake prefix and `.pdf` suffix. Correct naming is therefore part of the fixture contract; a filename match does not prove document completeness or authenticity.
 
 ### 1.5 Brief generation sequence
 
@@ -157,13 +179,17 @@ sequenceDiagram
     end
 ```
 
+Before AI review, JavaScript checks required draft fields, client/intake/staff identities, received-document coverage, the missing-document list, hearing-source filenames, and prohibited identifiers. These checks enforce selected structural and consistency rules; they do not establish factual accuracy. The AI review receives both the evidence and the deterministic issues, and any deterministic issue prevents approval.
+
+Missing-document emails follow their own drafting, AI review, parsing, and approval route before saving. Paralegal handoff emails are assembled from record fields in JavaScript rather than generated by AI.
+
 ### 1.6 Outputs, failure handling, and tradeoffs
 
 - Output artifacts include intake brief PDFs, missing-document email drafts, and paralegal handoff drafts in `storage/files/outbox/`.
 - Status flags control skipping and handoff behavior. The workflow does not implement durable updates to the input CSV files or an external CRM, so reruns should not be assumed idempotent.
 - The PDF renderer is local JavaScript and normalizes text to a limited character set. It avoids another rendering service but is not a general document-layout engine.
 - Missing related records, unreadable files, model failures, or parse failures can interrupt execution. The explicit rejection route handles a rejected brief review; it is not a general exception recovery system.
-- Environment access is enabled for the workflow's API-key expression. Credentials, n8n storage, and execution data belong outside source control. Production use would require access controls, audit policy, durable work state, and domain-approved review criteria.
+- Environment access is enabled in Compose, but the exported OpenAI nodes use saved credentials rather than an API-key expression. Credentials, n8n storage, and execution data belong outside source control. Production use would require access controls, audit policy, durable work state, and domain-approved review criteria.
 
 ## 2. Java / Spring Boot: Research memorandum preparation
 
@@ -187,6 +213,44 @@ flowchart LR
     Processing --> Logs[Console and rolling file logs]
 ```
 
+#### Technologies and dependencies
+
+| Technology or library | Role |
+| --- | --- |
+| Java 17 and Maven | Language target, dependency management, build, and local execution |
+| Spring Boot 4.1.2 and Spring MVC | Application configuration, embedded web application, and REST endpoint |
+| Spring Security | HTTP Basic authentication, JDBC user lookup, and authority checks |
+| Spring JDBC and HikariCP | Parameterized database access and the single-connection pool |
+| SQLite and Xerial SQLite JDBC 3.51.0.0 | In-memory relational database and JDBC driver |
+| Spring AI 2.0.1 | OpenAI integration, `ChatClient`, and `BeanOutputConverter` |
+| Jackson | JSON serialization, mapping, and field annotations |
+| Apache PDFBox 3.0.7 | PDF text extraction and memorandum rendering |
+| Spring `RestClient`, JDK `HttpClient`, and `JdkClientHttpRequestFactory` | CourtListener HTTP requests |
+| Spring AI OpenAI transport using OkHttp | OpenAI requests and per-attempt HTTP metadata interception |
+| SLF4J and Logback | Application logging, console output, and rolling log files |
+| OpenAI and CourtListener APIs | AI processing and preliminary opinion-search results |
+
+The Maven project declares `spring-boot-starter-webmvc`, `spring-boot-starter-jdbc`, `spring-boot-starter-security`, `org.xerial:sqlite-jdbc`, `spring-ai-starter-model-openai`, and `org.apache.pdfbox:pdfbox`. The `spring-ai-bom` manages Spring AI versions, and `spring-boot-maven-plugin` supports packaging and execution. Supporting libraries such as HikariCP, Jackson, SLF4J, Logback, and OkHttp are supplied through the dependency stack rather than separate application declarations.
+
+Test dependencies are `spring-boot-starter-webmvc-test` and `spring-security-test`. Tests use JUnit Jupiter, Mockito, AssertJ, Spring test utilities and MockMvc, and Logback test appenders. Versions not explicitly pinned here are managed by the Maven dependency configuration.
+
+The configured OpenAI model is `gpt-6.2-sol`; availability depends on the API project. This document records configuration rather than promising model access.
+
+#### Response contract
+
+No request body is required. Successful processing returns `status: "completed"` with a `memorandums` array. For example, a request that completes one selected memorandum returns:
+
+```json
+{
+  "status": "completed",
+  "memorandums": [
+    {"memorandumId": 1, "intakeId": "I-204", "status": "created"}
+  ]
+}
+```
+
+No eligible assignments returns `{"status":"no_work","memorandums":[]}`. Missing or invalid credentials produce HTTP 401; an authenticated caller without the required authority receives HTTP 403. Processing failures propagate rather than producing a successful completion summary; the application does not define a custom, stable error-response contract. Earlier completed memorandums remain completed if a later memorandum fails.
+
 ### 2.2 Security design and demo decisions
 
 Security is implemented in [SecurityConfig.java](project/spring-boot-work/legal-research/src/main/java/com/demo/legalfirm/config/SecurityConfig.java). The demo retains authentication and permission checks while simplifying credential management and browser-request defenses for direct local execution with Postman.
@@ -203,11 +267,7 @@ Security is implemented in [SecurityConfig.java](project/spring-boot-work/legal-
 
 #### Why CSRF is disabled here
 
-The demonstration uses a direct HTTP client to show the preparation endpoint executing. Disabling CSRF avoids introducing a browser login and token-handling workflow that would distract from the memorandum-processing example. The configured call can use HTTP Basic without first obtaining a CSRF token. This is a scope decision for the controlled demo, not a conclusion that a deployed legal application can disregard CSRF.
-
-Statelessness alone does not remove CSRF risk. A browser can automatically resend credentials, including browser-managed Basic authentication, even when the server creates no session. CORS also does not replace CSRF protection. Although the allowed-header list includes `X-CSRF-TOKEN` and `X-XSRF-TOKEN`, the current configuration does not validate them because CSRF is disabled.
-
-For a browser application using cookies or browser-managed Basic credentials, the security design would need an appropriate CSRF defense. An architecture using only bearer access tokens explicitly attached in the `Authorization` header, without automatically sent authentication cookies or Basic credentials, changes that analysis. JWT authentication and CSRF protection solve different problems; putting a JWT in an automatically sent cookie does not remove the need to address CSRF.
+The controlled demonstration uses Postman with HTTP Basic and disables CSRF to avoid a token-exchange step. A deployed browser client would need a CSRF decision based on its actual authentication model. Stateless sessions and CORS do not remove CSRF exposure when a browser automatically resends credentials, including browser-managed Basic authentication. The configured CSRF header names do not provide protection while CSRF validation is disabled.
 
 #### Request security sequence
 
@@ -237,7 +297,7 @@ sequenceDiagram
 
 #### Verification and production boundary
 
-The security integration tests cover missing/invalid credentials, seeded JDBC authentication, denied roles, absence of an authentication session, approved and rejected CORS origins, and required authentication even with an approved origin. These tests were not rerun for this documentation update.
+The security integration tests cover missing/invalid credentials, seeded JDBC authentication, denied roles, absence of an authentication session, approved and rejected CORS origins, and required authentication even with an approved origin.
 
 Before deployment, replace seeded plain-text credentials with a suitable identity and password-storage design, use HTTPS, select exact approved GUI origins, and decide CSRF handling from the actual client authentication model. CORS does not restrict the Java server to localhost. Production authorization would also need domain-approved assignment and access rules; the current requestor filter is not a complete law firm permissions model.
 
@@ -294,7 +354,7 @@ Work selection is separated from preparation. The preparation service accepts se
 
 ### 2.4 Relational model
 
-The schema below is shared in structure with the notebook fixtures, but the databases are separate. Attributes shown are selected fields from the actual SQL schema. Sensitive fields exist in the fictional database but are not necessary in this diagram.
+The diagram below describes the Java SQL schema. The notebook fixture schema has the same table definitions and constraints, but the databases are separate. Attributes shown are selected fields from the actual SQL schema. Sensitive fields exist in the fictional database but are not necessary in this diagram.
 
 ```mermaid
 erDiagram
@@ -331,6 +391,8 @@ erDiagram
         TEXT filename
     }
 ```
+
+In the demo terminology, the assigned paralegal is the requestor whose email controls work selection; the assigned law clerk appears as preparer metadata. `MEMORANDUM_PREPARER` is an authorization value, not a job title. The current seed data grants that authority to Riley and Jordan, while only Riley is the requestor assigned to the two seeded intakes.
 
 Each intake requires a client and two staff assignments. A unique `intake_id` in `research_memorandums` permits at most one memorandum row per intake. Status is constrained to `requested` or `completed` when non-null. Document lists remain delimited text fields rather than normalized document tables.
 
@@ -401,7 +463,7 @@ classDiagram
     CaseInput --> CaseDetails
     CaseInput "1" *-- "0..*" DocumentInput
     DocumentInput "1" *-- "0..*" DocumentPageInput
-    ResearchPlan "1" *-- "1..*" ResearchTopic
+    ResearchPlan "1" *-- "0..*" ResearchTopic
     ResearchTopic "1" *-- "0..*" ResearchFact
     ResearchEvidenceAssessment "1" *-- "0..*" ResearchQuestionAssessment
     ResearchPlan ..> CaseInput : grounded in sources
@@ -409,19 +471,31 @@ classDiagram
     MemorandumDraft ..> ResearchEvidenceAssessment : informed by
 ```
 
+| AI stage | Inputs | Structured output |
+| --- | --- | --- |
+| Research planning | Case details and extracted document pages | `ResearchPlan` |
+| Evidence assessment | Research plan and CourtListener results | `ResearchEvidenceAssessment` |
+| Memorandum drafting | Case input, plan, results, and assessment | `MemorandumDraft` |
+
+Spring AI's `BeanOutputConverter` supplies JSON-format instructions and converts response JSON into Java objects. Application checks then validate selected fields and references. This differs from the notebook's strict API-level JSON schema; format instructions and Java conversion alone do not establish semantic correctness. An empty research-topic list is supported and skips the AI evidence-assessment call; the sequence diagram shows the nonempty-plan path.
+
+An absent local PDF is recorded by filename as a limitation and processing continues. An existing PDF that cannot be read or extracted raises a processing failure.
+
 Unknown source IDs in planned facts fail validation. Missing or invalid page references warn and continue for the demo; a valid page number does not establish that the page supports the statement. CourtListener leads and AI assessments do not independently establish a holding, citation accuracy, or legal applicability.
 
 The current configuration executes at most one planned query per topic, retrieves at most five results per search, and spaces requests by 13 seconds in this JVM. These are demo limits, not guarantees about account-wide rate-limit compliance. PDF extraction reads embedded text and does not perform OCR.
+
+The OpenAI configuration sets `spring.ai.openai.timeout=120s` and `spring.ai.openai.max-retries=2`. CourtListener uses a 10-second connection timeout and a 30-second read timeout, without an application retry loop. Its 13-second pacing controls search spacing, not retries. These settings are not a complete recovery policy or a guarantee of total endpoint duration across AI stages, searches, and transport attempts.
 
 ### 2.7 Completion, observability, and deployment tradeoffs
 
 The output PDF is saved before the database update. Completion uses memorandum ID, intake ID, and `requested` status as conditions. If that update fails, preparation attempts to remove the newly written file and propagates the failure, preserving cleanup failures as suppressed exceptions. Filesystem and database writes are not one atomic transaction; process crashes can still leave orphan files.
 
-SLF4J writes to the console and a rolling log file. OpenAI prompt text and raw response JSON are logged separately for fictional-demo inspection. Shared external HTTP logging records bounded, sanitized transport metadata without bodies or credentials. Production handling would need an approved sensitive-data policy.
+SLF4J application logging uses Logback to write to the console and `logs/researchmemorandum.log`, with 10 MB rolling files, seven days of history, and a 70 MB total archive cap. OpenAI prompt text and raw response JSON are logged separately for fictional-demo inspection. Shared external HTTP logging records bounded, sanitized transport metadata without bodies or credentials. Production handling would need an approved sensitive-data policy.
 
 Synchronous processing keeps the demonstration easy to follow. A deployed service should use asynchronous jobs, persistent status, controlled retries, concurrency limits, and result retrieval. Those capabilities are proposals, not present endpoints. A persistent database and durable document storage would also be needed. The demo's plain-text seeded passwords and disabled CSRF protection are not suitable production defaults.
 
-Tests cover authentication/authorization, repositories, case input, AI stages with mocked responses, research processing, and file/completion behavior. This design-document task did not run tests or issue live API calls.
+Tests cover authentication/authorization, repositories, case input, AI stages with mocked responses, research processing, and file/completion behavior.
 
 ## 3. Python / Jupyter: Memorandum review
 
@@ -430,6 +504,21 @@ Tests cover authentication/authorization, repositories, case input, AI stages wi
 [legal-demo.ipynb](project/jupyter-notebook/summarize-docs-data/legal-demo.ipynb) is an interactive review workflow for an individual staff member. Cells run in order and share Python variables in the kernel. The implementation uses functions from libraries and dictionaries/lists; it does not define an application class hierarchy.
 
 The notebook compares each memorandum with its own intake record and supporting PDFs. It asks for discrepancies, missing information, unsupported conclusions, and recommended revisions, then displays and exports the returned reviews. It does not search CourtListener or independently verify legal authorities.
+
+#### Technologies and packages
+
+| Technology or package | Role |
+| --- | --- |
+| Python | Notebook execution language |
+| JupyterLab and IPython | Interactive workspace, shared kernel state, and `IPython.display` Markdown rendering |
+| `python-dotenv` | Loading the local `.env` file |
+| `pypdf` | Extracting embedded text from PDFs |
+| `openai` | OpenAI Python SDK and Responses API requests |
+| `fpdf2` | Exporting review text as PDFs; imported as `fpdf` |
+| Standard-library `sqlite3`, `json`, and `pathlib` | Read-only database access, JSON handling, and filesystem paths |
+| SQLite, SQL, JSON, Markdown, PDF, and Windows Arial | Fixture storage, queries, payloads, displayed reviews, and exported documents |
+
+The notebook does not pin Python or third-party package versions. A fresh installation may differ from the recorded environment. The configured model is `gpt-4.1`; the API project must have access to it.
 
 ### 3.2 Data flow and relational inputs
 
@@ -535,3 +624,13 @@ Paths currently assume `D:\lawfirm-intake-project`, and PDF export uses Windows 
 The combined API request sends all assembled evaluation entries together. Large fixture sets can exceed practical context or output limits; batching, explicit input/output ID reconciliation, durable review status, and stronger export formatting would be future improvements. The notebook is an interactive prototype, without service authentication, background jobs, or an automated integration with the other demos.
 
 An AI-generated review is another aid for human inspection, not independent legal verification. The final review responsibility remains with qualified staff and the supervising attorney.
+
+## 4. Failure handling across the demonstrations
+
+| Demonstration | Implemented behavior | Boundary |
+| --- | --- | --- |
+| n8n | Review rejection follows explicit routes; malformed records, unreadable files, model failures, and parse errors can interrupt execution | No general recovery workflow or durable assignment-state update; reruns can overwrite named outputs |
+| Java | Exceptions propagate; a failed completion update triggers attempted cleanup of its newly saved PDF | Earlier completed work remains; cleanup can fail, crashes can leave orphan files, and concurrent requests do not reserve work before processing |
+| Python notebook | Missing files, missing dictionary entries, incomplete responses, and parse/export failures raise exceptions | Staff must inspect the failure and rerun appropriate cells; shared kernel variables can retain earlier results |
+
+Across the demos, intake and document material included in prompts is transmitted to OpenAI. The Java application sends generated research queries to CourtListener. A read-only notebook database prevents database writes through that connection; it does not keep selected content local. Local artifacts and logs also require appropriate handling. Error handling and retries are simplified for demonstration purposes; none of the demos implements a complete operational recovery system.
