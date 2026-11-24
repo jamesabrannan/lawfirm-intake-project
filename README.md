@@ -231,7 +231,7 @@ The Java application intentionally uses demo security settings, including seeded
 
 ## Author
 
-James A. Brannan
+James A. Brannan — [LinkedIn](https://www.linkedin.com/in/james-brannan-656251b5/)
 
 > [!NOTE]
 > Codex provided substantial assistance with coding and documentation throughout this project. The author contributed directly to the implementation and content, directed Codex’s work, and is responsible for the final result.
