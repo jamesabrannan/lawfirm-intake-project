@@ -4,7 +4,7 @@ Author: James Brannan
 Date: 2026-11-23
 Description: Overview and setup notes for the three law firm workflow demonstrations.
 Copyright (c) 2026 James Brannan.
-Licensed under the MIT License. See project/spring-boot-work/legal-research/LICENSE
+Licensed under the MIT License. See LICENSE in the repository root
 for the license text. SPDX-License-Identifier: MIT
 -->
 
@@ -34,7 +34,7 @@ The manually triggered workflow reads CSV records for clients, active intakes, l
 
 The workflow extracts text from supporting PDFs, requests an intake brief from OpenAI, and submits the draft to a separate AI review step. Briefs that pass that step are rendered as PDFs. Missing-document requests and paralegal handoff messages are saved as text files for inspection; the workflow does not send those emails.
 
-**Main files:** [workflow export](project/n8n_work/My%20workflow.json), [Docker Compose configuration](project/n8n_work/compose.yml), and [notes](project/n8n_work/notes).
+**Main files:** [workflow export](project/n8n_work/My%20workflow.json) and [Docker Compose configuration](project/n8n_work/compose.yml).
 
 ### Running locally
 
@@ -111,6 +111,10 @@ Review PDFs are written to the notebook project's `output/` directory. The curre
 
 These are demonstrations for staff assistance, with attorney review required before relying on generated content. AI review or schema validation does not establish factual or legal accuracy. CourtListener search results are research leads, rather than verified holdings or completed legal research.
 
+My background is in software engineering, and I do not have professional legal domain expertise. The fictional scenarios, workflow assumptions, terminology, and generated documents demonstrate technical capabilities; they would need validation and refinement with attorneys and law firm staff before practical use.
+
+The Spring Boot endpoint processes memorandums synchronously to keep the demonstration simple and make execution easy to follow. For a deployed application, these long-running AI and research tasks would be better handled asynchronously, with background processing, job status tracking, and a way to retrieve completed results without keeping an HTTP request open.
+
 PDF processing extracts embedded text and does not perform OCR. Scanned documents and complex layouts may require additional handling.
 
 The Java application intentionally uses demo security settings, including seeded plain-text passwords and disabled CSRF protection. Its logging includes full fictional OpenAI prompts and response content. These settings require redesign before use with real client information or deployment beyond a controlled demonstration.
@@ -120,3 +124,7 @@ Keep actual API keys, `.env` files, n8n storage, backups, and sensitive logs out
 ## Author
 
 James Brannan
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Third-party dependencies remain subject to their respective licenses.
