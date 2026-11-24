@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 
 This document describes the implemented demonstrations as inspected on November 24, 2026. The three major sections follow intake preparation, preliminary research, and memorandum review. Each project runs independently with its own fixtures; their relationship is a business workflow, not an implemented automated integration.
 
-Diagrams use Mermaid, which GitHub renders in Markdown. Class and sequence diagrams use UML notation; flowcharts describe workflow routing, and ER diagrams describe relational structure. Class diagrams show selected responsibilities and dependencies rather than every accessor or model field.
+Diagrams render on GitHub. Class and sequence diagrams use UML notation; flowcharts describe workflow routing, and ER diagrams describe relational structure. Class diagrams show selected responsibilities and dependencies rather than every accessor or model field.
 
 All case material is fictional. These prototypes demonstrate software engineering approaches, not validated legal procedures. The author does not have professional legal domain expertise; workflow assumptions and legal outputs require validation with attorneys and law firm staff.
 
@@ -23,7 +23,7 @@ All case material is fictional. These prototypes demonstrate software engineerin
 - [Python / Jupyter: Memorandum review](#3-python--jupyter-memorandum-review)
 - [Failure handling across the demonstrations](#4-failure-handling-across-the-demonstrations)
 
-Documentation uses Markdown and Mermaid. Postman is the demonstration HTTP client, rather than an application dependency. Sequence diagrams simplify the main execution path and show selected failure branches; they do not enumerate every conditional call or exception.
+Documentation uses Markdown with diagrams. Postman is the demonstration HTTP client, rather than an application dependency. Sequence diagrams simplify the main execution path and show selected failure branches; they do not enumerate every conditional call or exception.
 
 ## 1. n8n: Intake preparation
 
@@ -70,7 +70,7 @@ The screenshot below shows the workflow in the n8n editor. Open the image at ful
 
 [View the full-size workflow screenshot](n8n.png).
 
-The Mermaid diagram below summarizes the exported node connections. Node groups keep the routing readable alongside the editor screenshot.
+The diagram below summarizes the exported node connections. Node groups keep the routing readable alongside the editor screenshot.
 
 ```mermaid
 flowchart TD
@@ -463,8 +463,8 @@ classDiagram
     CaseInput --> CaseDetails
     CaseInput "1" *-- "0..*" DocumentInput
     DocumentInput "1" *-- "0..*" DocumentPageInput
-    ResearchPlan "1" *-- "0..*" ResearchTopic
-    ResearchTopic "1" *-- "0..*" ResearchFact
+    ResearchPlan "1" *-- "1..*" ResearchTopic
+    ResearchTopic "1" *-- "1..*" ResearchFact
     ResearchEvidenceAssessment "1" *-- "0..*" ResearchQuestionAssessment
     ResearchPlan ..> CaseInput : grounded in sources
     ResearchEvidenceAssessment ..> ResearchPlan : evaluates questions
@@ -477,7 +477,7 @@ classDiagram
 | Evidence assessment | Research plan and CourtListener results | `ResearchEvidenceAssessment` |
 | Memorandum drafting | Case input, plan, results, and assessment | `MemorandumDraft` |
 
-Spring AI's `BeanOutputConverter` supplies JSON-format instructions and converts response JSON into Java objects. Application checks then validate selected fields and references. This differs from the notebook's strict API-level JSON schema; format instructions and Java conversion alone do not establish semantic correctness. An empty research-topic list is supported and skips the AI evidence-assessment call; the sequence diagram shows the nonempty-plan path.
+Spring AI's `BeanOutputConverter` supplies JSON-format instructions and converts response JSON into Java objects. Application checks then validate selected fields and references. This differs from the notebook's strict API-level JSON schema; format instructions and Java conversion alone do not establish semantic correctness. Research planning requires at least one topic. Although the assessment service handles an empty topic list defensively, the preparation workflow rejects such a plan during planning validation.
 
 An absent local PDF is recorded by filename as a limitation and processing continues. An existing PDF that cannot be read or extracted raises a processing failure.
 
@@ -518,7 +518,7 @@ The notebook compares each memorandum with its own intake record and supporting 
 | Standard-library `sqlite3`, `json`, and `pathlib` | Read-only database access, JSON handling, and filesystem paths |
 | SQLite, SQL, JSON, Markdown, PDF, and Windows Arial | Fixture storage, queries, payloads, displayed reviews, and exported documents |
 
-The notebook does not pin Python or third-party package versions. A fresh installation may differ from the recorded environment. The configured model is `gpt-4.1`; the API project must have access to it.
+The notebook metadata records Python 3.11.4, but does not enforce that version or pin third-party package versions. A fresh installation may differ from the recorded environment. The configured model is `gpt-4.1`; the API project must have access to it.
 
 ### 3.2 Data flow and relational inputs
 
@@ -602,8 +602,10 @@ sequenceDiagram
     NB->>AI: One combined request with strict JSON schema
     AI-->>NB: Response with reviews array
     NB->>NB: Check completion and parse JSON
-    loop Each returned review
+    loop Each returned review in the display cell
         NB->>Out: Display Markdown
+    end
+    loop Each returned review in the export cell
         NB->>Out: Export memorandum-ID review PDF
     end
     Out-->>Staff: Review text and local PDF files
@@ -611,7 +613,7 @@ sequenceDiagram
 
 ### 3.5 Review instructions and validation boundaries
 
-The prompt requires independent evaluation of each entry and distinguishes documented evidence, client reports, allegations, assumptions, and conclusions. Source text is treated as material to assess rather than instructions. Findings should identify source filenames or intake fields, preserve conflicts, and avoid invented facts, page numbers, and authorities.
+The prompt requires independent evaluation of each entry and distinguishes documented evidence, client reports, allegations, assumptions, and conclusions. The prompt instructs the model to treat source text as material to assess rather than instructions. Findings should identify source filenames or intake fields, preserve conflicts, and avoid invented facts, page numbers, and authorities.
 
 The request uses `gpt-4.1`, a strict JSON schema, a 12,000-token output limit, and `store=False`. The latter is a request storage setting, not a blanket claim about provider retention. The notebook checks response completion and parses JSON. The schema constrains output shape, but the current code does not establish that every input has exactly one correctly matched review or that the review is accurate.
 
