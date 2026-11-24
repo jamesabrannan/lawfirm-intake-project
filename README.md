@@ -10,6 +10,8 @@ for the license text. SPDX-License-Identifier: MIT
 
 # Law Firm Workflow Demonstrations
 
+See the [design document](DESIGN.md) for architecture, UML class and sequence diagrams, workflow routing, and the relational data model for all three demonstrations.
+
 Three demonstrations explore how software and AI can assist law firm staff with intake preparation, preliminary legal research, and review of research memorandums. The examples use fictional clients, intake records, and supporting documents.
 
 | Demo | Purpose | Implementation |
@@ -19,8 +21,6 @@ Three demonstrations explore how software and AI can assist law firm staff with 
 | [Memorandum review](project/jupyter-notebook/summarize-docs-data/legal-demo.ipynb) | Compare memorandums with intake information and supporting documents | Python, Jupyter, SQLite, OpenAI, pypdf, fpdf2 |
 
 Together, these illustrate successive staff activities. They are separate demonstrations with their own fixtures and execution steps; they do not automatically transfer records or outputs between projects.
-
-See the [design document](DESIGN.md) for architecture, UML class and sequence diagrams, workflow routing, and the relational data model for all three demonstrations.
 
 ## Watch the demonstrations
 
