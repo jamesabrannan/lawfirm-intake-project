@@ -42,7 +42,13 @@ The current workflow reads CSV and PDF fixtures from `/files/output/resource/`, 
 
 ### 1.3 Workflow routing
 
-The diagram below is reconstructed from the exported node connections, not a browser screenshot. Browser capture was unavailable during document preparation. Node groups summarize the actual routes while keeping the diagram readable.
+The screenshot below shows the workflow in the n8n editor. Open the image at full size to inspect individual nodes and connections.
+
+![n8n intake workflow showing CSV ingestion, missing-document requests, brief generation and validation, and paralegal handoff](n8n.png)
+
+[View the full-size workflow screenshot](n8n.png).
+
+The Mermaid diagram below summarizes the exported node connections. Node groups keep the routing readable alongside the editor screenshot.
 
 ```mermaid
 flowchart TD
