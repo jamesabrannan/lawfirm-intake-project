@@ -444,6 +444,9 @@ sequenceDiagram
 
 The controller delegates the loop to `MemorandumProcessingService`; the sequence groups those entry-point interactions to keep external processing visible. On failure, the successful-summary path is not taken. Earlier completed memorandums are not rolled back if a later one fails.
 
+> [!NOTE]
+> The application validates response structure and references in Java and uses AI to assess research evidence before drafting. A separate AI review of the completed memorandum could provide an additional consistency check. Legal authorities, factual support, and conclusions would still require verification and attorney review.
+
 ### 2.6 Evidence contracts and validation
 
 `CaseInput` combines case details, extracted documents, and missing filenames. Documents carry source identifiers and page records. `ResearchPlan` contains topics, questions, queries, and source-attributed facts. CourtListener result models retain retrieved lead information; evidence-assessment models relate research questions to those results. `MemorandumDraft` supplies structured content to the PDF renderer.
