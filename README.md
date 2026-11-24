@@ -31,6 +31,9 @@ Together, these illustrate successive staff activities. They are separate demons
 
 Brief screen recordings show each demo executing and producing its results. No installation is needed to view them; GitHub may offer large videos as downloads.
 
+> [!NOTE]
+> If a video does not play on GitHub, open its link and select **Download raw file** (the downward-arrow icon in the upper-right corner of the file viewer, above the preview area). Open the downloaded MP4 in your video player.
+
 - [n8n intake workflow](n8n-run.mp4)
 - [Java research memorandum workflow](spring-run.mp4)
 - [Jupyter memorandum review](jupyter-notebook-run.mp4)
@@ -131,6 +134,9 @@ Keep actual API keys, `.env` files, n8n storage, backups, and sensitive logs out
 ## Author
 
 James Brannan
+
+> [!NOTE]
+> Codex provided substantial assistance with coding and documentation throughout this project.
 
 ## License
 
